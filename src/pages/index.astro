@@ -1,0 +1,38 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+import Asd from "../components/Asd.astro";
+import WhereAmI from "../components/WhereAmI.astro";
+import MiscLinks from "../components/MiscLinks.astro";
+---
+
+<Layout>
+  <div class="px-5">
+    <p>
+      Autistic transfem nerd, studying to become a devops and systems engineer.
+    </p>
+    <br />
+    <p>
+      <span class="inline-block h-4 w-7 py-1 pr-2">
+        <Asd />
+      </span>I am neurodivergent (autistic). Highly interested in everything
+      computers, servers, and generally technical. I'm also super interested in
+      old mechanical equipment and old technology, and everything
+      <a
+        href="https://youtube.com/@TechnologyConnections"
+        rel="noopener noreferrer"
+        target="_blank"
+        class="underline hover:font-bold"
+      >
+        Technology Connections</a> has posted.
+    </p>
+    <br />
+    <p>
+      I speak both Norwegian and English, but even though I live in Norway and
+      Norwegian is my native language, I tend to speak more English
+    </p>
+  </div>
+
+  <WhereAmI />
+	<MiscLinks />
+</Layout>

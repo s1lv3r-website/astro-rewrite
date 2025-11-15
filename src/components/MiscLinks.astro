@@ -1,0 +1,64 @@
+---
+import { Github } from "simple-icons-astro";
+import { Link } from "@lucide/astro";
+export type AstroComponent = (_props: typeof Astro.props) => any;
+
+const links = [
+  {
+    title: "Pronouns [theS1LV3R]",
+    link: "https://en.pronouns.page/@theS1LV3R",
+    icon: Link,
+    rel: "me",
+    description: "A small page overviewing my pronouns and preferred terms"
+  },
+  {
+    icon: Github,
+    title: "dotfiles",
+    link: "https://github.com/theS1LV3R/dotfiles",
+    description: "All my dotfiles. There are a lot.",
+  },
+  {
+    icon: Link,
+    title: "nerd",
+    link: "https://nerd.s1lv3r.codes",
+    description: "nerd",
+  },
+  {
+    icon: Link,
+    title: "Team Corax",
+    link: "https://corax.team",
+    description: "The CTF team I'm a member of",
+  },
+  {
+    icon: Link,
+    title: "A Cypherpunk's Manifesto",
+    link: "/cypherpunk.txt",
+    description: '"A Cypherpunk\'s Manifesto" by Eric Hughes',
+  },
+];
+---
+
+<div>
+  <h2>Misc links</h2>
+  <div class="grid grid-cols-2 gap-4 px-5">
+    {
+      links.map((link) => (
+        <a
+          href={link.link}
+          target="_blank"
+                    rel={["noopener", "noreferrer", link.rel ?? ''].join(" ")}
+
+          class="rounded-md bg-neutral-800 p-3 transition-all hover:bg-neutral-700 hover:shadow-md"
+        >
+          <h3>
+            <span class="mr-[-4px] inline-block pb-[2px] align-middle">
+              <link.icon />
+            </span>
+            {link.title}
+          </h3>
+          {link.description}
+        </a>
+      ))
+    }
+  </div>
+</div>

@@ -1,0 +1,23 @@
+{
+  "name": "astro-site",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/mdx": "^4.3.10",
+    "@tailwindcss/vite": "^4.1.17",
+    "astro": "^5.15.7",
+    "tailwindcss": "^4.1.17"
+  },
+  "devDependencies": {
+    "@lucide/astro": "^0.553.0",
+    "@tailwindcss/typography": "^0.5.19",
+    "sass": "^1.94.0",
+    "simple-icons-astro": "^15.20.0"
+  }
+}

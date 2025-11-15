@@ -1,0 +1,33 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { getCollection } from "astro:content";
+const posts = await getCollection("blog");
+
+const dateToIso = (date: Date) => date.toISOString().split("T")[0];
+---
+
+<Layout>
+  <ul>
+    {
+      posts.map((post) => (
+        <li>
+          <a href={`/blog/${post.id}`}>
+            <h2 class="mb-0!">{post.data.title}</h2>
+            <span class="text-neutral-400!">
+              Posted on: {dateToIso(post.data.pubDate)}
+              {post.data.updatedDate &&
+                `| Last updated: ${dateToIso(post.data.updatedDate)}`}
+            </span>
+            {post.data.description && (
+              <p>
+                {post.data.description.length > 140
+                  ? post.data.description.substring(0, 140) + "..."
+                  : post.data.description}
+              </p>
+            )}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</Layout>
