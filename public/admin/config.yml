@@ -30,3 +30,4 @@ collections:
           optional: true,
         }
       - { label: "Body", name: "body", widget: "markdown" }
+      - { label: Show in UI, name: showInUI, widget: boolean }

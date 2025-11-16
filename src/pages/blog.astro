@@ -10,7 +10,7 @@ const dateToIso = (date: Date) => date.toISOString().split("T")[0];
 <Layout>
   <ul>
     {
-      posts.map((post) => (
+      posts.filter(post => import.meta.env.DEV || post.data.showInUI).map((post) => (
         <li class="rounded-md bg-neutral-800 mb-4 py-2 px-3 transition-all hover:bg-neutral-700 hover:shadow-md">
           <a href={`/blog/${post.id}`}>
             <h2 class="my-0!">{post.data.title}</h2>
