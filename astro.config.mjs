@@ -8,8 +8,14 @@ import tailwindcss from '@tailwindcss/vite';
 // https://astro.build/config
 export default defineConfig({
   integrations: [mdx()],
+  server: {
+    host: '0.0.0.0',
+    allowedHosts: true,
+  },
+  devToolbar: { enabled: false },
+
 
   vite: {
-    plugins: [tailwindcss()]
+    plugins: [tailwindcss()],
   }
 });

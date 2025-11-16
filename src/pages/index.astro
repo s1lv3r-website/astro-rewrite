@@ -2,17 +2,28 @@
 import Layout from "../layouts/Layout.astro";
 
 import Asd from "../components/Asd.astro";
+
 import WhereAmI from "../components/WhereAmI.astro";
 import MiscLinks from "../components/MiscLinks.astro";
+import HireMe from "../components/HireMe.astro"
+
+import { HIRE_ME_ENABLED, TAGLINE } from "../constants";
 ---
 
+<style lang="scss">
+  @use "tailwindcss";
+
+  .indent {
+    @apply md:px-5;
+  }
+</style>
+
 <Layout>
-  <div class="px-5">
-    <p>
-      Autistic transfem nerd, studying to become a devops and systems engineer.
+  <div class="indent">
+    <p class="!mb-4">
+      {TAGLINE}
     </p>
-    <br />
-    <p>
+    <p class="!mb-4">
       <span class="inline-block h-4 w-7 py-1 pr-2">
         <Asd />
       </span>I am neurodivergent (autistic). Highly interested in everything
@@ -24,15 +35,37 @@ import MiscLinks from "../components/MiscLinks.astro";
         target="_blank"
         class="underline hover:font-bold"
       >
-        Technology Connections</a> has posted.
+        Technology Connections</a
+      > has posted.
     </p>
-    <br />
     <p>
       I speak both Norwegian and English, but even though I live in Norway and
       Norwegian is my native language, I tend to speak more English
     </p>
   </div>
 
-  <WhereAmI />
-	<MiscLinks />
+  {
+    HIRE_ME_ENABLED && (
+      <div>
+        <h2>Interested in hiring me?</h2>
+        <div class="indent">
+          <HireMe />
+        </div>
+      </div>
+    )
+  }
+
+  <div>
+    <h2>Where can you find me?</h2>
+    <div class="indent">
+      <WhereAmI />
+    </div>
+  </div>
+
+  <div>
+    <h2>Misc links</h2>
+    <div class="indent">
+      <MiscLinks />
+    </div>
+  </div>
 </Layout>

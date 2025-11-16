@@ -12,6 +12,7 @@
     "@astrojs/mdx": "^4.3.10",
     "@tailwindcss/vite": "^4.1.17",
     "astro": "^5.15.7",
+    "decap-cms-app": "^3.9.0",
     "tailwindcss": "^4.1.17"
   },
   "devDependencies": {

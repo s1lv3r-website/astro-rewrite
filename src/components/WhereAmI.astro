@@ -1,41 +1,5 @@
 ---
-export type AstroComponent = (_props: typeof Astro.props) => any;
-import { Github, Signal, Matrix, Discord } from "simple-icons-astro";
-import { Link, MessageSquare, Hash, AtSign } from "@lucide/astro";
-
-const links = [
-  {
-    title: "GitHub [theS1LV3R]",
-    link: "https://github.com/theS1LV3R",
-    icon: Github,
-  },
-  // { title: 'Twitter (inactive) [theS1LV3R]', link: 'https://twitter.com/@theS1LV3R', icon: Twitter },
-  // {
-  //   title: "Fediverse [@zoe@woem.men]",
-  //   link: "https://woem.men/@zoe",
-  //   icon: Link,
-  // },
-  {
-    title: "Matrix [@s1lv3r:matrix.org]",
-    link: "https://matrix.to/#/@s1lv3r:matrix.org",
-    icon: Matrix,
-  },
-  {
-    title: "Signal [hwx2l1wncm.54]",
-    link: "https://signal.me/#eu/uQnZe59M88FcFd2TTXyvtA03IppAUx3e-WyhlSN3Gxlnf2AFxKpLQ7AM1n-nP7-x",
-    icon: Signal,
-  },
-  {
-    title: "Discord [theS1LV3R]",
-    link: "https://discord.com/users/279692618391093248",
-    icon: Discord,
-  },
-  {
-    title: "Email: [me <at> s1lv3r <dot> codes]",
-    link: "mailto:",
-    icon: AtSign,
-  },
-];
+import { CONTACT_LINKS } from "../constants";
 ---
 
 <style lang="scss">
@@ -46,24 +10,21 @@ const links = [
   }
 </style>
 
-<div>
-  <h2>Where can you find me?</h2>
-  <div class="flex flex-wrap gap-3 px-5">
-    {
-      links.map((link) => (
-        <a
-          href={link.link}
-          title={link.title}
-          target="_blank"
-          rel="noopener noreferrer"
-          class="button"
-        >
-          <span class="inline-block p-[2px] align-middle">
-            <link.icon aria-hidden="true" />
-          </span>
-          {link.title}
-        </a>
-      ))
-    }
-  </div>
+<div class="flex flex-wrap gap-3 items-stretch">
+  {
+    CONTACT_LINKS.map((link) => (
+      <a
+        href={link.link}
+        title={link.title}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="button grow-1 md:grow-0"
+      >
+        <span class="inline-block p-[2px] align-middle">
+          <link.icon aria-hidden />
+        </span>
+        {link.title}
+      </a>
+    ))
+  }
 </div>

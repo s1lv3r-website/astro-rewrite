@@ -1,7 +1,9 @@
 ---
-const siteName = "S1LV3R";
+import { SITE_NAME, THEME_COLOR, TAGLINE } from "../constants";
 
-const { title } = Astro.props;
+const { title, description } = Astro.props;
+
+const resolvedTitle = title ? `${title} | ${SITE_NAME}` : SITE_NAME
 ---
 
 <!doctype html>
@@ -9,19 +11,35 @@ const { title } = Astro.props;
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <title>{title ? `${title} | ${siteName}` : siteName}</title>
+    <link rel="icon" type="image/svg+xml" href="/logo.svg" />
+    <title>{resolvedTitle}</title>
+    <meta name="title" content={resolvedTitle}>
+    <meta name="theme-color" content={THEME_COLOR} />
+    <meta name="description" content={description ?? TAGLINE}>
+    <meta property="og:type" content="website">
   </head>
   <body>
-    <!-- <div class="flex h-full flex-col overflow-auto [&>*]:m-auto"> -->
-    <div class="h-full overflow-auto [&>*]:m-auto">
+    <div class="py-4 h-full overflow-auto [&>*]:m-auto">
       <div class="p-2 px-6 md:max-w-3xl">
-        <h1 class="mb-2!">{siteName}</h1>
-        <div class="mb-2">
-          <a href="/" class={[Astro.url.pathname === "/" ? "underline" : ""].toString()}
-            >home</a
-          > | <a class={[Astro.url.pathname === "/blog" ? "underline" : ""].toString()} href="/blog">blog</a>
-        </div>
+        <header class="flex flex-row items-baseline">
+          <img
+            style="max-height: 5rem;"
+            src="/logo.svg"
+            aria-hidden="true"
+            class="pb-[0.45rem] size-12 mr-1 my-auto"
+          />
+          <h1 class="mr-auto md:mr-4">{SITE_NAME}</h1>
+          <div class="">
+            <a href="/" class={Astro.url.pathname === "/" ? "underline" : ""}>
+              home</a
+            > | <a
+              href="/blog"
+              class={Astro.url.pathname === "/blog" ? "underline" : ""}
+            >
+              blog
+            </a>
+          </div>
+        </header>
         <slot />
       </div>
     </div>
@@ -30,10 +48,10 @@ const { title } = Astro.props;
 
 <style is:global lang="scss">
   @use "tailwindcss";
-  @plugin '@tailwindcss/typography';
+  @plugin "@tailwindcss/typography";
 
   * {
-    @apply box-border;
+    @apply box-border scroll-smooth;
     font-size: 102%;
   }
 
@@ -42,6 +60,10 @@ const { title } = Astro.props;
     @apply m-0 h-full w-full p-0;
     @apply bg-[#141414] font-mono text-[#ebebeb];
     @apply overflow-auto;
+  }
+
+  p {
+    @apply my-4;
   }
 
   h1 {

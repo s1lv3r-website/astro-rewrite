@@ -1,23 +1,61 @@
 ---
 import Prose from "../../components/Prose.astro";
+import ToC from "../../components/ToC.astro";
 import Layout from "../../layouts/Layout.astro";
+import { trimDescription } from "../../utils";
 import { getCollection, render } from "astro:content";
-// 1. Generate a new path for every collection entry
+
 export async function getStaticPaths() {
   const posts = await getCollection("blog");
+
   return posts.map((post) => ({
     params: { id: post.id },
     props: { post },
   }));
 }
-// 2. For your template, you can get the entry directly from the prop
+
 const { post } = Astro.props;
-const { Content } = await render(post);
+const { Content, headings } = await render(post);
+
+const dateFormat = (_date: Date): string => {
+  const els = _date.toISOString().split(/T|\.|:/);
+  const date = els[0];
+  const timestamp = els.splice(1, 2);
+  return `${date} ${timestamp.join(":")} (UTC)`;
+};
+
+const getMetaDescription = (): string => {
+  const base = `Posted: ${post.data.pubDate.toISOString().split("T")[0]}`;
+  if (post.data.description) {
+    return `${base} | ${trimDescription(post.data.description)}`;
+  }
+  return base;
+};
 ---
 
-<Layout title={post.data.title}>
-  <h1>{post.data.title}</h1>
+<Layout title={post.data.title} description={getMetaDescription()}>
+  <div>
+    <h1>{post.data.title}</h1>
+    <span class="text-neutral-400!">
+      <p>
+        Posted on: {dateFormat(post.data.pubDate)}
+
+        {
+          post.data.updatedDate &&
+            post.data.updatedDate > post.data.pubDate && (
+              <>
+                <br />
+                Last updated: {dateFormat(post.data.updatedDate)}
+              </>
+            )
+        }
+      </p>
+    </span>
+    {post.data.description && <p>{post.data.description}</p>}
+  </div>
+  <hr class="my-4" />
   <Prose>
+    <ToC headings={headings} />
     <Content />
   </Prose>
 </Layout>

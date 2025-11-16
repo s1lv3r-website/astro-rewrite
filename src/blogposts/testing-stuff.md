@@ -2,7 +2,7 @@
 title: "Markdown: Syntax"
 tags: [markdown, syntax, another-tag]
 pubDate: 2025-11-15T03:48:28+01:00
-updatedDate: 2025-11-15T03:48:28+01:00
+updatedDate: 2025-11-15T04:48:28+01:00
 description: The quick brown fox jumps over the lazy dog, and then it does it again, and somehow a third time, and how many characters are we even reaching now
 ---
 
@@ -68,7 +68,7 @@ line of a hard-wrapped paragraph:
 > This is a blockquote with two paragraphs. Lorem ipsum dolor sit amet,
 > consectetuer adipiscing elit. Aliquam hendrerit mi posuere lectus.
 > Vestibulum enim wisi, viverra nec, fringilla in, laoreet vitae, risus.
-
+>
 > Donec sit amet nisl. Aliquam semper ipsum sit amet velit. Suspendisse
 > id sem consectetuer libero luctus adipiscing.
 
@@ -84,14 +84,16 @@ adding additional levels of `>`:
 Blockquotes can contain other Markdown elements, including headers, lists,
 and code blocks:
 
-> ## This is a header.
+> ## This is a header
 >
-> 1.  This is the first list item.
-> 2.  This is the second list item.
+> 1. This is the first list item.
+> 2. This is the second list item.
 >
 > Here's some example code:
 >
->     return shell_exec("echo $input | $markdown_script");
+> ```js
+> return shell_exec("echo $input | $markdown_script");
+> ```
 
 Any decent text editor should make email-style quoting easy. For
 example, with BBEdit, you can make a selection and choose Increase
@@ -122,9 +124,9 @@ and:
 
 Ordered lists use numbers followed by periods:
 
-1.  Bird
-2.  McHale
-3.  Parish
+1. Bird
+2. McHale
+3. Parish
 
 It's important to note that the actual numbers you use to mark the
 list have no effect on the HTML output Markdown produces. The HTML
@@ -132,9 +134,9 @@ Markdown produces from the above list is:
 
 If you instead wrote the list in Markdown like this:
 
-1.  Bird
-1.  McHale
-1.  Parish
+1. Bird
+1. McHale
+1. Parish
 
 or even:
 
@@ -167,7 +169,7 @@ List items may consist of multiple paragraphs. Each subsequent
 paragraph in a list item must be indented by either 4 spaces
 or one tab:
 
-1.  This is a list item with two paragraphs. Lorem ipsum dolor
+1. This is a list item with two paragraphs. Lorem ipsum dolor
     sit amet, consectetuer adipiscing elit. Aliquam hendrerit
     mi posuere lectus.
 
@@ -175,7 +177,7 @@ or one tab:
     vitae, risus. Donec sit amet nisl. Aliquam semper ipsum
     sit amet velit.
 
-2.  Suspendisse id sem consectetuer libero luctus adipiscing.
+2. Suspendisse id sem consectetuer libero luctus adipiscing.
 
 It looks nice if you indent every line of the subsequent
 paragraphs, but here again, Markdown will allow you to be
@@ -183,7 +185,9 @@ lazy:
 
 - This is a list item with two paragraphs.
 
-      This is the second paragraph in the list item. You're
+  ```plain
+  This is the second paragraph in the list item. You're
+  ```
 
   only required to indent the first line. Lorem ipsum dolor
   sit amet, consectetuer adipiscing elit.
@@ -203,7 +207,9 @@ to be indented _twice_ -- 8 spaces or two tabs:
 
 - A list item with a code block:
 
-      <code goes here>
+  ```plain
+  <code goes here>
+  ```
 
 ### Code Blocks
 
@@ -217,13 +223,17 @@ block by at least 4 spaces or 1 tab.
 
 This is a normal paragraph:
 
-    This is a code block.
+```plain
+This is a code block.
+```
 
 Here is an example of AppleScript:
 
-    tell application "Foo"
-        beep
-    end tell
+```as
+tell application "Foo"
+    beep
+end tell
+```
 
 A code block continues until it reaches a line that is not indented
 (or the end of the article).
@@ -234,18 +244,23 @@ easy to include example HTML source code using Markdown -- just paste
 it and indent it, and Markdown will handle the hassle of encoding the
 ampersands and angle brackets. For example, this:
 
-    <div class="footer">
-        &copy; 2004 Foo Corporation
-    </div>
+```html
+<div class="footer">
+    &copy; 2004 Foo Corporation
+</div>
+```
 
 Regular Markdown syntax is not processed within code blocks. E.g.,
 asterisks are just literal asterisks within a code block. This means
 it's also easy to use Markdown to write about Markdown's own syntax.
 
-```
-tell application "Foo"
-    beep
-end tell
+```js
+// filename.js
+// Javascript code with syntax highlighting.
+var fun = function lang(l) {
+  dateformat.i18n = require("./lang/" + l);
+  return true;
+};
 ```
 
 ## Span Elements
@@ -272,13 +287,9 @@ emphasis. Text wrapped with one `*` or `_` will be wrapped with an
 HTML `<em>` tag; double `*`'s or `_`'s will be wrapped with an HTML
 `<strong>` tag. E.g., this input:
 
-_single asterisks_
+_single underscore_.
 
-_single underscores_
-
-**double asterisks**
-
-**double underscores**
+**double asterisks**.
 
 ### Code
 
