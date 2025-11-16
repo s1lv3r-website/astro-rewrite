@@ -2,7 +2,9 @@
 import Layout from "../layouts/Layout.astro";
 import { getCollection } from "astro:content";
 import { trimDescription } from "../utils";
-const posts = await getCollection("blog");
+const posts = (await getCollection("blog")).filter(
+  (post) => import.meta.env.DEV || post.data.showInUI
+);
 
 const dateToIso = (date: Date) => date.toISOString().split("T")[0];
 ---
@@ -60,26 +62,25 @@ const dateToIso = (date: Date) => date.toISOString().split("T")[0];
 </style>
 
 <Layout>
+  {posts.length === 0 && <p>Nothing here yet... you're early!</p>}
   <ul class="indent">
     {
-      posts
-        .filter((post) => import.meta.env.DEV || post.data.showInUI)
-        .map((post) => (
-          <li>
-            <a title={post.data.title} href={`/blog/${post.id}`}>
-              <h2>{post.data.title}</h2>
-              <span>
-                Posted on: {dateToIso(post.data.pubDate)}
-                {post.data.updatedDate &&
-                  post.data.updatedDate > post.data.pubDate &&
-                  ` | Last updated: ${dateToIso(post.data.updatedDate)}`}
-              </span>
-              {post.data.description && (
-                <p>{trimDescription(post.data.description)}</p>
-              )}
-            </a>
-          </li>
-        ))
+      posts.map((post) => (
+        <li>
+          <a title={post.data.title} href={`/blog/${post.id}`}>
+            <h2>{post.data.title}</h2>
+            <span>
+              Posted on: {dateToIso(post.data.pubDate)}
+              {post.data.updatedDate &&
+                post.data.updatedDate > post.data.pubDate &&
+                ` | Last updated: ${dateToIso(post.data.updatedDate)}`}
+            </span>
+            {post.data.description && (
+              <p>{trimDescription(post.data.description)}</p>
+            )}
+          </a>
+        </li>
+      ))
     }
   </ul>
 </Layout>
