@@ -1,67 +1,60 @@
 ---
 import Layout from "../layouts/Layout.astro";
 
+import HireMe from "../components/HireMe.astro";
 import WhereAmI from "../components/WhereAmI.astro";
 import MiscLinks from "../components/MiscLinks.astro";
-import HireMe from "../components/HireMe.astro"
 
 import { HIRE_ME_ENABLED, TAGLINE } from "../constants";
 ---
 
 <style lang="scss">
-  @use "tailwindcss";
-
   .indent {
-    @apply md:px-5;
+    @media (width >= 48rem) {
+      padding-right: 1.25rem;
+      padding-left: 1.25rem;
+    }
+  }
+
+  .tagline {
+    margin-top: 0;
   }
 </style>
 
 <Layout>
-  <div class="indent">
-    <p class="!mb-4">
+  <div class="about">
+    <p class="tagline">
       {TAGLINE}
     </p>
-    <p class="!mb-4">
-      I am neurodivergent (autistic). Highly interested in everything
-      computers, servers, and generally technical. I'm also super interested in
-      old mechanical equipment and old technology, and everything
-      <a
-        href="https://youtube.com/@TechnologyConnections"
-        rel="noopener noreferrer"
-        target="_blank"
-        class="underline hover:font-bold"
-      >
-        Technology Connections</a
-      > has posted.
-    </p>
     <p>
-      I speak both Norwegian and English, but even though I live in Norway and
-      Norwegian is my native language, I tend to speak more English
+      I am highly interested in everything computers, servers, networking, and
+      generally technical. I'm also super interested in old mechanical equipment
+      and old technology.
     </p>
   </div>
 
   {
     HIRE_ME_ENABLED && (
-      <div>
+      <section title="Hiring notice">
         <h2>Interested in hiring me?</h2>
         <div class="indent">
           <HireMe />
         </div>
-      </div>
+      </section>
     )
   }
 
-  <div>
+  <section title="Contact links">
     <h2>Where can you find me?</h2>
     <div class="indent">
       <WhereAmI />
     </div>
-  </div>
+  </section>
 
-  <div>
+  <section title="Misc links">
     <h2>Misc links</h2>
     <div class="indent">
       <MiscLinks />
     </div>
-  </div>
+  </section>
 </Layout>

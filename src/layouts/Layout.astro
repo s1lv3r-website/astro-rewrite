@@ -1,9 +1,13 @@
 ---
 import { SITE_NAME, THEME_COLOR, TAGLINE } from "../constants";
+import StyleReset from "../components/StyleReset.astro";
+
+const getPageClass = (name: string): string =>
+  Astro.url.pathname === `/${name}` ? "current-page" : "";
 
 const { title, description } = Astro.props;
 
-const resolvedTitle = title ? `${title} | ${SITE_NAME}` : SITE_NAME
+const resolvedTitle = title ? `${title} | ${SITE_NAME}` : SITE_NAME;
 ---
 
 <!doctype html>
@@ -13,68 +17,125 @@ const resolvedTitle = title ? `${title} | ${SITE_NAME}` : SITE_NAME
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/logo.svg" />
     <title>{resolvedTitle}</title>
-    <meta name="title" content={resolvedTitle}>
+    <meta name="title" content={resolvedTitle} />
     <meta name="theme-color" content={THEME_COLOR} />
-    <meta name="description" content={description ?? TAGLINE}>
-    <meta property="og:type" content="website">
+    <meta name="description" content={description ?? TAGLINE} />
+    <meta property="og:type" content="website" />
+    <StyleReset />
   </head>
   <body>
-    <div class="py-4 h-full overflow-auto [&>*]:m-auto">
-      <div class="p-2 px-6 md:max-w-3xl">
-        <header class="flex flex-row items-baseline">
-          <img
-            style="max-height: 5rem;"
-            src="/logo.svg"
-            aria-hidden="true"
-            class="pb-[0.45rem] size-12 mr-1 my-auto"
-          />
-          <h1 class="mr-auto md:mr-4">{SITE_NAME}</h1>
-          <div class="">
-            <a href="/" class={Astro.url.pathname === "/" ? "underline" : ""}>
-              home</a
-            > | <a
-              href="/blog"
-              class={Astro.url.pathname === "/blog" ? "underline" : ""}
-            >
-              blog
-            </a>
-          </div>
-        </header>
-        <slot />
-      </div>
+    <div class="wrapper">
+      <header>
+        <img src="/logo.svg" aria-hidden="true" />
+        <h1>{SITE_NAME}</h1>
+        <div>
+          <a href="/" class={getPageClass("")}>home</a>
+          |
+          <a href="/blog" class={getPageClass("blog")}>blog</a>
+        </div>
+      </header>
+      <slot />
     </div>
   </body>
 </html>
 
+<style lang="scss">
+  .wrapper {
+    padding: 1rem;
+    margin-right: auto;
+    margin-left: auto;
+
+    @media (width >= 48rem) {
+      max-width: 48rem;
+    }
+  }
+
+  header {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+
+    & > img {
+      padding-bottom: 0.45rem;
+      width: 3rem;
+      height: 3rem;
+      margin-right: 0.25rem;
+      margin-top: auto;
+      margin-bottom: auto;
+    }
+
+    & > h1 {
+      margin-right: auto;
+      max-height: 5rem;
+
+      @media (width >= 48rem) {
+        margin-right: 1rem;
+      }
+    }
+
+    .current-page {
+      text-decoration: underline;
+    }
+  }
+</style>
+
 <style is:global lang="scss">
-  @use "tailwindcss";
-  @plugin "@tailwindcss/typography";
+  $bgPrimary: #141414;
+  $fgPrimary: #ebebeb;
 
   * {
-    @apply box-border scroll-smooth;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
     font-size: 102%;
   }
 
   html,
   body {
-    @apply m-0 h-full w-full p-0;
-    @apply bg-[#141414] font-mono text-[#ebebeb];
-    @apply overflow-auto;
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    width: 100%;
+
+    background-color: $bgPrimary;
+    color: $fgPrimary;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+      "Liberation Mono", "Courier New", monospace;
+
+    overflow: auto;
   }
 
   p {
-    @apply my-4;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
   }
 
   h1 {
-    @apply my-4 text-4xl font-bold;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+
+    font-size: 2.25rem;
+    font-weight: 700;
+    line-height: calc(2.5 / 2.25);
   }
 
   h2 {
-    @apply my-3 mt-5 text-3xl font-bold leading-normal;
+    margin-top: 1.25rem;
+    margin-bottom: 0.75rem;
+
+    font-size: 1.875rem;
+    font-weight: 700;
+    line-height: 1.5;
   }
 
   h3 {
-    @apply my-1 text-2xl font-semibold;
+    margin-top: 0.25rem;
+    margin-bottom: 0.25rem;
+
+    font-size: 1.5rem;
+    font-weight: 600;
+  }
+
+  a {
+    color: currentColor;
   }
 </style>

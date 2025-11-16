@@ -9,7 +9,7 @@ export type AstroComponent = (_props: Record<string, any>) => any;
 
 export const SITE_NAME: string = "S1LV3R";
 export const TAGLINE: string =
-  "Autistic transfem nerd, educated DevOps and systems engineer.";
+  "Autistic trans woman (she/her), working with DevOps and systems design, engineering, and administration.";
 export const THEME_COLOR: string = "#744eb4"
 
 export const HIRE_ME_ENABLED: boolean = true;
@@ -34,18 +34,18 @@ export const MISC_LINKS: {
     link: "https://github.com/theS1LV3R/dotfiles",
     description: "All my dotfiles. There are a lot.",
   },
-  {
-    icon: Link,
-    title: "nerd",
-    link: "https://nerd.s1lv3r.codes",
-    description: "nerd",
-  },
-  {
-    icon: Link,
-    title: "Team Corax",
-    link: "https://corax.team",
-    description: "The CTF team I'm a member of",
-  },
+  // {
+  //   icon: Link,
+  //   title: "nerd",
+  //   link: "https://nerd.s1lv3r.codes",
+  //   description: "nerd",
+  // },
+  // {
+  //   icon: Link,
+  //   title: "Team Corax",
+  //   link: "https://corax.team",
+  //   description: "The CTF team I'm a member of",
+  // },
   {
     icon: Link,
     title: "A Cypherpunk's Manifesto",

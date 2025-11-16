@@ -3,14 +3,47 @@ import { CONTACT_LINKS } from "../constants";
 ---
 
 <style lang="scss">
-  @use "tailwindcss";
+  .wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    align-items: stretch;
+  }
 
   .button {
-    @apply rounded-md bg-neutral-800 p-1 transition-all hover:bg-neutral-700 hover:shadow-md;
+    border-radius: 0.375rem;
+    background-color: #202020;
+    color: #dfdfdf;
+    padding: 0.25rem;
+    display: block;
+    flex-grow: 1;
+    text-decoration: inherit;
+
+    transition-property: background-color color;
+    transition: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+    line-height: 0;
+
+    @media (width >= 48rem) {
+      flex-grow: 0;
+    }
+
+    &:hover {
+      background-color: #262626;
+      color: #dddddd;
+      box-shadow:
+        0 4px 6px -1px rgb(0 0 0 / 0.1),
+        0 2px 4px -2px rgb(0 0 0 / 0.1);
+    }
+  }
+
+  .icon {
+    display: inline-block;
+    padding: 2px;
+    vertical-align: middle;
   }
 </style>
 
-<div class="flex flex-wrap gap-3 items-stretch">
+<div class="wrapper">
   {
     CONTACT_LINKS.map((link) => (
       <a
@@ -18,9 +51,9 @@ import { CONTACT_LINKS } from "../constants";
         title={link.title}
         target="_blank"
         rel="noopener noreferrer"
-        class="button grow-1 md:grow-0"
+        class="button"
       >
-        <span class="inline-block p-[2px] align-middle">
+        <span class="icon">
           <link.icon aria-hidden />
         </span>
         {link.title}

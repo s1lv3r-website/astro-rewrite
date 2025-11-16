@@ -2,17 +2,62 @@
 import { MISC_LINKS } from "../constants";
 ---
 
-<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<style lang="scss">
+  div {
+    display: grid;
+    grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
+    --cols: 1;
+
+    gap: 1rem;
+
+    @media (width >= 48rem) {
+      --cols: 2;
+    }
+  }
+
+  a {
+    border-radius: 0.375rem;
+    background-color: #202020;
+    color: #dfdfdf;
+    padding: 0.75rem;
+    display: block;
+    text-decoration: inherit;
+
+    transition-property: background-color color;
+    transition: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+
+    &:hover {
+      background-color: #262626;
+      color: #dddddd;
+      box-shadow:
+        0 4px 6px -1px rgb(0 0 0 / 0.1),
+        0 2px 4px -2px rgb(0 0 0 / 0.1);
+    }
+  }
+
+  .icon {
+    display: inline-block;
+    margin-right: -4px;
+    padding-bottom: 2px;
+    vertical-align: middle;
+  }
+
+  h3 {
+    margin-top: 0;
+  }
+</style>
+
+<div>
   {
     MISC_LINKS.map((link) => (
       <a
+        title={link.title}
         href={link.link}
         target="_blank"
         rel={`noopener noreferrer ${link.rel}`}
-        class="rounded-md bg-neutral-800 p-3 transition-all hover:bg-neutral-700 hover:shadow-md"
       >
         <h3>
-          <span class="mr-[-4px] inline-block pb-[2px] align-middle">
+          <span class="icon mr-[-4px] inline-block pb-[2px] align-middle">
             <link.icon aria-hidden />
           </span>
           {link.title}

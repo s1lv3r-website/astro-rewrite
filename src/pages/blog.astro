@@ -7,25 +7,79 @@ const posts = await getCollection("blog");
 const dateToIso = (date: Date) => date.toISOString().split("T")[0];
 ---
 
+<style lang="scss">
+  ul {
+    list-style-type: none;
+    padding: 0;
+
+    @media (width >= 48rem) {
+      padding-right: 1.25rem;
+      padding-left: 1.25rem;
+    }
+
+    & > p {
+      margin-top: 0;
+    }
+  }
+
+  li {
+    border-radius: 0.375rem;
+    background-color: #202020;
+    color: #dfdfdf;
+
+    margin-bottom: 1rem;
+
+    transition-property: background-color color;
+    transition: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+
+    &:hover {
+      background-color: #262626;
+      color: #dddddd;
+      box-shadow:
+        0 4px 6px -1px rgb(0 0 0 / 0.1),
+        0 2px 4px -2px rgb(0 0 0 / 0.1);
+    }
+
+    a {
+      display: block;
+      padding: 0.75rem 0.75rem;
+    }
+
+    h2 {
+      margin: 0;
+    }
+
+    span {
+      color: #a1a1a1;
+    }
+
+    p {
+      margin-bottom: 0;
+    }
+  }
+</style>
+
 <Layout>
-  <ul>
+  <ul class="indent">
     {
-      posts.filter(post => import.meta.env.DEV || post.data.showInUI).map((post) => (
-        <li class="rounded-md bg-neutral-800 mb-4 py-2 px-3 transition-all hover:bg-neutral-700 hover:shadow-md">
-          <a href={`/blog/${post.id}`}>
-            <h2 class="my-0!">{post.data.title}</h2>
-            <span class="text-neutral-400!">
-              Posted on: {dateToIso(post.data.pubDate)}
-              {post.data.updatedDate &&
-                post.data.updatedDate > post.data.pubDate &&
-                `| Last updated: ${dateToIso(post.data.updatedDate)}`}
-            </span>
-            {post.data.description && (
-              <p>{trimDescription(post.data.description)}</p>
-            )}
-          </a>
-        </li>
-      ))
+      posts
+        .filter((post) => import.meta.env.DEV || post.data.showInUI)
+        .map((post) => (
+          <li>
+            <a title={post.data.title} href={`/blog/${post.id}`}>
+              <h2>{post.data.title}</h2>
+              <span>
+                Posted on: {dateToIso(post.data.pubDate)}
+                {post.data.updatedDate &&
+                  post.data.updatedDate > post.data.pubDate &&
+                  ` | Last updated: ${dateToIso(post.data.updatedDate)}`}
+              </span>
+              {post.data.description && (
+                <p>{trimDescription(post.data.description)}</p>
+              )}
+            </a>
+          </li>
+        ))
     }
   </ul>
 </Layout>

@@ -1,5 +1,4 @@
 ---
-import Prose from "../../components/Prose.astro";
 import ToC from "../../components/ToC.astro";
 import Layout from "../../layouts/Layout.astro";
 import { trimDescription } from "../../utils";
@@ -33,13 +32,36 @@ const getMetaDescription = (): string => {
 };
 ---
 
+<style lang="scss">
+  @use "tailwindcss";
+  @plugin "@tailwindcss/typography";
+
+  .metadata {
+    h1 {
+      margin-bottom: 0rem;
+    }
+
+    span {
+      color: #a1a1a1;
+    }
+
+    p {
+      margin-top: 0;
+    }
+  }
+
+  .separator {
+    margin-top: 1.5rem;
+    margin-bottom: -1.5rem;
+  }
+</style>
+
 <Layout title={post.data.title} description={getMetaDescription()}>
-  <div>
+  <div class="metadata">
     <h1>{post.data.title}</h1>
-    <span class="text-neutral-400!">
+    <span title="Posted and updated date">
       <p>
         Posted on: {dateFormat(post.data.pubDate)}
-
         {
           post.data.updatedDate &&
             post.data.updatedDate > post.data.pubDate && (
@@ -51,11 +73,24 @@ const getMetaDescription = (): string => {
         }
       </p>
     </span>
-    {post.data.description && <p>{post.data.description}</p>}
-  </div>
-  <hr class="my-4" />
-  <Prose>
+    {
+      post.data.description && (
+        <p title="Post description">
+          {post.data.description}
+        </p>
+      )
+    }
     <ToC headings={headings} />
+  </div>
+  <hr class="separator" />
+  <main
+    class:list={[
+      `!prose !prose-neutral !prose-invert prose-a:text-inherit`, // Colors
+      "!max-w-none", // Sizes
+      "font-sans prose-a:underline", // Text
+      "prose-img:rounded-xl", // Other
+    ]}
+  >
     <Content />
-  </Prose>
+  </main>
 </Layout>
