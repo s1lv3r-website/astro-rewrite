@@ -3,7 +3,7 @@ import { SITE_NAME, THEME_COLOR, TAGLINE } from "../constants";
 import StyleReset from "../components/StyleReset.astro";
 
 const getPageClass = (name: string): string =>
-  Astro.url.pathname === `/${name}` ? "current-page" : "";
+  [`/${name}`, `/${name}/`].includes(Astro.url.pathname) ? "current-page" : "";
 
 const { title, description } = Astro.props;
 
