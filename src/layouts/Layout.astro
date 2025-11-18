@@ -1,5 +1,5 @@
 ---
-import { SITE_NAME, THEME_COLOR, TAGLINE } from "../constants";
+import { SITE_NAME, THEME_COLOR } from "../constants";
 import StyleReset from "../components/StyleReset.astro";
 
 const getPageClass = (name: string): string =>
@@ -7,6 +7,8 @@ const getPageClass = (name: string): string =>
 
 const { title, description } = Astro.props;
 
+const tagline =
+  "Autistic trans woman (she/her), working with DevOps, networks, and systems design, engineering, and administration.";
 const resolvedTitle = title ? `${title} | ${SITE_NAME}` : SITE_NAME;
 ---
 
@@ -19,7 +21,7 @@ const resolvedTitle = title ? `${title} | ${SITE_NAME}` : SITE_NAME;
     <title>{resolvedTitle}</title>
     <meta name="title" content={resolvedTitle} />
     <meta name="theme-color" content={THEME_COLOR} />
-    <meta name="description" content={description ?? TAGLINE} />
+    <meta name="description" content={description ?? tagline} />
     <meta property="og:type" content="website" />
     <StyleReset />
   </head>
@@ -32,6 +34,8 @@ const resolvedTitle = title ? `${title} | ${SITE_NAME}` : SITE_NAME;
           <a href="/" class={getPageClass("")}>home</a>
           |
           <a href="/blog" class={getPageClass("blog")}>blog</a>
+          |
+          <a href="/projects" class={getPageClass("projects")}>projects</a>
         </div>
       </header>
       <slot />
@@ -74,7 +78,12 @@ const resolvedTitle = title ? `${title} | ${SITE_NAME}` : SITE_NAME;
     }
 
     .current-page {
-      text-decoration: underline;
+      font-style: italic;
+      font-weight: 600;
+    }
+
+    a {
+      text-decoration: none;
     }
   }
 </style>

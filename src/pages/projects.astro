@@ -1,1 +1,78 @@
-Something will be here at some point ™️
+---
+import Layout from "../layouts/Layout.astro";
+
+import { PROJECT_LINKS } from "../constants";
+---
+
+<style lang="scss">
+  div {
+    display: grid;
+    grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
+    --cols: 1;
+
+    gap: 1rem;
+
+    @media (width >= 48rem) {
+      --cols: 2;
+    }
+  }
+
+  a {
+    border-radius: 0.375rem;
+    background-color: #202020;
+    color: #dfdfdf;
+    padding: 0.75rem;
+    display: block;
+    text-decoration: inherit;
+
+    transition-property: background-color color;
+    transition: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+
+    &:hover {
+      background-color: #262626;
+      color: #dddddd;
+      box-shadow:
+        0 4px 6px -1px rgb(0 0 0 / 0.1),
+        0 2px 4px -2px rgb(0 0 0 / 0.1);
+    }
+  }
+
+  .icon {
+    display: inline-block;
+    margin-right: 0.4rem;
+    padding-bottom: 0.12rem;
+    vertical-align: middle;
+  }
+
+  h3 {
+    margin-top: 0;
+  }
+</style>
+
+<Layout>
+  <p>
+    These are miscellaneous projects I've made, participated in, or otherwise
+    find interesting enough to share with others :3
+  </p>
+
+  <div>
+    {
+      PROJECT_LINKS.map((project) => (
+        <a
+          title={project.title}
+          href={project.link}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <h3>
+            <span class="icon">
+              <project.icon aria-hidden />
+            </span>
+            {project.title}
+          </h3>
+          {project.description}
+        </a>
+      ))
+    }
+  </div>
+</Layout>

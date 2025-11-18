@@ -3,9 +3,8 @@ import Layout from "../layouts/Layout.astro";
 
 import HireMe from "../components/HireMe.astro";
 import WhereAmI from "../components/WhereAmI.astro";
-import MiscLinks from "../components/MiscLinks.astro";
 
-import { HIRE_ME_ENABLED, TAGLINE } from "../constants";
+import { HIRE_ME_ENABLED } from "../constants";
 ---
 
 <style lang="scss">
@@ -24,7 +23,12 @@ import { HIRE_ME_ENABLED, TAGLINE } from "../constants";
 <Layout>
   <div class="about">
     <p class="tagline">
-      {TAGLINE}
+      Autistic trans woman (<a
+        target="_blank"
+        rel="noopener noreferrer"
+        href="https://en.pronouns.page/@theS1LV3R">she/her</a
+      >), working with DevOps, networks, and systems design, engineering, and
+      administration.
     </p>
     <p>
       I am highly interested in everything computers, servers, networking, and
@@ -48,13 +52,6 @@ import { HIRE_ME_ENABLED, TAGLINE } from "../constants";
     <h2>Where can you find me?</h2>
     <div class="indent">
       <WhereAmI />
-    </div>
-  </section>
-
-  <section title="Misc links">
-    <h2>Misc links</h2>
-    <div class="indent">
-      <MiscLinks />
     </div>
   </section>
 </Layout>

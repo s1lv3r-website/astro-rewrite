@@ -1,3 +1,5 @@
+import { DESCRIPTION_TRIM_LENGTH } from "./constants";
+
 /**
  * Trims a given description down in case it is too long
  *
@@ -6,6 +8,7 @@
  */
 export function trimDescription(description?: string): string | undefined {
   if (!description) return;
-  if (description.length > 140) return description.substring(0, 140) + "...";
+  if (description.length > DESCRIPTION_TRIM_LENGTH)
+    return description.substring(0, DESCRIPTION_TRIM_LENGTH) + "...";
   return description;
 }
