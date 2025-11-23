@@ -64,6 +64,7 @@ const getMetaDescription = (): string => {
         Posted on: {dateFormat(post.data.pubDate)}
         {
           post.data.updatedDate &&
+            typeof post.data.updatedDate !== "string" &&
             post.data.updatedDate > post.data.pubDate && (
               <>
                 <br />
@@ -75,9 +76,7 @@ const getMetaDescription = (): string => {
     </span>
     {
       post.data.description && (
-        <p title="Post description">
-          {post.data.description}
-        </p>
+        <p title="Post description">{post.data.description}</p>
       )
     }
     <ToC headings={headings} />

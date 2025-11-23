@@ -73,6 +73,7 @@ const dateToIso = (date: Date) => date.toISOString().split("T")[0];
             <span>
               Posted on: {dateToIso(post.data.pubDate)}
               {post.data.updatedDate &&
+                typeof post.data.updatedDate !== "string" &&
                 post.data.updatedDate > post.data.pubDate &&
                 ` | Last updated: ${dateToIso(post.data.updatedDate)}`}
             </span>

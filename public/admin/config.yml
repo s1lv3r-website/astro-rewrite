@@ -1,9 +1,10 @@
 publish_mode: editorial_workflow
 media_folder: /public/uploaded
 public_folder: /uploaded
-local_backend: true
+
 backend:
-  name: git-gateway
+  name: github
+  repo: s1lv3r-website/astro-rewrite
   branch: master
   squash_merges: true
 
@@ -17,6 +18,7 @@ collections:
     fields:
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Description", name: "description", widget: "string" }
+      - { label: Show in UI, name: showInUI, widget: boolean }
       - {
           label: "Publish Date",
           name: "pubDate",
@@ -28,6 +30,6 @@ collections:
           name: "updatedDate",
           widget: "datetime",
           optional: true,
+          required: false,
         }
       - { label: "Body", name: "body", widget: "markdown" }
-      - { label: Show in UI, name: showInUI, widget: boolean }
