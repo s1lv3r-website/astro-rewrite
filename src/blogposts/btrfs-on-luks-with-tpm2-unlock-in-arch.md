@@ -8,7 +8,6 @@ pubDate: 2025-11-23T23:39:00.000+01:00
 ---
 ## Background
 
-
 I first installed my laptop with plain BTRFS and Arch without any form of encryption since I just needed a functional laptop as soon as possible (shipment was already 2 months delayed), but now that I have more time to tinker I have decided to re-install to get full disk encryption[^1].
 
 
