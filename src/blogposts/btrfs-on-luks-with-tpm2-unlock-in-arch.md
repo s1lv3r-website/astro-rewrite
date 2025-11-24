@@ -21,15 +21,45 @@ Usually I wouldn't go for full encryption, however I chose encryption here for a
 
 Before setting up the system I'll pre-plan the BTRFS subvolumes I'll be using and the options I'll be applying to each of these, to simplify later setup. This is taken a lot from [Jordan Williams' post on Btrfs subvolumes](https://www.jwillikers.com/btrfs-layout), so I recommend going there if you want to replicate this yourself.
 
-For simplicity's sake I'll only include the flags that are unique to each mount, with the defaults applying to all of them being `defaults,noatime,autodefrag,compress=zstd,commit=120`. Some options are also overwritten at times (e.g. `compress`).
+All volumes are mounted with the options `defaults,noatime,autodefrag,compress=lzo,commit=30` unless otherwise specified.
 
-| Subvol name | Mount path    | Flags              | Rationale                                                                                                                                                                   |
-| ----------- | ------------- | ------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `root`      | `/`           | `subvol=root`      |                                                                                                                                                                             |
-| `snapshots` | `/.snapshots` | `subvol=snapshots` | Having snapshots separated is highly recommended to avoid a snapshot-within-snapshot situation                                                                              |
-| `home`      | `/home`       | `subvol=home`      | Some people also recommend having a separate subvol for each user, however for my laptop there's only one user: me. So I stick to only having `/home` be its own subvolume. |
+| Subvol name | Mount path    | Flags              | Rationale |
+| ----------- | ------------- | ------------------ | --------- |
+| `root`      | `/`           |                    |           |
+| `snapshots` | `/.snapshots` || Having snapshots separated is highly recommended to avoid a snapshot-within-snapshot situation |
+| `home`      | `/home`       || Some people also recommend having a separate subvol for each user, however for my laptop there's only one user: me. So I stick to only having `/home` be its own subvolume. |
+| `opt` | `/opt` || A lot of third-party apps are installed here, and we don't want those to be uninstalled in case of a rootfs rollback |
+| `srv` | `/srv` | | Similar reason to `opt`, as well as this being a mountpoint for other drives. Don't wanna take snapshots of everything here |
+| `swap` | `/swap` | Remove `compress` option | Swapfile |
+| `tmp` | `/tmp` | | Temp data doesn't need to be stored |
+| `usr_local` | `/usr/local` | | Similar reason to `opt` |
+| `podman` | `/var/lib/containers` | | Podman images are stored here |
+| `docker` | `/var/lib/docker` | | Docker images are stored here |
+| `libvirt` | `/var/lib/libvirt/images` | | Libvirt (qemu, virt-manager) stores data here |
+
+Using `lzo` encryption won't save me a *lot* of storage space, however it does have the highest transfer speeds out of the three available (ZLIB, LZO, ZSTD) according to [a test by TheLinuxCode](https://thelinuxcode.com/enable-btrfs-filesystem-compression/). With me having a 2TB drive, sacrificing some compression in favor of speed is therefore acceptable.
 
 ## Installation
+
+Before starting the install itself, I boot into my regular arch install to shrink the existing BTRFS partition down to roughly 500G, giving me ~1.5T to install the encrypted OS on: `btrfs filesystem resize 500G /`
+
+Following that, installation starts off as usual. I download the latest [Arch ISO](https://archlinux.org/downloads), boot it, configure the keyboard, network, etc. All the usual stuff.
+
+I open a `tmux` session so I can actually scroll my terminal. and proceed with opening `fdisk` on `/dev/nvme0n1`. Since the BTRFS data has been shrunk to 500G, I can shrink the partition to match, and create a new partition following it for the new installation. Once this has been configured as a linux root partition, I write and close `fdisk`.
+
+After setting up the partition, I configure it with `crypttab`:
+```
+crypttab luksFormat \
+  --type luks2 \
+  --cipher aes-xts-plain64 \
+  --hash sha256 \
+  --iter-time 2000 \
+  --key-size 256 \
+  --pbkdf argon2id \
+  --use-urandom \
+  --verify-passphrase \
+  /dev/nvme0n1p3
+```
 
 ## Post-install configuration
 
