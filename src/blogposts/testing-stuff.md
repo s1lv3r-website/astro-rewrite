@@ -9,6 +9,8 @@ showInUI: false
 
 ## Overview
 
+Press <kbd>CTRL</kbd> and <kbd>B</kbd>.
+
 ### Philosophy
 
 Markdown is intended to be as easy-to-read and easy-to-write as is feasible.
@@ -171,12 +173,12 @@ paragraph in a list item must be indented by either 4 spaces
 or one tab:
 
 1. This is a list item with two paragraphs. Lorem ipsum dolor
-    sit amet, consectetuer adipiscing elit. Aliquam hendrerit
-    mi posuere lectus.
+   sit amet, consectetuer adipiscing elit. Aliquam hendrerit
+   mi posuere lectus.
 
-    Vestibulum enim wisi, viverra nec, fringilla in, laoreet
-    vitae, risus. Donec sit amet nisl. Aliquam semper ipsum
-    sit amet velit.
+   Vestibulum enim wisi, viverra nec, fringilla in, laoreet
+   vitae, risus. Donec sit amet nisl. Aliquam semper ipsum
+   sit amet velit.
 
 2. Suspendisse id sem consectetuer libero luctus adipiscing.
 
@@ -246,23 +248,28 @@ it and indent it, and Markdown will handle the hassle of encoding the
 ampersands and angle brackets. For example, this:
 
 ```html
-<div class="footer">
-    &copy; 2004 Foo Corporation
-</div>
+<div class="footer">&copy; 2004 Foo Corporation</div>
 ```
 
 Regular Markdown syntax is not processed within code blocks. E.g.,
 asterisks are just literal asterisks within a code block. This means
 it's also easy to use Markdown to write about Markdown's own syntax.
 
-```js
-// filename.js
+```js title="filename.js" showLineNumbers
 // Javascript code with syntax highlighting.
 var fun = function lang(l) {
   dateformat.i18n = require("./lang/" + l);
   return true;
 };
 ```
+
+## Tables
+
+| A   | B   | C   | D   |
+| --- | --- | --- | --- |
+| 1   | 1   | 1   | 1   |
+| 2   | 2   | 2   | 2   |
+| 3   | 3   | 3   | 3   |
 
 ## Span Elements
 
