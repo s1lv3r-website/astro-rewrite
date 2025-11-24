@@ -47,8 +47,9 @@ Following that, installation starts off as usual. I download the latest [Arch IS
 
 I open a `tmux` session so I can actually scroll my terminal. and proceed with opening `fdisk` on `/dev/nvme0n1`. Since the BTRFS data has been shrunk to 500G, I can shrink the partition to match, and create a new partition following it for the new installation. Once this has been configured as a linux root partition, I write and close `fdisk`.
 
-After setting up the partition, I configure it with `crypttab`:
-```
+After setting up the partition, I configure it with `crypttab`. I pre-generated a passphrase to use with Bitwarden's [passphrase generator](https://bitwarden.com/passphrase-generator/#passphrase-generator), and input that here when prompted.
+
+```sh
 crypttab luksFormat \
   --type luks2 \
   --cipher aes-xts-plain64 \
@@ -60,6 +61,26 @@ crypttab luksFormat \
   --verify-passphrase \
   /dev/nvme0n1p3
 ```
+
+Running this sets up encryption on the partition, requiring it to be opened with `cryptsetup` before any further configuration can be made. This will also require the password generated earlier:
+
+```sh
+cryptsetup open /dev/device root
+```
+
+This will create a device mapper on `/dev/mapper/root`, allowing the decrypted partition to be interacted with like any other. This gets followed up with creating a fresh BTRFS filesystem, which I mount at /mnt:
+
+```sh
+mkfs.btrfs /dev/mapper/root
+mount /dev/mapper/root /mnt
+```
+
+I can then create the subvolumes defined [earlier](#btrfs-configuration):
+
+```
+
+```
+
 
 ## Post-install configuration
 
