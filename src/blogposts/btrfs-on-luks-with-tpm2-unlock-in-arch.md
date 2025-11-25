@@ -163,9 +163,37 @@ As mentioned in [Secure boot keys](#secure-boot-keys), I took a copy of the secu
 So far I've only set up signing of the images themselves (which can *technically* be booted directly), however if I want to ever use a bootloader for multiple OSes or kernels I'll have to sign it too (less I disable secure boot every time, which isn't particularly favorable).
 
 For pacman, this is luckily decently simple. I'll need to install two hooks:
-- [`80-sign-systemd-boot.hook`] - As the name implies, this hook signs the systemd-boot efi binary.
+- [`80-sign-systemd-boot.hook`](#TODO: UPLOAD FILE) - As the name implies, this hook signs the systemd-boot efi binary.
+- [`95-update-systemd-boot`](#TODO: UPLOAD FILE) - This restarts the systemd-boot updater, ensuring the new version of the binary is put into place immediately
+
+For simplicity's sake I've just uploaded the full files for download instead of putting them into the post itself.
+
+I'll also make sure to reinstall systemd to make both hooks run once, so the binary gets signed and put into place: `sudo pacman -S systemd`
+
+### Misc last touches
+
+Before having a usable system, I'll need to configure a few smaller things:
+- `/etc/fstab`
+  - Add /boot to the fstab
+  - Use `/dev/mapper/root` instead of the UUID (personal preference)
+- Greeter
+  - Enable and create cache dir for remembering the last used session
+    ```
+    systemctl enable greetd
+    mkdir /var/cache/tuigreet
+    chown greeter:greeter /var/cache/tuigreet
+    chmod 0755 /var/cache/tuigreet
+    ```
+  - Select the greeter to use by editing `/etc/greetd/config.toml`:
+    ```
+    command = "tuigreet --time --remember --remember-user-session --user-menu --user-menu-min-uid 1000 --asterisks --cmd 'uwsm start hyprland-uwsm.desktop'"
+    ```
+
+Once this is all completed: Reboot time!
 
 ## Post-install configuration
+
+Now, this is where the actual TPM2 unlocking part comes into place. I'll skip all the boring "copy old home dir and struggle for 2 hours to configure dotfiles and install programs" stuff, and only focus on TPM2 here.
 
 ## Acknowledgements
 
