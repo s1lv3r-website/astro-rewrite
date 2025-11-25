@@ -4,7 +4,7 @@ description: My experience with installing Arch Linux on my Framework 13
   with   LUKS, BTRFS, and automatic unlocking using TPM2 similar to what
   BitLocker   does.
 showInUI: true
-pubDate: 2025-11-25T22:42:00.000+01:00
+pubDate: 2025-11-25T22:57:00.000+01:00
 ---
 > [NOTE] 
 > As of this writing (initial publish date), and until this notice is removed, this is still a WIP and very much a living document.
