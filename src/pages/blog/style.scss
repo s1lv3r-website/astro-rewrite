@@ -1,4 +1,5 @@
 @layer base {
+
   :after,
   :before,
   ::backdrop {
@@ -330,24 +331,24 @@
     margin-bottom: .5em
   }
 
-  .\!prose>ul>li p {
+  ul>li p {
     margin-top: .75em;
     margin-bottom: .75em
   }
 
-  .\!prose>ul>li>p:first-child {
+  ul>li>p:first-child {
     margin-top: 1.25em
   }
 
-  .\!prose>ul>li>p:last-child {
+  ul>li>p:last-child {
     margin-bottom: 1.25em
   }
 
-  .\!prose>ol>li>p:first-child {
+  ol>li>p:first-child {
     margin-top: 1.25em
   }
 
-  .\!prose>ol>li>p:last-child {
+  ol>li>p:last-child {
     margin-bottom: 1.25em
   }
 
@@ -405,17 +406,5 @@
   figure {
     margin-top: 2em;
     margin-bottom: 2em
-  }
-
-  .prose-a\:text-inherit :where(a):not(:where([class~=not-prose], [class~=not-prose] *)) {
-    color: inherit
-  }
-
-  .prose-a\:underline :where(a):not(:where([class~=not-prose], [class~=not-prose] *)) {
-    text-decoration-line: underline
-  }
-
-  .prose-img\:rounded-xl :where(img):not(:where([class~=not-prose], [class~=not-prose] *)) {
-    border-radius: var(--radius-xl)
   }
 }

@@ -11,6 +11,11 @@ showInUI: false
 
 Press <kbd>CTRL</kbd> and <kbd>B</kbd>.
 
+```
+some quite decently long string of code in a codeblock most definitely going to require some form of scrolling oh youre still here why are you still reading you should really go do something else now.
+```
+
+
 ### Philosophy
 
 Markdown is intended to be as easy-to-read and easy-to-write as is feasible.
@@ -146,6 +151,12 @@ or even:
 3. Bird
 1. McHale
 1. Parish
+
+or even:
+
+300. wow
+301. such long
+302. list element
 
 you'd get the exact same HTML output. The point is, if you want to,
 you can use ordinal numbers in your ordered Markdown lists, so that

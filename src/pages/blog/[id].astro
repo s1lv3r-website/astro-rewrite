@@ -24,9 +24,10 @@ const dateFormat = (_date: Date): string => {
 };
 
 const getMetaDescription = (): string => {
-  const base = `Posted: ${post.data.pubDate.toISOString().split("T")[0]}`;
+  // const base = `[${post.data.pubDate.toISOString().split("T")[0]}]`;
+  const base = ``;
   if (post.data.description) {
-    return `${base} | ${trimDescription(post.data.description)}`;
+    return `${base} ${trimDescription(post.data.description)}`;
   }
   return base;
 };
@@ -150,6 +151,7 @@ const getMetaDescription = (): string => {
         border-width: 0;
         border-radius: 0;
         padding: 0;
+        overflow: auto;
 
         button.rehype-pretty-copy {
           background: none;
@@ -245,7 +247,7 @@ const getMetaDescription = (): string => {
     ul {
       margin-top: 1rem;
       margin-bottom: 1rem;
-      padding-inline-start: 1.625rem;
+      // padding-inline-start: 2rem;
     }
 
     ol {
@@ -304,7 +306,12 @@ const getMetaDescription = (): string => {
   }
 </style>
 
-<Layout title={post.data.title} description={getMetaDescription()}>
+<Layout
+  blogpost="true"
+  title={post.data.title}
+  description={getMetaDescription()}
+  blogData={post.data}
+>
   <div class="metadata">
     <h1>{post.data.title}</h1>
     <span title="Posted and updated date">
