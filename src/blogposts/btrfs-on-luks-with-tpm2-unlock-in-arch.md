@@ -157,18 +157,34 @@ In the chroot, I do some other post-config:
 ### Mkinitcpio
 
 
-Arch uses mkinitcpio to generate the kernel and initramfs images by default, so I'll just keep using it for simplicity's sake. I could've used an alternative like [dracut](https://wiki.archlinux.org/title/Dracut), but meh. Mkinitcpio works.
+Arch uses `mkinitcpio` to generate the kernel and initramfs images by default, so I'll just keep using it for simplicity's sake. I could've used an alternative like [`dracut`](https://wiki.archlinux.org/title/Dracut), but meh. `Mkinitcpio` works.
 
 
 There are a few options I need to configure for mkinitcpio to
 
 
-1. Generate a [UKI](https://wiki.archlinux.org/title/Unified_kernel_image)
-2. Sign the generated image for secure boot
-3. Have the required modules to boot the encrypted-signed image
+1. Have the required modules to boot the encrypted-signed image
+2. Generate a [UKI](https://wiki.archlinux.org/title/Unified_kernel_image)
+3. Sign the generated image for secure boot
+
+First task is configuring `mkinitcpio` to have the required modules for my desired setup. Editing the configuration file, I make it look something like this:
+
+```sh title=/etc/mkinitcpio.conf
+MODULES=(btrfs)
+BINARIES=(/usr/bin/btrfs)
+FILES=()
+HOOKS=(systemd autodetect microcode modconf kms keyboard sd-vconsole sd-encrypt block filesystems)
+COMPRESSION="lz4"
+COMPRESSION_OPTIONS=(-9)
+```
+
+This enables btrfs on root, sets up unlocking encryption through systemd, and increases compression ratio to around 2.5 while preserving the fastest decryption speeds ([Mkinitcpio#COMPRESSION on the Arch Wiki](https://wiki.archlinux.org/title/Mkinitcpio#COMPRESSION)).
+
+The first task is the UKI. For this, I installed `systemd-ukify` which includes the `ukify` binary, used by `mkinitcpio`. In the `/etc/mkinitcpio.d/linux.preset` file, I uncomment the `default_uki`, `default_options`, `fallback_uki`, and `fallback_options` lines, and comment out the `default_image` and `fallback_image` options. I then put in the correct paths in the `default_uki` and `fallback_uki` lines (in my case `/boot/EFI/Linux/arch-linux.efi` and `arch-linux-fallback.efi`).
+
+Uncommenting these options tells `mkinitcpio` to generate a unified image instead of a separate kernel and initramfs. It can also be configured to automatically sign the generated image for secure boot, leading me into the second task.
 
 
-The first task is the UKI.
 
 
 ## Post-install configuration
