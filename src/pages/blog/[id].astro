@@ -24,12 +24,10 @@ const dateFormat = (_date: Date): string => {
 };
 
 const getMetaDescription = (): string => {
-  // const base = `[${post.data.pubDate.toISOString().split("T")[0]}]`;
-  const base = ``;
   if (post.data.description) {
-    return `${base} ${trimDescription(post.data.description)}`;
+    return trimDescription(post.data.description);
   }
-  return base;
+  return "No description... its a surprise!";
 };
 ---
 
