@@ -6,6 +6,9 @@ description: My experience with installing Arch Linux on my Framework 13
 showInUI: true
 pubDate: 2025-11-23T23:39:00.000+01:00
 ---
+> [!NOTE] 
+> As of this writing (initial publish date), and until this notice is removed, this is still a WIP and very much a living document.
+
 ## Background
 
 I first installed my laptop with plain BTRFS and Arch without any form of encryption since I just needed a functional laptop as soon as possible (shipment was already 2 months delayed), but now that I have more time to tinker I have decided to re-install to get full disk encryption[^1].
@@ -194,6 +197,10 @@ Once this is all completed: Reboot time!
 ## Post-install configuration
 
 Now, this is where the actual TPM2 unlocking part comes into place. I'll skip all the boring "copy old home dir and struggle for 2 hours to configure dotfiles and install programs" stuff, and only focus on TPM2 here.
+
+> [!NOTE]
+> Aaaand that's about as far as I've gotten so far. Document is very much a WIP, so check back in a week or two and there might be progress!
+
 
 ## Acknowledgements
 
