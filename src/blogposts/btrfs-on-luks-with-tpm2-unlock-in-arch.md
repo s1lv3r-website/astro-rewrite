@@ -178,14 +178,14 @@ Before having a usable system, I'll need to configure a few smaller things:
   - Use `/dev/mapper/root` instead of the UUID (personal preference)
 - Greeter
   - Enable and create cache dir for remembering the last used session
-    ```
+    ```sh
     systemctl enable greetd
     mkdir /var/cache/tuigreet
     chown greeter:greeter /var/cache/tuigreet
     chmod 0755 /var/cache/tuigreet
     ```
   - Select the greeter to use by editing `/etc/greetd/config.toml`:
-    ```
+    ```toml
     command = "tuigreet --time --remember --remember-user-session --user-menu --user-menu-min-uid 1000 --asterisks --cmd 'uwsm start hyprland-uwsm.desktop'"
     ```
 
