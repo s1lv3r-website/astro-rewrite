@@ -6,7 +6,7 @@ description: My experience with installing Arch Linux on my Framework 13
 showInUI: true
 pubDate: 2025-11-25T22:42:00.000+01:00
 ---
-> [!NOTE] 
+> [NOTE] 
 > As of this writing (initial publish date), and until this notice is removed, this is still a WIP and very much a living document.
 
 ## Background
@@ -198,7 +198,7 @@ Once this is all completed: Reboot time!
 
 Now, this is where the actual TPM2 unlocking part comes into place. I'll skip all the boring "copy old home dir and struggle for 2 hours to configure dotfiles and install programs" stuff, and only focus on TPM2 here.
 
-> [!NOTE]
+> [NOTE]
 > Aaaand that's about as far as I've gotten so far. Document is very much a WIP, so check back in a week or two and there might be progress!
 
 
