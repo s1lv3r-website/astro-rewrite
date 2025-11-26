@@ -6,7 +6,9 @@ description: My experience with installing Arch Linux on my Framework 13
 showInUI: true
 pubDate: 2025-11-25T22:57:00.000+01:00
 ---
-> [NOTE] 
+> ![]()
+>
+> \[NOTE] 
 > As of this writing (initial publish date), and until this notice is removed, this is still a WIP and very much a living document.
 
 ## Background
@@ -26,21 +28,19 @@ Before setting up the system I'll pre-plan the BTRFS subvolumes I'll be using an
 
 All volumes are mounted with the options `defaults,noatime,autodefrag,compress=lzo,commit=30` unless otherwise specified.
 
-
-| Subvol name | Mount path    | Flags              | Rationale |
-| ----------- | ------------- | ------------------ | --------- |
-| `root`      | `/`           |                    |           |
-| `snapshots` | `/.snapshots` || Having snapshots separated is highly recommended to avoid a snapshot-within-snapshot situation |
-| `home`      | `/home`       || Some people also recommend having a separate subvol for each user, however for my laptop there's only one user: me. So I stick to only having `/home` be its own subvolume. |
-| `opt` | `/opt` || A lot of third-party apps are installed here, and we don't want those to be uninstalled in case of a rootfs rollback |
-| `srv` | `/srv` | | Similar reason to `opt`, as well as this being a mountpoint for other drives. Don't wanna take snapshots of everything here |
-| `swap` | `/swap` | Remove `compress` option | Swapfile |
-| `tmp` | `/tmp` | | Temp data doesn't need to be stored |
-| `usr_local` | `/usr/local` | | Similar reason to `opt` |
-| `podman` | `/var/lib/containers` | | Podman images are stored here |
-| `docker` | `/var/lib/docker` | | Docker images are stored here |
-| `libvirt` | `/var/lib/libvirt/images` | | Libvirt (qemu, virt-manager) stores data here |
-
+| Subvol name | Mount path                | Flags                    | Rationale                                                                                                                                                                   |
+| ----------- | ------------------------- | ------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `root`      | `/`                       |                          |                                                                                                                                                                             |
+| `snapshots` | `/.snapshots`             |                          | Having snapshots separated is highly recommended to avoid a snapshot-within-snapshot situation                                                                              |
+| `home`      | `/home`                   |                          | Some people also recommend having a separate subvol for each user, however for my laptop there's only one user: me. So I stick to only having `/home` be its own subvolume. |
+| `opt`       | `/opt`                    |                          | A lot of third-party apps are installed here, and we don't want those to be uninstalled in case of a rootfs rollback                                                        |
+| `srv`       | `/srv`                    |                          | Similar reason to `opt`, as well as this being a mountpoint for other drives. Don't wanna take snapshots of everything here                                                 |
+| `swap`      | `/swap`                   | Remove `compress` option | Swapfile                                                                                                                                                                    |
+| `tmp`       | `/tmp`                    |                          | Temp data doesn't need to be stored                                                                                                                                         |
+| `usr_local` | `/usr/local`              |                          | Similar reason to `opt`                                                                                                                                                     |
+| `podman`    | `/var/lib/containers`     |                          | Podman images are stored here                                                                                                                                               |
+| `docker`    | `/var/lib/docker`         |                          | Docker images are stored here                                                                                                                                               |
+| `libvirt`   | `/var/lib/libvirt/images` |                          | Libvirt (qemu, virt-manager) stores data here                                                                                                                               |
 
 Using `lzo` encryption won't save me a *lot* of storage space, however it does have the highest transfer speeds out of the three available (ZLIB, LZO, ZSTD) according to [a test by TheLinuxCode](https://thelinuxcode.com/enable-btrfs-filesystem-compression/). With me having a 2TB drive, sacrificing some compression in favor of speed is therefore acceptable.
 
@@ -92,7 +92,6 @@ I can then create the subvolumes defined [earlier](#btrfs-configuration), by run
 btrfs subvolume create /mnt/@$NAME
 ```
 
-
 Then the root-volume gets unmounted, and I mount each of the subvolumes to their correct locations, putting in or removing the appropriate options as required:
 
 ```sh
@@ -127,10 +126,11 @@ genfstab -U /mnt >> /mnt/etc/fstab
 After installing the base packages I `chroot`ed into the system with `arch-chroot /mnt`. Any commands after here are in the chroot unless otherwise specified.
 
 In the chroot, I do some other post-config:
-- Setup locales: `vim /etc/locale.gen` + `locale-gen` + `/etc/locale.conf` + `localectl set-locale`
-- Setup keymap: `/etc/vconsole.conf` + `localectl set-keymap`
-- Setup hostname: `/etc/hostname` + `hostnamectl hostname`
-- Setup hosts file: `/etc/hosts`
+
+* Setup locales: `vim /etc/locale.gen` + `locale-gen` + `/etc/locale.conf` + `localectl set-locale`
+* Setup keymap: `/etc/vconsole.conf` + `localectl set-keymap`
+* Setup hostname: `/etc/hostname` + `hostnamectl hostname`
+* Setup hosts file: `/etc/hosts`
 
 ### Mkinitcpio
 
@@ -144,7 +144,7 @@ There are a few options I need to configure for mkinitcpio to
 
 First task is configuring `mkinitcpio` to have the required modules for my desired setup. Editing the configuration file, I make it look something like this:
 
-```sh title=/etc/mkinitcpio.conf
+```sh
 MODULES=(btrfs)
 BINARIES=(/usr/bin/btrfs)
 FILES=()
@@ -166,8 +166,11 @@ As mentioned in [Secure boot keys](#secure-boot-keys), I took a copy of the secu
 So far I've only set up signing of the images themselves (which can *technically* be booted directly), however if I want to ever use a bootloader for multiple OSes or kernels I'll have to sign it too (less I disable secure boot every time, which isn't particularly favorable).
 
 For pacman, this is luckily decently simple. I'll need to install two hooks:
-- [`80-sign-systemd-boot.hook`](#TODO: UPLOAD FILE) - As the name implies, this hook signs the systemd-boot efi binary.
-- [`95-update-systemd-boot`](#TODO: UPLOAD FILE) - This restarts the systemd-boot updater, ensuring the new version of the binary is put into place immediately
+
+
+
+* [`80-sign-systemd-boot.hook`](/uploaded/80-sign-systemd-boot.hook) - As the name implies, this hook signs the systemd-boot efi binary.
+* [`95-update-systemd-boot.hook`](/uploaded/95-update-systemd-boot.hook) - This restarts the systemd-boot updater, ensuring the new version of the binary is put into place immediately
 
 For simplicity's sake I've just uploaded the full files for download instead of putting them into the post itself.
 
@@ -176,18 +179,23 @@ I'll also make sure to reinstall systemd to make both hooks run once, so the bin
 ### Misc last touches
 
 Before having a usable system, I'll need to configure a few smaller things:
-- `/etc/fstab`
-  - Add /boot to the fstab
-  - Use `/dev/mapper/root` instead of the UUID (personal preference)
-- Greeter
-  - Enable and create cache dir for remembering the last used session
+
+* `/etc/fstab`
+
+  * Add /boot to the fstab
+  * Use `/dev/mapper/root` instead of the UUID (personal preference)
+* Greeter
+
+  * Enable and create cache dir for remembering the last used session
+
     ```sh
     systemctl enable greetd
     mkdir /var/cache/tuigreet
     chown greeter:greeter /var/cache/tuigreet
     chmod 0755 /var/cache/tuigreet
     ```
-  - Select the greeter to use by editing `/etc/greetd/config.toml`:
+  * Select the greeter to use by editing `/etc/greetd/config.toml`:
+
     ```toml
     command = "tuigreet --time --remember --remember-user-session --user-menu --user-menu-min-uid 1000 --asterisks --cmd 'uwsm start hyprland-uwsm.desktop'"
     ```
@@ -198,9 +206,8 @@ Once this is all completed: Reboot time!
 
 Now, this is where the actual TPM2 unlocking part comes into place. I'll skip all the boring "copy old home dir and struggle for 2 hours to configure dotfiles and install programs" stuff, and only focus on TPM2 here.
 
-> [NOTE]
+> \[NOTE]
 > Aaaand that's about as far as I've gotten so far. Document is very much a WIP, so check back in a week or two and there might be progress!
-
 
 ## Acknowledgements
 
