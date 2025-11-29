@@ -17,8 +17,21 @@ collections:
     preview_path: blog/{{slug}}
     fields:
       - { label: "Title", name: "title", widget: "string" }
-      - { label: "Description", name: "description", widget: "string" }
-      - { label: Show in UI, name: showInUI, widget: boolean }
+      - {
+          label: "Description",
+          name: "description",
+          widget: "string",
+          required: false,
+          optional: true
+        }
+      - {
+          label: Show in UI,
+          name: showInUI,
+          widget: boolean,
+          default: true,
+          required: false,
+          optional: true
+        }
       - {
           label: "Publish Date",
           name: "pubDate",
