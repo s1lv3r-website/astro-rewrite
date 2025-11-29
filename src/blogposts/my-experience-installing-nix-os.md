@@ -1,7 +1,7 @@
 ---
 title: My experience installing Nix OS
-description: N/A
-showInUI: false
+description: ""
+showInUI: true
 pubDate: 2025-11-29T18:34:00.000+01:00
 ---
 After some friends of mine started using and recommending [NixOS](https://nixos.org) to me I eventually got tempted enough by the sweet, sweet reproducibility and git-managed system that I decided to give it a try.
