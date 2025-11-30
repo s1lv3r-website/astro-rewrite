@@ -24,10 +24,10 @@ const dateFormat = (_date: Date): string => {
 };
 
 const getMetaDescription = (): string => {
-  if (post.data.description) {
-    return trimDescription(post.data.description);
-  }
-  return "No description... its a surprise!";
+  return (
+    trimDescription(post.data.description ?? post.body) ??
+    "No description... Its a mystery!"
+  );
 };
 ---
 
