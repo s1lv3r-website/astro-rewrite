@@ -8,11 +8,17 @@ After some friends of mine started using and recommending [NixOS](https://nixos.
 
 At first, I wasn't a massive fan. Configurations were archaic, the nix configuration language had some... quirks (?) that I weren't a big fan of (more on that [here](#nix-language-quirks), and configuring flakes for git-managed configurations wasn't exactly intuitive.
 
+Later though, I did start getting a bit used to the system. A lot of that was thanks to my friend [Soni](https://github.com/soni801) who helped me for hours on end with setting up the system, and answered every question I annoyed him with in our DMs. Thanks a lot :3
+
+To put the TLDR at the start: I am likely not gonna be switching to Nix full time. It's good, just not quite for me. More on that at the end.
+
 # Installation process
 
 First of all, there's the installation process. Now, this was likely mostly an issue with my machine, but for some unknown reason WiFi was absolutely *refusing* to connect, whether I was using the Minimal or Graphical installer, and regardless of environment in the Graphical installer. This caused me about an hour of pain with trying, restarting, retrying, and repeat. In the end I just plugged the machine in with a cable, and that solved my issues, but not a "good" first experience at least.
 
-Next, the installer itself was being kinda annoying. There was no ability to shrink my existing LUKS partition to make 
+Next, the installer itself was being kinda annoying. There was no ability to shrink my existing LUKS partition to make space for installing Nix itself, so I had to use GParted for this. That itself is fine, as shrinking a LUKS partition is decently niche. But when I then did shrink the partition to make space, the installer never refreshed the partition selection, forcing me to restart the installer completely. Again: Niche is, but a small annoyance either way.
+
+Finally, and I noticed this only after the installation itself, it overwrote my `systemd-boot` config completely and changed the EFI parameters to ensure Nix was booted first instead of using the existing `sd-boot` entry and config. As I had customized my `loader.conf` a decent amount, this was kinda annoying. Nothing I couldn't fix, but another small annoyance. As I was quick to notice, there were a lot of those.
 
 <!--
 network issues
@@ -24,6 +30,29 @@ network issues
 -->
 
 # Nix language quirks
+
+The Nix language itself is very good, I like it quite a lot. However, some small things kinda got to me.
+
+First: The fact that there is a semicolon between `with pkgs` and an array. To me, coming from other languages (and even from the nix language itself), this seems incorrect. To me, a semicolon indicates "end of this statement", so in Nix' case "end of this variable or definition". It was not logical to me that in *this* case only, the statement continued after the semicolon. Once I got used to this it was no issue at all.
+
+Second, and this is more a nitpick than anything: Indents and bracketing. Why does `nixfmt` insist on this pattern (pseudocode):
+
+```nix
+services.openssh =
+  {
+    enabled = true;
+  };
+```
+
+instead of
+
+```nix
+services.openssh = {
+  enabled = true;
+};
+```
+
+Again: Preference, doesn't at all matter for the operation of the system, but just tiny nitpicks. I don't *have* to use `nixfmt` at all.
 
 <!--
 - semicolon after `with pkgs` into array
@@ -39,6 +68,12 @@ network issues
 
 # The good
 
+Now for a change of pace: Some good things and things I liked with Nix!
+
+First: I absolutely LOVE the declarative configuration. I am absolutely a fan of being able to define "I want foo, bar, and baz" and have only that be installed, and if I remove anything from that list, it gets removed automatically. I am ABSOLUTELY a fan of that, not a question about it.
+
+Further: I love the ability to, with a tiny bit of config, have different setups for different machines while being able to share base configurations. Being able to add `nixosConfigurations` and run `nixos-rebuild switch --flake .#hostname` to have my desired configuration for my exact system: Absolutely love it. That is exactly what other dotfile managers and config managers should strive to be.
+
 <!--
 - Defining exactly what i need to install
 - Different setups for different machines in the same repo
@@ -46,9 +81,13 @@ network issues
 
 # The bad
 
+Now: Back to some more complaining (unfortunately). NixOS' lack of following the [FHS](https://refspecs.linuxfoundation.org/FHS_3.0/fhs-3.0.html) absolutely made the transition to Nix more difficult for me. Trying to find config files (or really any files at all) was made incredibly difficult. I essentially needed to throw away everything I knew and start completely anew.
+
+This leads me into my second main problem: The documentation is... something. Configuration documentation is seemingly spread across 10 different websites, all of which having something the others don't have. The [nix wiki](https://wiki.nixos.org/) is a good starting point and a good resource for basic configuration, but the second I needed anything else I found myself digging down GitHub issues, Nix search sites, and my friends' DMs.
+
 <!--
 - lack of filesystem hierarchy standard following
-- vscode remote in bwrap,  sudo issues
+- vscode remote in bwrap, sudo issues
 -->
 
 # The confusing
@@ -59,3 +98,5 @@ network issues
 - weird packaging of binaries
   - krunner package not including krunner
 -->
+
+# Overall
