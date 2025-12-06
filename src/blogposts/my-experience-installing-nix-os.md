@@ -47,7 +47,6 @@ packages = with pkgs [
 ];
 ```
 
-
 Second, and this is more a nitpick than anything: Indents and bracketing. Why does `nixfmt` insist on this pattern (pseudocode):
 
 ```nix
