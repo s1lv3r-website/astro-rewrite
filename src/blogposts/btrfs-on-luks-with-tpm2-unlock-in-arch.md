@@ -110,6 +110,12 @@ btrfs filesystem mkswapfile /mnt/swap/swapfile --size 40G --uuid clear
 swapon /mnt/swap/swapfile
 ```
 
+And mounting the EFI partition of course:
+
+```sh
+mount /dev/nvme0n1p1 /mnt/boot --mkdir
+```
+
 ## Base setup
 
 After setting up all the partitions, I simply set up the system like any other:
@@ -121,7 +127,7 @@ reflector --save /etc/pacman.d/mirrorlist --protocol http,https --country Norway
 
 # Install base packages
 # Further hyprland addons (like hyprshot, hyprpicker, various xdg-desktop-portals, etc are installed in the post-install section)
-pacstrap -K /mnt base linux linux-firmware-amdgpu linux-firmware-mediatek ukify systemd-ukify uwsm firefox-developer-edition tmux kate zsh git sudo vim amd-ucode networkmanager btrfs-progs hyprland rofi dolphin man-db greetd-tuigreet fprintd efibootmgr alacritty
+pacstrap -K /mnt base linux linux-firmware-amdgpu linux-firmware-mediatek systemd-ukify uwsm tmux kate zsh git sudo vim amd-ucode networkmanager btrfs-progs hyprland rofi dolphin man-db greetd-tuigreet fprintd efibootmgr alacritty
 
 # Generate an initial fstab
 genfstab -U /mnt >> /mnt/etc/fstab
@@ -149,7 +155,7 @@ There are a few options I need to configure for mkinitcpio to
 First task is configuring `mkinitcpio` to have the required modules for my desired setup. Editing the configuration file, I make it look something like this:
 
 ```sh
-MODULES=(btrfs)
+MODULES=(btrfs tpm_crb)
 BINARIES=(/usr/bin/btrfs)
 FILES=()
 HOOKS=(systemd autodetect microcode modconf kms keyboard sd-vconsole sd-encrypt block filesystems)
@@ -169,7 +175,7 @@ As mentioned in [Secure boot keys](#secure-boot-keys), I took a copy of the secu
 
 So far I've only set up signing of the images themselves (which can *technically* be booted directly), however if I want to ever use a bootloader for multiple OSes or kernels I'll have to sign it too (less I disable secure boot every time, which isn't particularly favorable).
 
-For pacman, this is luckily decently simple. I'll need to install two hooks:
+For pacman, this is luckily decently simple. I'll need to install two hooks to `/etc/pacman.d/hooks/`:
 
 * [`80-sign-systemd-boot.hook`](/uploaded/80-sign-systemd-boot.hook) - As the name implies, this hook signs the systemd-boot efi binary.
 * [`95-update-systemd-boot.hook`](/uploaded/95-update-systemd-boot.hook) - This restarts the systemd-boot updater, ensuring the new version of the binary is put into place immediately
@@ -182,10 +188,6 @@ I'll also make sure to reinstall systemd to make both hooks run once, so the bin
 
 Before having a usable system, I'll need to configure a few smaller things:
 
-* `/etc/fstab`
-
-  * Add /boot to the fstab
-  * Use `/dev/mapper/root` instead of the UUID (personal preference)
 * Greeter
 
   * Enable and create cache dir for remembering the last used session
