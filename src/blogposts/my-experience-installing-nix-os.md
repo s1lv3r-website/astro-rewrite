@@ -108,7 +108,19 @@ First: The (at least) 5 different way to install packages:
 
 After using and working with Nix a bit more I do understand *why* it is this way. All of them serve a different purpose, and configure a slightly different part of the system. But knowing which to use when was maybe one of the most confusing things for me as a new user.
 
-Next: User services. Ohhh did I ever struggle with user services.
+Next: User services. Ohhh did I ever struggle with user services. I was thinking I was gonna install and use [SwayNotificationCenter](https://github.com/ErikReider/SwayNotificationCenter) for my notifications in Hyprland. So first I need to figure out what package to use. I try what seems like the most logical option, the [`pkgs.swaynotificationcenter`](https://mynixos.com/nixpkgs/package/swaynotificationcenter) package. That one did work if launched manually or through the hypr `exec-once` config, but as I was using [uwsm](https://github.com/Vladimir-csp/uwsm), I was thinking I could enable the user service. Only issue: There was none!
+
+So I started digging. Was it in /etc...? No, right, Nix doesn't use FHS. /usr/lib/systemd..? Nope, nothing there either. I dug for about half an hour until I realized: The package itself doesn't include a service! So I started researching other methods, and saw that home-manager includes a `services` key. However it *clearly* (very sarcastic) uses a different format to regular flakes and nix config, and keys used in `nix` aren't available in `home-manager` despite using the same file format.
+
+So, after another half hour of debugging, I did figure out how to get it running:
+
+```nix
+services.swaync.enable = true;
+```
+
+Easy enough, I guess, just not intuitive at all. I also have no idea where this has installed the binaries or programs themselves /shrug.
+
+Finally, what seems like a packaging bug to me? The [`krunner`](https://search.nixos.org/packages?channel=unstable&query=krunner) package just... didn't install `krunner`? In fact, it doesn't install *anything*! I believe this is probably just a bug, but an annoying one nonetheless. Only way to get krunner was by installing the `kdePackages.plasma-workspace` package, but this also installed a lot of junk I didn't want at all. I dug into only including the `bin/krunner` part of the package, but that got me into [derivations](https://nix.dev/manual/nix/2.22/language/derivations) which I was not nearly ready for.
 
 <!--
 - systemPackages vs packages vs programs vs home-manager packages (e.g. sway) vs wayland.windowManager
@@ -118,3 +130,5 @@ Next: User services. Ohhh did I ever struggle with user services.
 -->
 
 # Overall
+
+So far it might've seemed like I've mostly complained, however: I do like Nix. It's confusing for sure, and not necessarily very intuitive even for seasoned linux users like myself, but the ideas and concepts it brings to the table are ones I very much enjoy. I won't be switching to Nix full-time, but perhaps I'll be more open to dabbling around in it in the future? For now though, I'll be sticking to Arch, btw :3
