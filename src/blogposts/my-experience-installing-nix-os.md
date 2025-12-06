@@ -35,6 +35,19 @@ The Nix language itself is very good, I like it quite a lot. However, some small
 
 First: The fact that there is a semicolon between `with pkgs` and an array. To me, coming from other languages (and even from the nix language itself), this seems incorrect. To me, a semicolon indicates "end of this statement", so in Nix' case "end of this variable or definition". It was not logical to me that in *this* case only, the statement continued after the semicolon. Once I got used to this it was no issue at all.
 
+```nix
+# How it is:
+packages = with pkgs; [
+  ...
+];
+
+# How it makes intuitive sense for me:
+packages = with pkgs [
+  ...
+];
+```
+
+
 Second, and this is more a nitpick than anything: Indents and bracketing. Why does `nixfmt` insist on this pattern (pseudocode):
 
 ```nix
@@ -59,9 +72,10 @@ Again: Preference, doesn't at all matter for the operation of the system, but ju
 - issues with indents
 -->
 
-# Home-manager
 
 <!--
+# Home-manager
+
 - Config management
 - Package installation
 -->
