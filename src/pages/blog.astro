@@ -78,8 +78,8 @@ const dateToIso = (date: Date) => date.toISOString().split("T")[0];
                 post.data.updatedDate > post.data.pubDate &&
                 ` | Last updated: ${dateToIso(post.data.updatedDate)}`}
             </span>
-            {post.data.description && (
-              <p>{trimDescription(post.data.description)}</p>
+            {(post.data.description || post.body) && (
+              <p>{trimDescription(post.data.description || post.body)}</p>
             )}
           </a>
         </li>

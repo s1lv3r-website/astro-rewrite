@@ -23,12 +23,8 @@ const dateFormat = (_date: Date): string => {
   return `${date} ${timestamp.join(":")} (UTC)`;
 };
 
-const getMetaDescription = (): string => {
-  return (
-    trimDescription(post.data.description ?? post.body) ??
-    "No description... Its a mystery!"
-  );
-};
+const getMetaDescription = (): string =>
+  trimDescription(post.data.description || post.body)!;
 ---
 
 <style lang="scss">
@@ -334,6 +330,7 @@ const getMetaDescription = (): string => {
       )
     }
     <ToC headings={headings} />
+    {getMetaDescription()}
   </div>
   <hr class="separator" />
   <main id="content">
