@@ -54,7 +54,7 @@ Following that, installation starts off as usual. I download the latest [Arch IS
 
 First things first, I opened `/dev/nvme0n1` with `fdisk`. Since the BTRFS data has been shrunk to 500G already, I can shrink the partition to match and create a new partition following it for the new installation. Once this has been configured as a linux root partition, I write and close `fdisk`.
 
-After setting up the partition, I configure it with `crypttab`. I pre-generated a passphrase to use with Bitwarden's [passphrase generator](https://bitwarden.com/passphrase-generator/#passphrase-generator), and input that here when prompted.
+After setting up the partition, I configure it with `crypttab`. I pre-generated a passphrase to use through Bitwarden's [passphrase generator](https://bitwarden.com/passphrase-generator/#passphrase-generator), and input that when prompted:
 
 ```sh
 cryptsetup luksFormat \
