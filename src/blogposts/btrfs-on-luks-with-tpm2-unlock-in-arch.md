@@ -22,7 +22,7 @@ Usually I wouldn't go for full encryption, however I chose encryption here for a
 
 Before setting up the system I'll pre-plan the BTRFS subvolumes I'll be using and the options I'll be applying to each of these, to simplify later setup. This is taken a lot from [Jordan Williams' post on Btrfs subvolumes](https://www.jwillikers.com/btrfs-layout), so I recommend going there if you want to replicate this yourself.
 
-All volumes are mounted with the options `defaults,noatime,autodefrag,compress=lzo,commit=30` unless otherwise specified.
+All volumes are mounted with the options `defaults,noatime,autodefrag,ssd,compress=lzo,commit=30` unless otherwise specified.
 
 | Subvol name | Mount path                | Flags                    | Rationale                                                                                                                                                                   |
 | ----------- | ------------------------- | ------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -32,11 +32,10 @@ All volumes are mounted with the options `defaults,noatime,autodefrag,compress=l
 | `opt`       | `/opt`                    |                          | A lot of third-party apps are installed here, and we don't want those to be uninstalled in case of a rootfs rollback                                                        |
 | `srv`       | `/srv`                    |                          | Similar reason to `opt`, as well as this being a mountpoint for other drives. Don't wanna take snapshots of everything here                                                 |
 | `swap`      | `/swap`                   | Remove `compress` option | Swapfile                                                                                                                                                                    |
-| `tmp`       | `/tmp`                    |                          | Temp data doesn't need to be stored                                                                                                                                         |
 | `usr_local` | `/usr/local`              |                          | Similar reason to `opt`                                                                                                                                                     |
-| `podman`    | `/var/lib/containers`     |                          | Podman images are stored here                                                                                                                                               |
-| `docker`    | `/var/lib/docker`         |                          | Docker images are stored here                                                                                                                                               |
-| `libvirt`   | `/var/lib/libvirt/images` |                          | Libvirt (qemu, virt-manager) stores data here                                                                                                                               |
+| `podman`    | `/var/lib/containers`     | `nodatacow`                         | Podman images are stored here                                                                                                                                               |
+| `docker`    | `/var/lib/docker`         | `nodatacow`                         | Docker images are stored here                                                                                                                                               |
+| `libvirt`   | `/var/lib/libvirt/images` | `nodatacow`                   | Libvirt (qemu, virt-manager) stores data here                                                                                                                               |
 
 Using `lzo` encryption won't save me a *lot* of storage space, however it does have the highest transfer speeds out of the three available (ZLIB, LZO, ZSTD) according to [a test by TheLinuxCode](https://thelinuxcode.com/enable-btrfs-filesystem-compression/). With me having a 2TB drive, sacrificing some compression in favor of speed is therefore acceptable.
 
@@ -72,7 +71,7 @@ cryptsetup luksFormat \
 Running this sets up encryption on the partition, requiring it to be opened with `cryptsetup` before any further configuration can be made. This will also require the password generated earlier:
 
 ```sh
-cryptsetup open /dev/device root
+cryptsetup open /dev/nvme0n1p3 root
 ```
 
 This will create a device mapper on `/dev/mapper/root`, allowing the decrypted partition to be interacted with like any other. This gets followed up with creating a fresh BTRFS filesystem, which I mount at /mnt:
@@ -92,8 +91,17 @@ Then the root-volume gets unmounted, and I mount each of the subvolumes to their
 
 ```sh
 umount /mnt
-mount --mkdir /dev/mapper/root /dev/$MOUNTPOINT -o defaults,noatime,autodefrag,compress-force=lzo,commit=30,subvol=@$NAME
+mount --mkdir /dev/mapper/root /dev/$MOUNTPOINT -o defaults,noatime,autodefrag,ssd,compress=lzo,commit=30,subvol=@$NAME
 ```
+
+> **Meaning of each option**
+> - `defaults`: Default mount options from the mount.btrfs command? Honestly a bit unsure
+> - `noatime`: Disables access time recording, see writeups [here](https://www.reddit.com/r/linux/comments/imgler/) (reddit) and [here](https://lwn.net/Articles/499293/) (lwm)
+> - `autodefrag`: Small writes (64kb) are automatically queued for defrag? Again, not completely sure about the full effect from this, it is used in Jordan William's post linked to earlier
+> - `ssd`: Enables some smaller optimizations ([StackExchange](https://unix.stackexchange.com/questions/752748/what-optimizations-are-turned-on-with-the-mount-option-ssd))
+> - `compress` = Sets compression algorithm to use
+> - `commit` = Sets how often periodic flushing to permanent storage should be performed
+> - `subvol`: Tells btrfs what subvol to mount
 
 This is followed up with creating and mounting a swapfile using BTRFS' [`filesystem mkswapfile`](https://wiki.archlinux.org/title/Btrfs#Swap_file) command:
 
