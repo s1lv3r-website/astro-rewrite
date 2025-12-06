@@ -57,7 +57,7 @@ First things first, I opened `/dev/nvme0n1` with `fdisk`. Since the BTRFS data h
 After setting up the partition, I configure it with `crypttab`. I pre-generated a passphrase to use with Bitwarden's [passphrase generator](https://bitwarden.com/passphrase-generator/#passphrase-generator), and input that here when prompted.
 
 ```sh
-crypttab luksFormat \
+cryptsetup luksFormat \
   --type luks2 \
   --cipher aes-xts-plain64 \
   --hash sha256 \
