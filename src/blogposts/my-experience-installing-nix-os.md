@@ -2,7 +2,7 @@
 title: My experience installing Nix OS
 description: ""
 showInUI: true
-pubDate: 2025-12-06T13:12:00.000+01:00
+pubDate: 2025-12-06T13:41:00.000+01:00
 ---
 After some friends of mine started using and recommending [NixOS](https://nixos.org) to me I eventually got tempted enough by the sweet, sweet reproducibility and git-managed system that I decided to give it a try.
 
