@@ -2,10 +2,10 @@
 import Layout from "../layouts/Layout.astro";
 import { getCollection } from "astro:content";
 import { trimDescription } from "../utils";
-const posts = await getCollection(
+const posts = (await getCollection(
   "blog",
   (post) => import.meta.env.DEV || post.data.showInUI
-);
+)).sort((a, b) => a.data.pubDate > b.data.pubDate ? -1 : 1);
 
 const dateToIso = (date: Date) => date.toISOString().split("T")[0];
 ---
