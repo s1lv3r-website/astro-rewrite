@@ -85,12 +85,30 @@ Now: Back to some more complaining (unfortunately). NixOS' lack of following the
 
 This leads me into my second main problem: The documentation is... something. Configuration documentation is seemingly spread across 10 different websites, all of which having something the others don't have. The [nix wiki](https://wiki.nixos.org/) is a good starting point and a good resource for basic configuration, but the second I needed anything else I found myself digging down GitHub issues, Nix search sites, and my friends' DMs.
 
+Finally, and again, Nitpick (I do that a lot, huh): Running VSCode through the [Remote - SSH](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh) extension was... not easy. Turns out the node binary that ships with that extension and the remote server is dynamically linked, which NixOS doesn't support without additional configuration. That in and of itself isn't necessarily bad, as there are workarounds.
+
+The issue I encountered after that though, that was a bit annoying. Turns out if I choose the [patched binary workaround](https://github.com/K900/vscode-remote-workaround), the remote server gets ran in [bubblewrap](https://github.com/containers/bubblewrap), making `sudo` unavailable, meaning I had to have an open terminal on the laptop itself for rebuilding the system. Now I admit, my use case is... different than a lot of others'. But: Slight annoyance.
+
 <!--
 - lack of filesystem hierarchy standard following
 - vscode remote in bwrap, sudo issues
 -->
 
 # The confusing
+
+Then come the parts that are just kinda... confusing? They're not inherently bad, just not intuitive for a new user.
+
+First: The (at least) 5 different way to install packages:
+
+- `systemPackages`
+- `packages`
+- `programs`
+- home-manager `packages`
+- `wayland.windowManager`
+
+After using and working with Nix a bit more I do understand *why* it is this way. All of them serve a different purpose, and configure a slightly different part of the system. But knowing which to use when was maybe one of the most confusing things for me as a new user.
+
+Next: User services. Ohhh did I ever struggle with user services.
 
 <!--
 - systemPackages vs packages vs programs vs home-manager packages (e.g. sway) vs wayland.windowManager
