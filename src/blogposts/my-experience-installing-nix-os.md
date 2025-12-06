@@ -94,7 +94,7 @@ Further: I love the ability to, with a tiny bit of config, have different setups
 
 # The bad
 
-Now: Back to some more complaining (unfortunately). NixOS' lack of following the [FHS](https://refspecs.linuxfoundation.org/FHS_3.0/fhs-3.0.html) absolutely made the transition to Nix more difficult for me. Trying to find config files (or really any files at all) was made incredibly difficult. I essentially needed to throw away everything I knew and start completely anew.
+Now: Back to some more complaining (unfortunately). NixOS' lack of following the [FHS](https://refspecs.linuxfoundation.org/FHS_3.0/fhs-3.0.html) absolutely made the transition to Nix more difficult for me. Trying to find config files for programs and services (or really any files at all) was made incredibly difficult. I essentially needed to throw away everything I knew and start completely anew (which I guess is kinda the whole point of immutable systems?)
 
 This leads me into my second main problem: The documentation is... something. Configuration documentation is seemingly spread across 10 different websites, all of which having something the others don't have. The [nix wiki](https://wiki.nixos.org/) is a good starting point and a good resource for basic configuration, but the second I needed anything else I found myself digging down GitHub issues, Nix search sites, and my friends' DMs.
 
@@ -144,4 +144,4 @@ Finally, what seems like a packaging bug to me? The [`krunner`](https://search.n
 
 # Overall
 
-So far it might've seemed like I've mostly complained, however: I do like Nix. It's confusing for sure, and not necessarily very intuitive even for seasoned linux users like myself, but the ideas and concepts it brings to the table are ones I very much enjoy. I won't be switching to Nix full-time, but perhaps I'll be more open to dabbling around in it in the future? For now though, I'll be sticking to Arch, btw :3
+So far it might've seemed like I've mostly complained, however: I do like Nix. It's confusing for sure, and not necessarily very intuitive even for seasoned Linux users like myself, but the ideas and concepts it brings to the table are ones I very much enjoy. I won't be switching to Nix full-time, but perhaps I'll be more open to dabbling around in it in the future? For now though, I'll be sticking to Arch, btw :3
