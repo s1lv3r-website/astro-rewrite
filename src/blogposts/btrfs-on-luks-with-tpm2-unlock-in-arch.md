@@ -1,28 +1,24 @@
 ---
-title: BTRFS on LUKS with TPM2 unlock in Arch
+title: Installing Arch Linux on BTRFS with LUKS and automatic TPM2 unlocking
 description: My experience with installing Arch Linux on my Framework 13
   with   LUKS, BTRFS, and automatic unlocking using TPM2 similar to what
   BitLocker   does.
 showInUI: true
 pubDate: 2025-11-25T22:57:00.000+01:00
 ---
-> ![]()
->
-> \[NOTE] 
-> As of this writing (initial publish date), and until this notice is removed, this is still a WIP and very much a living document.
-
-## Background
-
-I first installed my laptop with plain BTRFS and Arch without any form of encryption since I just needed a functional laptop as soon as possible (shipment was already 2 months delayed), but now that I have more time to tinker I have decided to re-install to get full disk encryption[^1].
+I recently got a new laptop, and figured I'd install Arch on it, just to have a functional system asap. Now that I have more time to tinker however, I have decided to re-install to get full disk encryption[^1]. That's what this blog post is!
 
 [^1]: Technically I'm not using *full* encryption here, as I am only encrypting the main data partition of the device and not the boot partition, however because I am signing the kernel and creating a unified image I deemed this an acceptable risk.
+
+> \[NOTE] 
+> As of this writing (initial publish date), and until this notice is removed, this is still a WIP and very much a living document. I havent been able to finish the install as I encountered issues, but I am working on fixing those and updating the post :3
 
 Usually I wouldn't go for full encryption, however I chose encryption here for a few reasons:
 
 1. As a challenge to myself, and to learn new technologies
 2. The changing political climates and my status as a minority in more ways than one unfortunately result in me being more likely to be targeted by various actors, state or otherwise, and I figure I need to protect my privacy better.
 
-## BTRFS configuration
+# BTRFS configuration
 
 Before setting up the system I'll pre-plan the BTRFS subvolumes I'll be using and the options I'll be applying to each of these, to simplify later setup. This is taken a lot from [Jordan Williams' post on Btrfs subvolumes](https://www.jwillikers.com/btrfs-layout), so I recommend going there if you want to replicate this yourself.
 
@@ -44,17 +40,17 @@ All volumes are mounted with the options `defaults,noatime,autodefrag,compress=l
 
 Using `lzo` encryption won't save me a *lot* of storage space, however it does have the highest transfer speeds out of the three available (ZLIB, LZO, ZSTD) according to [a test by TheLinuxCode](https://thelinuxcode.com/enable-btrfs-filesystem-compression/). With me having a 2TB drive, sacrificing some compression in favor of speed is therefore acceptable.
 
-## Secure boot keys
+# Secure boot keys
 
-As I already had a configured system with UKI and secureboot-signed images, I make sure to make a copy of the existing secureboot private key and certificates from `/etc/kernel/secure-boot-private-key.pem` and `secure-boot-certificate.pem`. These were previously generated with `ukify genkey` following the guide for [secure boot with systemd](https://wiki.archlinux.org/title/Unified_Extensible_Firmware_Interface/Secure_Boot#Assisted_process_with_systemd) on the Arch Wiki. Later on, when setting up image signing, these will need to be put back in place.
+As I already had a configured system with UKI and secure boot-signed images, I made sure to make a copy of the existing secureboot private key and certificates from `/etc/kernel/secure-boot-private-key.pem` and `secure-boot-certificate.pem`. These were previously generated with `ukify genkey` following the guide for [secure boot with systemd](https://wiki.archlinux.org/title/Unified_Extensible_Firmware_Interface/Secure_Boot#Assisted_process_with_systemd) on the Arch Wiki. Later on, when setting up image signing, these will need to be put back in place.
 
-## Installation
+# Installation
 
 Before starting the install itself, I boot into my regular arch install to shrink the existing BTRFS partition down to roughly 500G, giving me ~1.5T to install the encrypted OS on: `btrfs filesystem resize 500G /`
 
-Following that, installation starts off as usual. I download the latest [Arch ISO](https://archlinux.org/downloads), boot it, configure the keyboard, network, etc. All the usual stuff, including opening a `tmux` session.
+Following that, installation starts off as usual. I download the latest [Arch ISO](https://archlinux.org/downloads), boot it, configure the keyboard, network, etc. All the usual stuff, including opening a `tmux` session (because not having scrollback is annoying).
 
-### Partitions
+## Partitions
 
 First things first, I opened `/dev/nvme0n1` with `fdisk`. Since the BTRFS data has been shrunk to 500G already, I can shrink the partition to match and create a new partition following it for the new installation. Once this has been configured as a linux root partition, I write and close `fdisk`.
 
@@ -106,7 +102,7 @@ btrfs filesystem mkswapfile /mnt/swap/swapfile --size 40G --uuid clear
 swapon /mnt/swap/swapfile
 ```
 
-### Base setup
+## Base setup
 
 After setting up all the partitions, I simply set up the system like any other:
 
@@ -132,7 +128,7 @@ In the chroot, I do some other post-config:
 * Setup hostname: `/etc/hostname` + `hostnamectl hostname`
 * Setup hosts file: `/etc/hosts`
 
-### Mkinitcpio
+## Mkinitcpio
 
 Arch uses `mkinitcpio` to generate the kernel and initramfs images by default, so I'll just keep using it for simplicity's sake. I could've used an alternative like [`dracut`](https://wiki.archlinux.org/title/Dracut), but meh. `Mkinitcpio` works.
 
@@ -161,13 +157,11 @@ Uncommenting these options tells `mkinitcpio` to generate a unified image instea
 
 As mentioned in [Secure boot keys](#secure-boot-keys), I took a copy of the secure boot keys. I'll copy these over into the new system, making sure to set up `/etc/kernel/uki.conf` in the process. I'll need to set the `SecureBootSigningTool` to `systemd-sbsign`, and `SecureBootPrivateKey` + `SecureBootCertificate` to their appropriate files. `SignKernel` must also be set to true. Once this is done, `ukify` signs its generated images.
 
-### Signing the bootloader
+## Signing the bootloader
 
 So far I've only set up signing of the images themselves (which can *technically* be booted directly), however if I want to ever use a bootloader for multiple OSes or kernels I'll have to sign it too (less I disable secure boot every time, which isn't particularly favorable).
 
 For pacman, this is luckily decently simple. I'll need to install two hooks:
-
-
 
 * [`80-sign-systemd-boot.hook`](/uploaded/80-sign-systemd-boot.hook) - As the name implies, this hook signs the systemd-boot efi binary.
 * [`95-update-systemd-boot.hook`](/uploaded/95-update-systemd-boot.hook) - This restarts the systemd-boot updater, ensuring the new version of the binary is put into place immediately
@@ -176,7 +170,7 @@ For simplicity's sake I've just uploaded the full files for download instead of 
 
 I'll also make sure to reinstall systemd to make both hooks run once, so the binary gets signed and put into place: `sudo pacman -S systemd`
 
-### Misc last touches
+## Misc last touches
 
 Before having a usable system, I'll need to configure a few smaller things:
 
@@ -202,14 +196,11 @@ Before having a usable system, I'll need to configure a few smaller things:
 
 Once this is all completed: Reboot time!
 
-## Post-install configuration
+# Post-install configuration
 
 Now, this is where the actual TPM2 unlocking part comes into place. I'll skip all the boring "copy old home dir and struggle for 2 hours to configure dotfiles and install programs" stuff, and only focus on TPM2 here.
 
-> \[NOTE]
-> Aaaand that's about as far as I've gotten so far. Document is very much a WIP, so check back in a week or two and there might be progress!
-
-## Acknowledgements
+# Acknowledgements
 
 While setting up my own system I leaned heavily on a few other blogs, namely:
 
