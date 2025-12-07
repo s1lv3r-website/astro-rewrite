@@ -193,11 +193,7 @@ rootflags=subvol=@
 rw
 ```
 
-The tuning I've gone into in [another post](/blog/), so I'll avoid putting it here :3
-===================
-TODO! FIX THIS LINK
-===================
-
+The tuning I've gone into in [another post](/blog/tuning-and-performance-optimizations-in-arch-linux), so I'll avoid putting it here :3
 
 
 ## Signing the bootloader
