@@ -91,7 +91,7 @@ Then the root-volume gets unmounted, and I mount each of the subvolumes to their
 
 ```sh
 umount /mnt
-mount --mkdir /dev/mapper/root /dev/$MOUNTPOINT -o defaults,noatime,autodefrag,ssd,compress=lzo,commit=30,subvol=@$NAME
+mount --mkdir /dev/mapper/root /mnt/$MOUNTPOINT -o defaults,noatime,autodefrag,ssd,compress=lzo,commit=30,subvol=@$NAME
 ```
 
 > **Meaning of each option**
@@ -170,6 +170,35 @@ Second is the UKI. For this, I installed `systemd-ukify` during pacstrap, which 
 Uncommenting these options tells `mkinitcpio` to generate a unified image instead of a separate kernel and initramfs. It can also be configured to automatically sign the generated image for secure boot, leading me into the final task of actually signing the images.
 
 As mentioned in [Secure boot keys](#secure-boot-keys), I took a copy of the secure boot keys. I'll copy these over into the new system, making sure to set up `/etc/kernel/uki.conf` in the process. I'll need to set the `SecureBootSigningTool` to `systemd-sbsign`, and `SecureBootPrivateKey` + `SecureBootCertificate` to their appropriate files. `SignKernel` must also be set to true. Once this is done, `ukify` signs its generated images.
+
+### cmdline
+
+Finally, I need to set up the cmdline. When using signed UKIs, the system cannot load boot options through the regular `/boot/loader/entries` files, as these can be tampered with. Instead the options are built in to the image itself, ensuring they are secure from tampering.
+
+For my cmdline files I had a few requirements:
+- The LUKS partition must be set as the root partition, and discovered for decryption
+- The decrypted root partition must be properly mounted as BTRFS partitions from /etc/fstab
+- Minor tuning must be done
+
+For the first and second ones, the Arch wiki is a good resource. By following [Dm-crypt/System configuration](https://wiki.archlinux.org/title/Dm-crypt/System_configuration), I set up:
+
+```conf title=/etc/cmdline.d/rootfs.conf
+rd.luks.name=UUID=root
+# For later TPM2 unlocking
+rd.luks.options=UUID=tpm2-device=auto
+
+root=/dev/mapper/root
+rootfstype=btrfs
+rootflags=subvol=@
+rw
+```
+
+The tuning I've gone into in [another post](/blog/), so I'll avoid putting it here :3
+===================
+TODO! FIX THIS LINK
+===================
+
+
 
 ## Signing the bootloader
 
