@@ -127,7 +127,7 @@ reflector --save /etc/pacman.d/mirrorlist --protocol http,https --country Norway
 
 # Install base packages
 # Further hyprland addons (like hyprshot, hyprpicker, various xdg-desktop-portals, etc are installed in the post-install section)
-pacstrap -K /mnt base linux linux-firmware-amdgpu linux-firmware-mediatek systemd-ukify uwsm tmux kate zsh git sudo vim amd-ucode networkmanager btrfs-progs hyprland rofi dolphin man-db greetd-tuigreet fprintd efibootmgr alacritty
+pacstrap -K /mnt base linux linux-firmware-amdgpu linux-firmware-mediatek systemd-ukify uwsm tmux kate zsh git sudo vim amd-ucode networkmanager btrfs-progs hyprland rofi dolphin man-db greetd-tuigreet fprintd efibootmgr alacritty base-devel
 
 # Generate an initial fstab
 genfstab -U /mnt >> /mnt/etc/fstab
