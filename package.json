@@ -18,5 +18,8 @@
     "remark-sectionize": "^2.1.0",
     "sass": "^1.94.0",
     "simple-icons-astro": "^15.20.0"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.6.0"
   }
 }
