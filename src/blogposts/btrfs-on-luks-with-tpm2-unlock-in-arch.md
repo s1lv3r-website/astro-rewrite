@@ -5,13 +5,15 @@ description: My experience with installing Arch Linux on my Framework 13
   BitLocker   does.
 showInUI: true
 pubDate: 2025-11-25T22:57:00.000+01:00
+updatedDate: 2025-12-12T17:52:00.000+01:00
 ---
 I recently got a new laptop, and figured I'd install Arch on it, just to have a functional system asap. Now that I have more time to tinker however, I have decided to re-install to get full disk encryption[^1]. That's what this blog post is!
 
 [^1]: Technically I'm not using *full* encryption here, as I am only encrypting the main data partition of the device and not the boot partition, however because I am signing the kernel and creating a unified image I deemed this an acceptable risk.
 
 > \[NOTE] 
-> As of this writing (initial publish date), and until this notice is removed, this is still a WIP and very much a living document. I havent been able to finish the install as I encountered issues, but I am working on fixing those and updating the post :3
+> This isn't a *guide* per say. This is simply my own experience with the setup, and it's the first time I've ever done this so there are likely to be issues. Regardless: Maybe you'll learn something!
+
 
 Usually I wouldn't go for full encryption, however I chose encryption here for a few reasons:
 
@@ -233,7 +235,34 @@ Once this is all completed: Reboot time!
 
 # Post-install configuration
 
-Now, this is where the actual TPM2 unlocking part comes into place. I'll skip all the boring "copy old home dir and struggle for 2 hours to configure dotfiles and install programs" stuff, and only focus on TPM2 here.
+Now, this is where the actual TPM2 unlocking part comes into place. I'll skip all the boring "copy old home dir and struggle for 2 hours to configure dotfiles and install programs" stuff, and only focus on LUKS and TPM2 here.
+
+## Keys
+
+Once booted into the system I changed the boot order using `efibootmgr` to ensure sd-boot was first. Then I went into `/boot/loader/loader.conf`, and set `secure-boot-enroll force`. This makes sd-boot enroll the keys I copied over earlier, which I in all honesty don't know how got there (see `/boot/loader/keys/auto`). They kinda just appeared and I rolled with it.
+
+Then I reboot and ensure:
+
+1. The old keys are removed, leaving no secure boot keys at all
+2. Secure boot enforcement is disabled
+
+When sd-boot then loads it gives a message about keys being enrolled, which I don't interrupt. The system then reboots again, and I can re-activate secure boot. With the signed kernel I should then be put to the password prompt correctly.
+
+## TPM2
+
+First things first: Creating a recovery key using `systemd-cryptenroll`. This is essentially a long, easy to type, securely generated password. The command outputs a long string which should be written down someplace safe in case everything else fails:
+
+```sh
+systemd-cryptenroll /dev/nvme0n1p3 --recovery-key
+```
+
+Next, I enrolled the TPM2 itself in the LUKS volume, again with `systemd-cryptenroll`:
+
+```sh
+systemd-cryptenroll /dev/nvme0n1p3 --tpm2-device=auto --tpm2-pcrs=7+15:sha256=<64-zeroes>
+```
+
+Why 64 zeroes? Can't explain it myself, the [Arch Wiki](https://wiki.archlinux.org/title/Systemd-cryptenroll) does a much better job. TLDR: Something about ensuring a TPM measurement is empty.
 
 # Acknowledgements
 
@@ -241,3 +270,5 @@ While setting up my own system I leaned heavily on a few other blogs, namely:
 
 * [Btrfs Layout - Jordan Williams](https://www.jwillikers.com/btrfs-layout)
 * [Arch Linux Installation Guide - mihirchanduka](https://gist.github.com/mihirchanduka/a9ba1c6edbfa068d2fbc2acb614c80e8)
+
+There is also an almost 100% chance that this won't work properly. I have gone back and forth a bunch to set up my own laptop, a lot of which I unfortunately managed to forget to write down. Hopefully it helps somewhat at least!
