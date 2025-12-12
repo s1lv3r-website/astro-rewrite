@@ -5,7 +5,7 @@ description: My experience with installing Arch Linux on my Framework 13
   BitLocker   does.
 showInUI: true
 pubDate: 2025-11-25T22:57:00.000+01:00
-updatedDate: 2025-12-12T17:52:00.000+01:00
+updatedDate: 2025-12-12T18:19:00.000+01:00
 ---
 I recently got a new laptop, and figured I'd install Arch on it, just to have a functional system asap. Now that I have more time to tinker however, I have decided to re-install to get full disk encryption[^1]. That's what this blog post is!
 
