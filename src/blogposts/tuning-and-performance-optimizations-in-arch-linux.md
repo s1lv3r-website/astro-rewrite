@@ -13,10 +13,34 @@ Relevant links are added where available, expect this document to update frequen
 
 Improves game performance at the cost of a small reduction in clock accuracy. Only in use on my laptop.
 
+Sources:
 - <https://wiki.archlinux.org/title/Gaming#Improve_clock_gettime_throughput>
 
 ```conf
 tsc=reliable clocksource=tsc
+```
+
+## zswap
+
+TLDR for why zswap and not zram: zswap is best if you already have a swap device (e.g. a swapfile), zram works best if you don't have swap.
+
+Sources:
+- <https://askubuntu.com/questions/471912/zram-vs-zswap-vs-zcache-ultimate-guide-when-to-use-which-one>
+- <https://wiki.archlinux.org/title/Zswap>
+
+```conf
+zswap.enabled=1 zswap.shrinker_enabled=1 zswap.compressor=lz4
+```
+
+## ACPI alarm
+
+Sets the kernel to use ACPI alarms instead of HPET, enabled on my laptop.
+
+Sources:
+- <https://community.frame.work/t/resolved-systemd-suspend-then-hibernate-wakes-up-after-5-minutes/39392>
+
+```conf
+rtc_cmos.use_acpi_alarm=1
 ```
 
 # Sysctl
@@ -25,8 +49,38 @@ tsc=reliable clocksource=tsc
 
 Lower the default swappiness to increase responsiveness, as i have 32G and up with system memory on all my systems.
 
+Sources:
 - <https://wiki.archlinux.org/title/Swap#Swappiness>
 
 ```conf title=/etc/sysctl.d/99-swappiness.conf
 vm.swappiness = 35
+```
+
+## Network tuning
+
+A couple minor tweaks, TLDR:
+
+- Enable TCP fast open
+- Attempt to probe for largest possible MTU
+- Set a larger starting MTU for probing
+
+Sources:
+- <https://wiki.archlinux.org/title/Sysctl#Improving_performance>
+- <https://kernel.org/doc/html/latest/networking/ip-sysctl.html>
+- <https://blog.cloudflare.com/path-mtu-discovery-in-practice/>
+
+```conf
+net.ipv4.tcp_fastopen = 3
+net.ipv4.tcp_mtu_probing = 1
+net.ipv4.tcp_base_mss = 1024
+```
+
+# Others
+
+## Power profiles
+
+I manage my power profiles manually using [Power-profiles-daemon](https://wiki.archlinux.org/title/CPU_frequency_scaling#power-profiles-daemon) and `powerprofilesctl`:
+
+```shell
+powerprofilesctl set <power-saver|balanced|performance>
 ```
