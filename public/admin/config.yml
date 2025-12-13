@@ -11,7 +11,7 @@ backend:
 collections:
   - name: "blog"
     label: "Blog"
-    folder: "src/blogposts"
+    folder: "src/_blogposts"
     create: true
     slug: "{{ slug }}"
     preview_path: blog/{{slug}}
