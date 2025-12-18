@@ -29,6 +29,7 @@ const resolvedTitle = title ? `${title} | ${SITE_NAME}` : SITE_NAME;
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/logo.svg" />
     <link rel="sitemap" href="/sitemap-index.xml" />
+    <link rel="canonical" href={Astro.url} />
     <title>{resolvedTitle}</title>
     <meta name="title" content={title ?? SITE_NAME} />
     <meta name="theme-color" content={THEME_COLOR} />

@@ -13,7 +13,15 @@ import { transformerCopyButton } from "@rehype-pretty/transformers";
 // https://astro.build/config
 export default defineConfig({
   site: "https://s1lv3r.codes",
-  integrations: [mdx(), sitemap()],
+  trailingSlash: 'never',
+  integrations: [mdx(), sitemap({
+    serialize(item) {
+      if (item.url.includes("/admin")) {
+        return undefined;
+      }
+      return item;
+    }
+  })],
   server: {
     host: "0.0.0.0",
     allowedHosts: true,
