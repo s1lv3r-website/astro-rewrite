@@ -12,6 +12,7 @@ export const THEME_COLOR: string = "#744eb4";
 
 export const HIRE_ME_ENABLED: boolean = true;
 export const DESCRIPTION_TRIM_LENGTH: number = 160;
+export const TOC_MAX_NESTED = 3;
 
 export const MISC_LINKS: {
   icon: AstroComponent;

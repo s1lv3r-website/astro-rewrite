@@ -4,15 +4,16 @@ description: ""
 showInUI: true
 pubDate: 2025-12-06T13:41:00.000+01:00
 ---
+
 After some friends of mine started using and recommending [NixOS](https://nixos.org) to me I eventually got tempted enough by the sweet, sweet reproducibility and git-managed system that I decided to give it a try.
 
-At first, I wasn't a massive fan. Configurations were archaic, the nix configuration language had some... quirks (?) that I weren't a big fan of (more on that [here](#nix-language-quirks), and configuring flakes for git-managed configurations wasn't exactly intuitive.
+At first, I wasn't a massive fan. Configurations were archaic, the nix configuration language had some... quirks (?) that I weren't a big fan of (more on that at [#Nix language quirks](#nix-language-quirks), and configuring flakes for git-managed configurations wasn't exactly intuitive.
 
 Later though, I did start getting a bit used to the system. A lot of that was thanks to my friend [Soni](https://github.com/soni801) who helped me for hours on end with setting up the system, and answered every question I annoyed him with in our DMs. Thanks a lot :3
 
 To put the TLDR at the start: I am likely not gonna be switching to Nix full time. It's good, just not quite for me. More on that at the end.
 
-# Installation process
+## Installation process
 
 First of all, there's the installation process. Now, this was likely mostly an issue with my machine, but for some unknown reason WiFi was absolutely *refusing* to connect, whether I was using the Minimal or Graphical installer, and regardless of environment in the Graphical installer. This caused me about an hour of pain with trying, restarting, retrying, and repeat. In the end I just plugged the machine in with a cable, and that solved my issues, but not a "good" first experience at least.
 
@@ -29,7 +30,7 @@ network issues
 - overwriting sd-boot config and boot order
 -->
 
-# Nix language quirks
+## Nix language quirks
 
 The Nix language itself is very good, I like it quite a lot. However, some small things kinda got to me.
 
@@ -71,7 +72,6 @@ Again: Preference, doesn't at all matter for the operation of the system, but ju
 - issues with indents
 -->
 
-
 <!--
 # Home-manager
 
@@ -79,7 +79,7 @@ Again: Preference, doesn't at all matter for the operation of the system, but ju
 - Package installation
 -->
 
-# The good
+## The good
 
 Now for a change of pace: Some good things and things I liked with Nix!
 
@@ -92,7 +92,7 @@ Further: I love the ability to, with a tiny bit of config, have different setups
 - Different setups for different machines in the same repo
 -->
 
-# The bad
+## The bad
 
 Now: Back to some more complaining (unfortunately). NixOS' lack of following the [FHS](https://refspecs.linuxfoundation.org/FHS_3.0/fhs-3.0.html) absolutely made the transition to Nix more difficult for me. Trying to find config files for programs and services (or really any files at all) was made incredibly difficult. I essentially needed to throw away everything I knew and start completely anew (which I guess is kinda the whole point of immutable systems?)
 
@@ -107,7 +107,7 @@ The issue I encountered after that though, that was a bit annoying. Turns out if
 - vscode remote in bwrap, sudo issues
 -->
 
-# The confusing
+## The confusing
 
 Then come the parts that are just kinda... confusing? They're not inherently bad, just not intuitive for a new user.
 
@@ -142,6 +142,6 @@ Finally, what seems like a packaging bug to me? The [`krunner`](https://search.n
   - krunner package not including krunner
 -->
 
-# Overall
+## Overall
 
 So far it might've seemed like I've mostly complained, however: I do like Nix. It's confusing for sure, and not necessarily very intuitive even for seasoned Linux users like myself, but the ideas and concepts it brings to the table are ones I very much enjoy. I won't be switching to Nix full-time, but perhaps I'll be more open to dabbling around in it in the future? For now though, I'll be sticking to Arch, btw :3

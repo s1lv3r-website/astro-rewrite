@@ -1,7 +1,7 @@
 ---
 import ToC from "../../components/ToC.astro";
 import Layout from "../../layouts/Layout.astro";
-import { trimDescription } from "../../utils";
+import { getDescription } from "../../utils";
 import { getCollection, render } from "astro:content";
 
 export async function getStaticPaths() {
@@ -22,15 +22,12 @@ const dateFormat = (_date: Date): string => {
   const timestamp = els.splice(1, 2);
   return `${date} ${timestamp.join(":")} (UTC)`;
 };
-
-const getMetaDescription = (): string =>
-  trimDescription(post.data.description || post.body)!;
 ---
 
 <style lang="scss">
   .metadata {
     h1 {
-      margin-bottom: 0rem;
+      margin-bottom: 0.5rem;
     }
 
     span {
@@ -304,7 +301,7 @@ const getMetaDescription = (): string =>
 <Layout
   blogpost="true"
   title={post.data.title}
-  description={getMetaDescription()}
+  description={await getDescription(post)}
   blogData={post.data}
 >
   <div class="metadata">

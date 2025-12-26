@@ -1,0 +1,22 @@
+---
+import type { NestedHeading } from "./ToC.astro";
+
+interface Props {
+  headings: NestedHeading[];
+}
+
+const { headings } = Astro.props;
+---
+
+{
+  headings.map((heading) => (
+    <li>
+      <a href={`#${heading.slug}`}>{heading.text}</a>
+      {heading.children && (
+        <ul>
+          <Astro.self headings={heading.children} />
+        </ul>
+      )}
+    </li>
+  ))
+}

@@ -1,5 +1,9 @@
 ---
+import { TOC_MAX_NESTED } from "../constants";
+import InnerToC from "./InnerToC.astro";
 import type { MarkdownHeading } from "astro";
+
+export type NestedHeading = MarkdownHeading & { children: NestedHeading[] };
 
 interface Props {
   headings: MarkdownHeading[];
@@ -7,20 +11,52 @@ interface Props {
 
 const { headings } = Astro.props;
 
-const filteredHeadings = headings.filter((heading) => heading.depth <= 2);
+const filteredHeadings = headings.filter((heading) => heading.depth <= TOC_MAX_NESTED);
+const finalHeadings: NestedHeading[] = generateNestedData(filteredHeadings);
+
+function generateNestedData(input: MarkdownHeading[]): NestedHeading[] {
+  const result: NestedHeading[] = [];
+  const stack: NestedHeading[] = [];
+
+  input.forEach((item) => {
+    // Start a new node
+
+    const node: NestedHeading = {
+      ...JSON.parse(JSON.stringify(item)),
+      children: [],
+    };
+
+    // Handle the stack based on depth change
+    while (stack.length > 0 && stack[stack.length - 1].depth >= item.depth) {
+      stack.pop(); // Pop elements that are of greater or equal depth
+    }
+
+    // If there's a stack, the current node is a child of the last node on the stack
+    if (stack.length > 0) {
+      stack[stack.length - 1].children.push(node);
+    } else {
+      // If no parent, it's a top-level node
+      result.push(node);
+    }
+
+    // Push the current node to the stack
+    stack.push(node);
+  });
+
+  return result;
+}
 ---
 
 {
   filteredHeadings.length > 0 && (
     <nav>
       <h2>Table of Contents</h2>
+      <details>
+        <summary>Click to open</summary>
       <ul>
-        {filteredHeadings.map((heading) => (
-          <li>
-            <a href={`#${heading.slug}`}>{heading.text}</a>
-          </li>
-        ))}
+        <InnerToC headings={finalHeadings} />
       </ul>
+      </details>
     </nav>
   )
 }

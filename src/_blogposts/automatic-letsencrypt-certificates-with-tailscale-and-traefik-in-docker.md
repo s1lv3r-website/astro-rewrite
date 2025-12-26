@@ -72,7 +72,7 @@ Aha! It defaults to putting the socket in `/tmp` (for whatever reason)! Why this
 
 [^1]: Well actually that's not _completely_ true. I did find a few issues on it, most notably [#6849 - Change default socket path in containers](https://github.com/tailscale/tailscale/issues/6849) as well as the commit where this was introduced ([`2c403cb`](https://github.com/tailscale/tailscale/commit/2c403cbb313c89741068c7d9d700169c1bbf3ad5)), however neither of these explain _why_ it was done the way it was.
 
-# The solution
+## The solution
 
 So with these in mind, there are a few required properties for the compose file:
 

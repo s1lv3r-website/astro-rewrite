@@ -1,11 +1,13 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import { getCollection } from "astro:content";
-import { trimDescription } from "../utils";
-const posts = (await getCollection(
-  "blog",
-  (post) => import.meta.env.DEV || post.data.showInUI
-)).sort((a, b) => a.data.pubDate > b.data.pubDate ? -1 : 1);
+import { getDescription } from "../utils";
+const posts = (
+  await getCollection(
+    "blog",
+    (post) => import.meta.env.DEV || post.data.showInUI
+  )
+).sort((a, b) => (a.data.pubDate > b.data.pubDate ? -1 : 1));
 
 const dateToIso = (date: Date) => date.toISOString().split("T")[0];
 ---
@@ -15,10 +17,10 @@ const dateToIso = (date: Date) => date.toISOString().split("T")[0];
     list-style-type: none;
     padding: 0;
 
-    @media (width >= 48rem) {
-      padding-right: 1.25rem;
-      padding-left: 1.25rem;
-    }
+    // @media (width >= 48rem) {
+    //   padding-right: 1.25rem;
+    //   padding-left: 1.25rem;
+    // }
 
     & > p {
       margin-top: 0;
@@ -65,7 +67,7 @@ const dateToIso = (date: Date) => date.toISOString().split("T")[0];
 
 <Layout title="Blogposts">
   {posts.length === 0 && <p>Nothing here yet... you're early!</p>}
-  <ul class="indent">
+  <ul>
     {
       posts.map((post) => (
         <li>
@@ -79,7 +81,7 @@ const dateToIso = (date: Date) => date.toISOString().split("T")[0];
                 ` | Last updated: ${dateToIso(post.data.updatedDate)}`}
             </span>
             {(post.data.description || post.body) && (
-              <p>{trimDescription(post.data.description || post.body)}</p>
+              <p>{getDescription(post)}</p>
             )}
           </a>
         </li>
