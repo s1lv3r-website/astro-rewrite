@@ -44,18 +44,18 @@ Aha! The socket, for whatever reason, is actually a symlink to `/tmp`?? This rea
 So, more source code digging is required. Looking into the container, I see it starts a binary called `containerboot`. I checked the tailscale repo, and found the matching file: [`cmd/containerboot/tailscaled.go`](https://github.com/tailscale/tailscale/blob/b21cba0921dfd4c8ac9cf4fa7210879d0ea7cf34/cmd/containerboot/tailscaled.go) Nestled in there, on lines 78-82, there is the following:
 
 ```go
-	case cfg.StateDir != "":
-		args = append(args, "--statedir="+cfg.StateDir)
-	default:
-		args = append(args, "--state=mem:", "--statedir=/tmp")
-	}
+case cfg.StateDir != "":
+  args = append(args, "--statedir="+cfg.StateDir)
+default:
+  args = append(args, "--state=mem:", "--statedir=/tmp")
+}
 ```
 
-As well as [`cmd/containerboot/main.go`](https://github.com/tailscale/tailscale/blob/b21cba0921dfd4c8ac9cf4fa7210879d0ea7cf34/cmd/containerboot/main.go) containing:
+And where does `cfg.StateDir` come from? Well, [`cmd/containerboot/main.go`](https://github.com/tailscale/tailscale/blob/b21cba0921dfd4c8ac9cf4fa7210879d0ea7cf34/cmd/containerboot/main.go) contains:
 
 ```go
 func configFromEnv() (*settings, error) {
-	cfg := &settings{
+  cfg := &settings{
     // ...
     Socket: defaultEnv("TS_SOCKET", "/tmp/tailscaled.sock"),
     // ...
@@ -63,4 +63,6 @@ func configFromEnv() (*settings, error) {
 }
 ```
 
-Now, why this was introduced I have NO idea, and instead of trying to mess
+Aha! It defaults to putting the socket in `/tmp`!
+
+Now, why this was introduced I have NO idea, however this does tell me what to change to get 
