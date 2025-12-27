@@ -27,7 +27,9 @@ export default defineConfig({
     allowedHosts: true,
   },
   devToolbar: { enabled: false },
-
+  experimental: {
+    svgo: true,
+  },
   markdown: {
     syntaxHighlight: false,
     remarkPlugins: [sectionize],
