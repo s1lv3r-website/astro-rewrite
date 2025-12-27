@@ -1,7 +1,5 @@
 ---
 title: My experience installing Nix OS
-description: ""
-showInUI: true
 pubDate: 2025-12-06T13:41:00.000+01:00
 ---
 

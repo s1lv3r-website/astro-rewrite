@@ -17,32 +17,31 @@ collections:
     preview_path: blog/{{slug}}
     fields:
       - { label: "Title", name: "title", widget: "string" }
-      - {
-          label: "Description",
-          name: "description",
-          widget: "string",
-          required: false,
-          optional: true
-        }
-      - {
-          label: Show in UI,
-          name: showInUI,
-          widget: boolean,
-          default: true,
-          required: false,
-          optional: true
-        }
-      - {
-          label: "Publish Date",
-          name: "pubDate",
-          widget: "datetime",
-          default: "{{now}}",
-        }
-      - {
-          label: "Update Date",
-          name: "updatedDate",
-          widget: "datetime",
-          optional: true,
-          required: false,
-        }
+
+      - label: "Description"
+        name: "description"
+        widget: "string"
+        required: false
+        optional: true
+
+      - label: "Publish Date"
+        name: "pubDate"
+        widget: "datetime"
+        default: "{{now}}"
+      - label: "Update Date"
+        name: "updatedDate"
+        widget: "datetime"
+        optional: true
+        required: false
+
+      - label: Socials
+        name: socials
+        widget: list
+        optional: true
+        required: false
+        min: 0
+        fields:
+          - { label: Site name, name: site, widget: string }
+          - { label: URL, name: url, widget: string }
+
       - { label: "Body", name: "body", widget: "markdown" }

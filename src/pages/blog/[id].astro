@@ -37,10 +37,28 @@ const dateFormat = (_date: Date): string => {
     p {
       margin-top: 0;
     }
+
+    ul#socials-links {
+      display: inline-flex;
+      list-style: none;
+      padding-left: 0;
+
+      li {
+        padding-left: 1rem;
+        display: flex;
+
+        &:first-child {
+          padding-left: 0.3rem;
+        }
+
+        svg {
+        }
+      }
+    }
   }
 
   .separator {
-    margin-top: 1.5rem;
+    margin-top: 1rem;
   }
 </style>
 
@@ -120,16 +138,19 @@ const dateFormat = (_date: Date): string => {
     }
 
     pre {
-      padding-top: 1rem;
-      padding-inline-end: 1rem;
-      padding-bottom: 1rem;
-      border-radius: 0.25rem;
+      padding-top: 0.75rem;
+      padding-bottom: 0.75rem;
+      padding-inline-start: 0rem;
+      padding-inline-end: 0rem;
       margin-top: 1.5rem;
       margin-bottom: 1.5rem;
-      padding-inline-start: 1rem;
+
       font-size: 0.9rem;
       font-weight: 400;
       line-height: 1.5;
+
+      border-radius: 0.25rem;
+
       overflow-x: auto;
       position: relative;
 
@@ -142,6 +163,8 @@ const dateFormat = (_date: Date): string => {
         border-width: 0;
         border-radius: 0;
         padding: 0;
+        padding-inline-start: 0.85rem;
+        padding-inline-end: 0.85rem;
         overflow: auto;
 
         button.rehype-pretty-copy {
@@ -190,8 +213,8 @@ const dateFormat = (_date: Date): string => {
       &[data-language]:before {
         font-size: 0.7rem;
         position: absolute;
-        top: 0.3rem;
-        right: 0.4rem;
+        top: 0.35rem;
+        right: 1rem;
         font-style: normal;
         content: attr(data-language);
       }
@@ -216,18 +239,18 @@ const dateFormat = (_date: Date): string => {
 
       figcaption {
         position: absolute;
-        top: 0.5rem;
+        top: 0.42rem;
         left: 1rem;
-        font-size: 0.9rem;
+        font-size: 0.7rem;
         z-index: 1;
       }
 
       figcaption + pre {
-        padding-top: 2rem;
+        padding-top: 1.8rem;
 
         code {
-          border-top: 1px solid currentColor;
-          padding-top: 0.3rem;
+          border-top: 1px solid #505050;
+          padding-top: 0.6rem;
         }
       }
     }
@@ -307,20 +330,37 @@ const dateFormat = (_date: Date): string => {
   <div class="metadata">
     <h1>{post.data.title}</h1>
     <span title="Posted and updated date">
-      <p>
-        Posted on: {dateFormat(post.data.pubDate)}
-        {
-          post.data.updatedDate &&
-            typeof post.data.updatedDate !== "string" &&
-            post.data.updatedDate > post.data.pubDate && (
-              <>
-                <br />
-                Last updated: {dateFormat(post.data.updatedDate)}
-              </>
-            )
-        }
-      </p>
+      Posted on: {dateFormat(post.data.pubDate)}
+      {
+        post.data.updatedDate &&
+          typeof post.data.updatedDate !== "string" &&
+          post.data.updatedDate > post.data.pubDate && (
+            <>
+              <br />
+              Last updated: {dateFormat(post.data.updatedDate)}
+            </>
+          )
+      }
     </span>
+    {
+      post.data.socials && (
+        <>
+          <br />
+          <span title="Social links">
+            Discuss on:
+            <ul id="socials-links">
+              {post.data.socials.map(({site, url}) => (
+                <li>
+                  <a href={url} target="_blank" rel="noopener noreferrer">
+                    {site}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </span>
+        </>
+      )
+    }
     {
       post.data.description && (
         <p title="Post description">{post.data.description}</p>

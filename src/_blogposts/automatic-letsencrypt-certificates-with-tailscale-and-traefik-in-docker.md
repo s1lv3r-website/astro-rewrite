@@ -1,6 +1,5 @@
 ---
 title: Automatic LetsEncrypt certificates with Tailscale and Traefik in Docker
-showInUI: true
 pubDate: 2025-12-26T02:30:00.000+01:00
 ---
 

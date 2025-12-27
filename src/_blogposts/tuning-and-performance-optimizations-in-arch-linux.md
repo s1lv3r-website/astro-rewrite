@@ -1,6 +1,5 @@
 ---
 title: Tuning and performance optimizations in Arch Linux
-showInUI: true
 pubDate: 2025-12-07T01:29:00.000+01:00
 ---
 

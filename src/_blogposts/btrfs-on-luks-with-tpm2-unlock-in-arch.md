@@ -1,9 +1,6 @@
 ---
 title: Installing Arch Linux on BTRFS with LUKS and automatic TPM2 unlocking
-description: My experience with installing Arch Linux on my Framework 13
-  with   LUKS, BTRFS, and automatic unlocking using TPM2 similar to what
-  BitLocker   does.
-showInUI: true
+description: My experience with installing Arch Linux on my Framework 13 with LUKS, TRFS, and automatic unlocking using TPM2 similar to what BitLocker does.
 pubDate: 2025-11-25T22:57:00.000+01:00
 updatedDate: 2025-12-12T18:19:00.000+01:00
 ---
