@@ -53,7 +53,9 @@ const resolvedTitle = title ? `${title} | ${SITE_NAME}` : SITE_NAME;
           <a href="/projects" class={getPageClass("projects")}>projects</a>
         </div>
       </header>
-      <slot />
+      <main role="main">
+        <slot />
+      </main>
     </div>
   </body>
 </html>
