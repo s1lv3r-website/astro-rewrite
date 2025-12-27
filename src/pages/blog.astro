@@ -67,6 +67,13 @@ const dateToIso = (date: Date) => date.toISOString().split("T")[0];
 
 <Layout title="Blogposts">
   {posts.length === 0 && <p>Nothing here yet... you're early!</p>}
+
+  <p>
+    Want to subscribe with RSS? See
+    <a href="/blog/feed.rss" target="_blank" rel="noopener noreferrer">
+      /blog/feed.rss
+    </a>.
+  </p>
   <ul>
     {
       posts.map((post) => (

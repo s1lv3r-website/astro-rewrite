@@ -1,5 +1,5 @@
 ---
-import { SITE_NAME, THEME_COLOR } from "../constants";
+import { SITE_NAME, THEME_COLOR, TAGLINE } from "../constants";
 import StyleReset from "../components/StyleReset.astro";
 import type { InferEntrySchema } from "astro:content";
 
@@ -16,9 +16,6 @@ interface Props {
 const { title, description, blogpost, blogData } = Astro.props;
 
 const isBlogpost = blogpost === "true";
-
-const tagline =
-  "Autistic trans woman (she/her), working with DevOps, networks, and systems design, engineering, and administration.";
 const resolvedTitle = title ? `${title} | ${SITE_NAME}` : SITE_NAME;
 ---
 
@@ -33,7 +30,7 @@ const resolvedTitle = title ? `${title} | ${SITE_NAME}` : SITE_NAME;
     <title>{resolvedTitle}</title>
     <meta name="title" content={title ?? SITE_NAME} />
     <meta name="theme-color" content={THEME_COLOR} />
-    <meta name="description" content={description ?? tagline} />
+    <meta name="description" content={description ?? TAGLINE} />
     <meta property="og:type" content={isBlogpost ? "article" : "website"} />
     {isBlogpost && (
       <meta property="og:site_name" content={`${SITE_NAME} : ${blogData?.pubDate.toISOString().split("T")[0]}`} />
@@ -164,5 +161,9 @@ const resolvedTitle = title ? `${title} | ${SITE_NAME}` : SITE_NAME;
 
   a {
     color: currentColor;
+  }
+
+  details:hover {
+    cursor: pointer;
   }
 </style>
