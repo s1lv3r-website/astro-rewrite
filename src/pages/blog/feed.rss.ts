@@ -26,7 +26,6 @@ export const GET: APIRoute = async (context) => {
       pubDate: post.data.pubDate,
       description: await getDescription(post),
       link: `/blog/${post.id}`,
-      content: (await render(post)) && post.rendered!.html,
       customData: post.data.updatedDate ? `<lastBuildDate>${post.data.updatedDate}</lastBuildDate>` : undefined
     } satisfies RSSFeedItem))),
 
