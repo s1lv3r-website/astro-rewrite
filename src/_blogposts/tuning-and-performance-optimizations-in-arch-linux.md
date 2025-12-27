@@ -17,7 +17,7 @@ Sources:
 
 - <https://wiki.archlinux.org/title/Gaming#Improve_clock_gettime_throughput>
 
-```conf title=/etc/cmdline/clock.conf
+```ini title="/etc/cmdline/clock.conf"
 tsc=reliable clocksource=tsc
 ```
 
@@ -30,7 +30,7 @@ Sources:
 - <https://askubuntu.com/questions/471912/zram-vs-zswap-vs-zcache-ultimate-guide-when-to-use-which-one>
 - <https://wiki.archlinux.org/title/Zswap>
 
-```conf title=/etc/cmdline/zswap.conf
+```ini title="/etc/cmdline/zswap.conf"
 zswap.enabled=1 zswap.shrinker_enabled=1 zswap.compressor=lz4
 ```
 
@@ -42,7 +42,7 @@ Sources:
 
 - <https://community.frame.work/t/resolved-systemd-suspend-then-hibernate-wakes-up-after-5-minutes/39392>
 
-```conf title=/etc/cmdline/acpi.conf
+```ini title="/etc/cmdline/acpi.conf"
 rtc_cmos.use_acpi_alarm=1
 ```
 
@@ -56,7 +56,7 @@ Sources:
 
 - <https://wiki.archlinux.org/title/Swap#Swappiness>
 
-```conf title=/etc/sysctl.d/99-swappiness.conf
+```ini title="/etc/sysctl.d/99-swappiness.conf"
 vm.swappiness = 35
 ```
 
@@ -74,7 +74,7 @@ Sources:
 - <https://kernel.org/doc/html/latest/networking/ip-sysctl.html>
 - <https://blog.cloudflare.com/path-mtu-discovery-in-practice/>
 
-```conf title=/etc/sysctl.d/99-networking.conf
+```ini title="/etc/sysctl.d/99-networking.conf"
 net.ipv4.tcp_fastopen = 3
 net.ipv4.tcp_mtu_probing = 1
 net.ipv4.tcp_base_mss = 1024

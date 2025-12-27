@@ -81,7 +81,7 @@ So with these in mind, there are a few required properties for the compose file:
 
 This gives me the following file in the end (only including keys required for this specific config):
 
-```yaml title=compose.yaml
+```yaml title="compose.yaml"
 services:
   traefik:
     network: service:tailscale

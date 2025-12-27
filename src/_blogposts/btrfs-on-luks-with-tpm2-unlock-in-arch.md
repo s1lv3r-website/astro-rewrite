@@ -183,7 +183,7 @@ For my cmdline files I had a few requirements:
 
 For the first and second ones, the Arch wiki is a good resource. By following [Dm-crypt/System configuration](https://wiki.archlinux.org/title/Dm-crypt/System_configuration), I set up:
 
-```conf title=/etc/cmdline.d/rootfs.conf
+```ini title="/etc/cmdline.d/rootfs.conf"
 rd.luks.name=UUID=root
 # For later TPM2 unlocking
 rd.luks.options=UUID=tpm2-device=auto
