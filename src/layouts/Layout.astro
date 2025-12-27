@@ -32,26 +32,45 @@ const resolvedTitle = title ? `${title} | ${SITE_NAME}` : SITE_NAME;
     <meta name="theme-color" content={THEME_COLOR} />
     <meta name="description" content={description ?? TAGLINE} />
     <meta property="og:type" content={isBlogpost ? "article" : "website"} />
-    {isBlogpost && (
-      <meta property="og:site_name" content={`${SITE_NAME} : ${blogData?.pubDate.toISOString().split("T")[0]}`} />
-      <meta property="article:author" content={SITE_NAME} />
-      <meta property="article:published_time" content={blogData?.pubDate.toISOString()} />
-    )}
-    {blogData?.updatedDate && <meta property="article:updated_time" content={blogData?.updatedDate.toISOString()} />}
+    {
+      isBlogpost && (
+        <>
+          <meta
+            property="og:site_name"
+            content={`${SITE_NAME} : ${blogData?.pubDate.toISOString().split("T")[0]}`}
+          />
+          <meta property="article:author" content={SITE_NAME} />
+          <meta
+            property="article:published_time"
+            content={blogData?.pubDate.toISOString()}
+          />
+        </>
+      )
+    }
+    {
+      blogData?.updatedDate && (
+        <meta
+          property="article:updated_time"
+          content={blogData?.updatedDate.toISOString()}
+        />
+      )
+    }
     <StyleReset />
   </head>
   <body>
     <div class="wrapper">
       <header>
-        <img src="/logo.svg" aria-hidden="true" />
-        <h1>{SITE_NAME}</h1>
-        <div>
+        <span>
+          <img src="/logo.svg" aria-hidden="true" />
+          <h1>{SITE_NAME}</h1>
+        </span>
+        <nav>
           <a href="/" class={getPageClass("")}>home</a>
           |
           <a href="/blog" class={getPageClass("blog")}>blog</a>
           |
           <a href="/projects" class={getPageClass("projects")}>projects</a>
-        </div>
+        </nav>
       </header>
       <main role="main">
         <slot />
@@ -73,10 +92,22 @@ const resolvedTitle = title ? `${title} | ${SITE_NAME}` : SITE_NAME;
 
   header {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: baseline;
+    margin-bottom: 1rem;
 
-    & > img {
+    @media (width >= 48rem) {
+      flex-direction: row;
+    }
+
+    span {
+      display: flex;
+      flex-direction: row;
+      align-items: baseline;
+      margin-right: auto;
+    }
+
+    img {
       padding-bottom: 0.45rem;
       width: 3rem;
       height: 3rem;
@@ -85,13 +116,16 @@ const resolvedTitle = title ? `${title} | ${SITE_NAME}` : SITE_NAME;
       margin-bottom: auto;
     }
 
-    & > h1 {
-      margin-right: auto;
+    h1 {
       max-height: 5rem;
+      margin-top: auto;
+      margin-bottom: auto;
+    }
 
-      @media (width >= 48rem) {
-        margin-right: 1rem;
-      }
+    nav {
+      text-align: right;
+      margin-top: auto;
+      margin-bottom: auto;
     }
 
     .current-page {
@@ -109,10 +143,23 @@ const resolvedTitle = title ? `${title} | ${SITE_NAME}` : SITE_NAME;
   $bgPrimary: #141414;
   $fgPrimary: #ebebeb;
 
+  @font-face {
+    font-family: JetBrainsMono;
+    src: url(/fonts/jetbrains-mono/jbm-var.woff2);
+  }
+
+  @font-face {
+    font-family: JetBrainsMono;
+    src: url(/fonts/jetbrains-mono/jbm-it-var.woff2);
+    font-style: italic;
+  }
+
   * {
     box-sizing: border-box;
     scroll-behavior: smooth;
-    font-size: 102%;
+    @media (width >= 48rem) {
+      font-size: 102%;
+    }
   }
 
   html,
@@ -124,8 +171,9 @@ const resolvedTitle = title ? `${title} | ${SITE_NAME}` : SITE_NAME;
 
     background-color: $bgPrimary;
     color: $fgPrimary;
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
-      "Liberation Mono", "Courier New", monospace;
+    font-family:
+      JetBrainsMono, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+      "Courier New", monospace;
 
     overflow: auto;
   }
@@ -141,7 +189,7 @@ const resolvedTitle = title ? `${title} | ${SITE_NAME}` : SITE_NAME;
 
     font-size: 2rem;
     font-weight: 700;
-    line-height: calc(2.5 / 2.25);
+    line-height: 1.3;
   }
 
   h2 {
