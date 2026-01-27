@@ -37,11 +37,13 @@ In here, we use the regular Wine variant, not the Proton output. Select Custom p
 
 ### Why not the Proton output?
 
-Opentrack has a [hardcoded](https://github.com/opentrack/opentrack/blob/2d3ab7a61d2514ce51c9656908d33465a788763e/proto-wine/proton.cpp#L17-L27) list of locations for steam libraries and wine locations, which in many cases won't be applicable to your installation directory. In this case, the dropdown allowed no selections.
+OpenTrack has a [hardcoded](https://github.com/opentrack/opentrack/blob/2d3ab7a61d2514ce51c9656908d33465a788763e/proto-wine/proton.cpp#L17-L27) list of locations for Steam libraries and Wine locations, which in many cases won't be applicable to where Arma 3 actually is installed. In my case, the dropdown allowed no selections due to me not having my Steam library in any of the hardcoded paths, so I had to use the Wine output.
+
+As far as I can tell, the two are identical and use the same code except for the directory selection. Therefore there should be no negative effects from not using the Proton output.
 
 ## Arma 3 config
 
-Ensure Opentrack is running before launching Arma. Then, open Arma's input settings, and find the Controllers tab. There, two devices should be listed:
+Ensure OpenTtrack is running before launching Arma. Then, open Arma's input settings, and find the Controllers tab. From there two devices should be listed:
 
 - Track IR
 - FreeTrack
