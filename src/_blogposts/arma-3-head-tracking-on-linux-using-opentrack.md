@@ -62,4 +62,4 @@ Ensure **Track IR** is **enabled**, and **FreeTrack** is **disabled**. Input bin
 
 ## Acknowledgements
 
-This section was largely inspired by and guided by [robert](https://steamcommunity.com/profiles/76561199380829285)'s [Linux head tracking - simple, cost-free method using Proton and Opentrack](https://steamcommunity.com/sharedfiles/filedetails/?id=2972803012). Many thanks for that original, which made this one possible.
+This guide was largely inspired by [robert](https://steamcommunity.com/profiles/76561199380829285)'s [Linux head tracking - simple, cost-free method using Proton and Opentrack](https://steamcommunity.com/sharedfiles/filedetails/?id=2972803012). Many thanks for that original, which made this one possible.
