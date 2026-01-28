@@ -1,8 +1,8 @@
 import rss, { type RSSFeedItem } from '@astrojs/rss';
 import type { APIRoute } from 'astro';
-import { RSS_AUTHOR_EMAIL, SITE_NAME, TAGLINE } from '../../constants';
+import { RSS_AUTHOR_EMAIL, SITE_NAME, TAGLINE } from '@/constants';
 import { getCollection, render } from 'astro:content';
-import { getDescription } from '../../utils';
+import { getDescription } from '@/utils';
 
 export const GET: APIRoute = async (context) => {
   const posts = await getCollection("blog");

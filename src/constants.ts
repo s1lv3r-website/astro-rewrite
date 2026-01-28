@@ -13,7 +13,7 @@ export const TAGLINE: string = "Autistic trans woman (she/her), working with Dev
 export const THEME_COLOR: string = "#744eb4";
 
 export const HIRE_ME_ENABLED: boolean = true;
-export const DESCRIPTION_TRIM_LENGTH: number = 160;
+export const DESCRIPTION_TRIM_LENGTH: number = 180;
 export const TOC_MAX_NESTED = 3;
 
 export const RSS_AUTHOR_EMAIL = "me@s1lv3r.codes";
@@ -40,27 +40,27 @@ export const CONTACT_LINKS: {
   icon: AstroComponent;
 }[] = [
   {
-    title: "Email: [me <at> s1lv3r <dot> codes]",
-    link: "mailto:",
+    title: "Email",
+    link: "mailto:me@s1lv3r.codes",
     icon: AtSign,
   },
   {
-    title: "GitHub [theS1LV3R]",
+    title: "GitHub",
     link: "https://github.com/theS1LV3R",
     icon: Github,
   },
   {
-    title: "Signal [hwx2l1wncm.54]",
+    title: "Signal",
     link: "https://signal.me/#eu/uQnZe59M88FcFd2TTXyvtA03IppAUx3e-WyhlSN3Gxlnf2AFxKpLQ7AM1n-nP7-x",
     icon: Signal,
   },
   {
-    title: "Matrix [@s1lv3r:matrix.org]",
+    title: "Matrix",
     link: "https://matrix.to/#/@s1lv3r:matrix.org",
     icon: Matrix,
   },
   {
-    title: "Discord [theS1LV3R]",
+    title: "Discord",
     link: "https://discord.com/users/279692618391093248",
     icon: Discord,
   },

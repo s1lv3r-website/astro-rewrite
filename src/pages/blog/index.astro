@@ -1,9 +1,9 @@
 ---
-import Layout from "../layouts/Layout.astro";
+import Layout from "@layouts/Layout.astro";
 import { getCollection } from "astro:content";
-import { getDescription } from "../utils";
+import { getDescription } from "@/utils";
 const posts = (await getCollection("blog")).sort((a, b) =>
-  a.data.pubDate > b.data.pubDate ? -1 : 1
+  a.data.pubDate > b.data.pubDate ? -1 : 1,
 );
 
 const dateToIso = (date: Date) => date.toISOString().split("T")[0];
@@ -64,8 +64,10 @@ const dateToIso = (date: Date) => date.toISOString().split("T")[0];
 </style>
 
 <Layout title="Blogposts">
-  {posts.length === 0 && <p>Nothing here yet... you're early!</p>}
-
+  <p>
+    In here I'll kinda just post whatever I feel like :) There might be technical stuff,
+    non-technical, whatever I come over in my journeys across the internet :3
+  </p>
   <p>
     Want to subscribe with RSS? See
     <a href="/blog/feed.rss" target="_blank" rel="noopener noreferrer">
@@ -74,23 +76,27 @@ const dateToIso = (date: Date) => date.toISOString().split("T")[0];
   </p>
   <ul>
     {
-      posts.map((post) => (
-        <li>
-          <a title={post.data.title} href={`/blog/${post.id}`}>
-            <h2>{post.data.title}</h2>
-            <span>
-              Posted on: {dateToIso(post.data.pubDate)}
-              {post.data.updatedDate &&
-                typeof post.data.updatedDate !== "string" &&
-                post.data.updatedDate > post.data.pubDate &&
-                ` | Last updated: ${dateToIso(post.data.updatedDate)}`}
-            </span>
-            {(post.data.description || post.body) && (
-              <p>{getDescription(post)}</p>
-            )}
-          </a>
-        </li>
-      ))
+      posts.length === 0 ? (
+        <p>Nothing here yet... you're early!</p>
+      ) : (
+        posts.map((post) => (
+          <li>
+            <a title={post.data.title} href={`/blog/${post.id}`}>
+              <h2>{post.data.title}</h2>
+              <span>
+                Posted on: {dateToIso(post.data.pubDate)}
+                {post.data.updatedDate &&
+                  typeof post.data.updatedDate !== "string" &&
+                  post.data.updatedDate > post.data.pubDate &&
+                  ` | Last updated: ${dateToIso(post.data.updatedDate)}`}
+              </span>
+              {(post.data.description || post.body) && (
+                <p>{getDescription(post)}</p>
+              )}
+            </a>
+          </li>
+        ))
+      )
     }
   </ul>
 </Layout>
