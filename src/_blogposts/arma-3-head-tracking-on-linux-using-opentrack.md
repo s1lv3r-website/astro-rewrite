@@ -2,25 +2,33 @@
 title: Arma 3 head tracking on linux using OpenTrack
 pubDate: 2026-01-27T21:05:00.000+01:00
 ---
-I love playing Arma 3, and recently got myself a dedicated [PlayStation Eye](https://en.wikipedia.org/wiki/PlayStation_Eye) camera for head tracking due to the alternatives like [TrackIR](https://www.trackir.com/) being decently expensive (€219). I found the setup a bit tedious and honestly just annoying, so I wrote it down to make it easier for others :)
+I love playing Arma 3, and wanted to get myself a head tracking setup like a [TrackIR](https://www.trackir.com/) for more enjoyable gameplay, however due to it being decently expensive at €219 I bought a [PlayStation Eye](https://en.wikipedia.org/wiki/PlayStation_Eye) camera instead. This, paired with a piece of software called [OpenTrack](https://github.com/opentrack/opentrack) allows me to get *basically* the same experience as if I'd gotten a TrackIR.
 
-## Opentrack - Installation
+However, I found the setup for OpenTrack a bit tedious and kinda unintuitive, so I wrote it down to make the process easier for others :)
 
-Ensure Opentrack is installed with the Neuralnet tracker enabled. On Arch Linux, this involves installing it with any of the packages providing the onnxruntime optional dependency:
+## Hardware selection
 
-- `onnxruntime-cpu` - CPU-based computation
-- `onnxruntime-cuda` - For NVIDIA based GPU acceleration
-- `onnxruntime-rocm` - For AMD based GPU acceleration
+As mentioned, I got myself a PlayStation Eye, the camera for the PS3. It supports a *whopping* 640×480@60 or 320×240@120. You may note that these are very low resolutions, but that isn't that important in this case as the high frame rate is the important bit. The camera also has great low-light capabilities, making it a good match for late night gaming sessions.
+
+Any camera supporting at least 60fps should be good, however the [AiTrack wiki](https://github.com/AIRLegend/aitrack/wiki/Common-camera-FOV-values) has a good list of cameras and their FOV values. Any camera on there *should* be usable for OpenTrack, but YMMW.
+
+## OpenTrack - Installation
+
+First, ensure Opentrack is installed with the correct dependencies for the Neuralnet tracker. On Arch Linux, this involves installing it with any of the packages providing the `onnxruntime` optional dependency:
+
+- `onnxruntime-cpu`
+- `onnxruntime-cuda` (NVIDIA)
+- `onnxruntime-rocm` (AMD)
 
 ```bash
-paru -S onnxruntime-rocm opentrack
+paru -S onnxruntime-<variant> opentrack
 ```
 
 ## Opentrack - Neuralnet configuration
 
-In the Opentrack UI, select the neuralnet tracker in the Input field.
+In the Opentrack UI, select the neuralnet tracker in the Input field to enable it.
 
-Then, the tracker will need to be configured. Open the settings panel with the hammer button next to the input field. Select the correct camera, ideally one placed right in front of your face. Configure the FOV and resolution, and optionally any other settings through the Camera Settings button. This will open the Qt V4L2 test utility if installed.
+In the settings panel (hammer button) next to the input field, select the correct camera. Ideally it should be placed right in front of your face. Configure the FOV and resolution, and optionally any other settings through the Camera Settings button. This will open the Qt V4L2 test utility if installed.
 
 See more configuration details in the [Opentrack wiki](https://github.com/opentrack/opentrack/wiki/AI-Face-Tracking/3d839e36c47074ad40de570e1abfb0dce865fd37), common FOV values can be found in the [AiTrack Wiki](https://github.com/AIRLegend/aitrack/wiki/Common-camera-FOV-values)
 
@@ -28,7 +36,7 @@ See more configuration details in the [Opentrack wiki](https://github.com/opentr
 
 For native Wine/proton output, select the Wine output module. Then click the hammer to open settings.
 
-In here, we use the regular Wine variant, not the Proton output. Select Custom path to Wine executable. Then you will need to do some looking.
+In here, we use the regular Wine variant, not the Proton output ([why?](#why-not-the-proton-output). Select Custom path to Wine executable. Then you will need to do some looking.
 
 1. Find what version of Proton Arma is configured to use in the steam settings. In this example, that is Proton 9.0-4
 2. Fill in the path to the wine binary in the proton installation, here that would be `/srv/steam_games/steamapps/common/Proton 9.0 (Beta)/files/bin/wine`, where `/srv/steam_games` is the steam library. Your location may wary.
