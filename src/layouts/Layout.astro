@@ -1,7 +1,7 @@
 ---
+import type { InferEntrySchema } from "astro:content";
 import { SITE_NAME, THEME_COLOR, TAGLINE } from "@/constants";
 import StyleReset from "@components/StyleReset.astro";
-import type { InferEntrySchema } from "astro:content";
 
 const getPageClass = (name: string): string =>
   [`/${name}`, `/${name}/`].includes(Astro.url.pathname) ? "current-page" : "";

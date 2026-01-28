@@ -1,6 +1,6 @@
 import { render, type CollectionEntry } from "astro:content";
-import { DESCRIPTION_TRIM_LENGTH } from "./constants";
 import jsdom from "jsdom";
+import { DESCRIPTION_TRIM_LENGTH } from "./constants";
 
 /**
  * Gives plain text output of a rendered HTML document. Based on https://stackoverflow.com/questions/74116249
@@ -18,12 +18,12 @@ export async function getPostText(post: CollectionEntry<"blog">): Promise<string
   const { document, NodeFilter } = dom.window
   const walker = document.createTreeWalker(document, NodeFilter.SHOW_TEXT);
 
-
-  const textList: Node[] = [];
+  const textList: string[] = [];
   let currentNode: Node | null = walker.currentNode;
 
   while (currentNode) {
-    textList.push((currentNode as any).textContent);
+    // ! because we know node will exist from being in a while loop
+    textList.push(currentNode!.textContent ?? "");
     currentNode = walker.nextNode();
   }
 

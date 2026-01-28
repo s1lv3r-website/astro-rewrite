@@ -4,7 +4,6 @@ import AtSign from "./components/icons/AtSign.astro";
 import Discord from "./components/icons/Discord.astro";
 import Matrix from "./components/icons/Matrix.astro";
 import Signal from "./components/icons/Signal.astro";
-import type { CollectionEntry, CollectionKey } from "astro:content";
 
 export type AstroComponent = (_props: Record<string, any>) => any;
 

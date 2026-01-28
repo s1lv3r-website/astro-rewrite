@@ -1,7 +1,7 @@
 ---
+import type { MarkdownHeading } from "astro";
 import { TOC_MAX_NESTED } from "@/constants";
 import InnerToC from "@components/InnerToC.astro";
-import type { MarkdownHeading } from "astro";
 
 export type NestedHeading = MarkdownHeading & { children: NestedHeading[] };
 

@@ -1,8 +1,8 @@
 ---
-import ToC from "@components/ToC.astro";
-import Layout from "@layouts/Layout.astro";
-import { getDescription } from "@/utils";
 import { getCollection, render } from "astro:content";
+import { getDescription } from "@/utils";
+import Layout from "@layouts/Layout.astro";
+import ToC from "@components/ToC.astro";
 
 export async function getStaticPaths() {
   const posts = await getCollection("blog");
