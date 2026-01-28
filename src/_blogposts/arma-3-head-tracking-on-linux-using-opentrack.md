@@ -6,6 +6,8 @@ I love playing Arma 3, and wanted to get myself a head tracking setup like a [Tr
 
 However, I found the setup for OpenTrack a bit tedious and kinda unintuitive, so I wrote it down to make the process easier for others :)
 
+> The majority of this post was originally posted on steam: [Linux head tracking using Opentrack and its Neuralnet camera tracker](https://steamcommunity.com/sharedfiles/filedetails/?id=3599782753)
+
 ## Hardware selection
 
 As mentioned, I got myself a PlayStation Eye, the camera for the PS3. It supports a *whopping* 640×480@60 or 320×240@120. You may note that these are very low resolutions, but that isn't that important in this case as the high frame rate is the important bit. The camera also has great low-light capabilities, making it a good match for late night gaming sessions.
