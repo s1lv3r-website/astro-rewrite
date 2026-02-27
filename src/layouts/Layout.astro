@@ -60,10 +60,10 @@ const resolvedTitle = title ? `${title} | ${SITE_NAME}` : SITE_NAME;
   <body>
     <div class="wrapper">
       <header>
-        <span>
-          <img src="/logo.svg" aria-hidden="true" />
-          <h1>{SITE_NAME}</h1>
-        </span>
+        <a href="/">
+            <img src="/logo.svg" aria-hidden="true" />
+            <h1>{SITE_NAME}</h1>
+        </a>
         <nav>
           <a href="/" class={getPageClass("")}>home</a>
           |
@@ -100,7 +100,7 @@ const resolvedTitle = title ? `${title} | ${SITE_NAME}` : SITE_NAME;
       flex-direction: row;
     }
 
-    span {
+    &>a {
       display: flex;
       flex-direction: row;
       align-items: baseline;
@@ -174,8 +174,8 @@ const resolvedTitle = title ? `${title} | ${SITE_NAME}` : SITE_NAME;
     background-color: $bgPrimary;
     color: $fgPrimary;
     font-family:
-      JetBrainsMono, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
-      "Courier New", monospace;
+      JetBrainsMono, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+      "Liberation Mono", "Courier New", monospace;
 
     overflow: auto;
   }
