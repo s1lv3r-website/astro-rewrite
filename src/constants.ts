@@ -4,6 +4,7 @@ import AtSign from "./components/icons/AtSign.astro";
 import Discord from "./components/icons/Discord.astro";
 import Matrix from "./components/icons/Matrix.astro";
 import Signal from "./components/icons/Signal.astro";
+import FediverseNocolor from "@components/icons/FediverseNocolor.astro";
 
 export type AstroComponent = (_props: Record<string, any>) => any;
 
@@ -55,13 +56,18 @@ export const CONTACT_LINKS: {
   },
   {
     title: "Matrix",
-    link: "https://matrix.to/#/@s1lv3r:matrix.org",
+    link: "https://matrix.to/#/@s1lv3r:wolfgirl.pet",
     icon: Matrix,
   },
   {
     title: "Discord",
     link: "https://discord.com/users/279692618391093248",
     icon: Discord,
+  },
+  {
+    title: "Fedi",
+    link: "https://wolfgirl.pet/@s1lv3r",
+    icon: FediverseNocolor,
   },
 ];
 
