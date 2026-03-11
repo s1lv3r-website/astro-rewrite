@@ -70,6 +70,8 @@ const resolvedTitle = title ? `${title} | ${SITE_NAME}` : SITE_NAME;
           <a href="/blog" class={getPageClass("blog")}>blog</a>
           |
           <a href="/projects" class={getPageClass("projects")}>projects</a>
+          |
+          <a href="/noai" class={getPageClass("noai")}>NoAI</a>
         </nav>
       </header>
       <main role="main">
@@ -121,6 +123,7 @@ const resolvedTitle = title ? `${title} | ${SITE_NAME}` : SITE_NAME;
     & > a {
       display: flex;
       flex-direction: row;
+      flex-wrap: nowrap;
       align-items: baseline;
       margin-right: auto;
     }
