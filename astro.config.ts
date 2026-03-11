@@ -16,9 +16,9 @@ export default defineConfig({
   trailingSlash: 'never',
   integrations: [mdx(), sitemap({
     serialize(item) {
-      if (item.url.includes("/admin")) {
-        return undefined;
-      }
+      if (item.url.includes("/admin")) return undefined;
+      if (["/testpage"].includes(item.url)) return undefined;
+
       return item;
     }
   })],
