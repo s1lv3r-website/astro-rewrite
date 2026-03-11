@@ -1,5 +1,5 @@
 ---
-import { PROJECT_LINKS } from "@/constants";
+import { RANDOM_LINKS } from "@/constants";
 import Layout from "@layouts/Layout.astro";
 ---
 
@@ -48,15 +48,16 @@ import Layout from "@layouts/Layout.astro";
   }
 </style>
 
-<Layout title="Projects">
+<Layout title="Links">
   <p>
-    These are miscellaneous projects I've made, participated in, or otherwise
-    find interesting enough to share with others :3
+    These are random links to projects I've participated in, random cool
+    websites, or otherwise things I find interesting enough to share with others
+    :3
   </p>
 
   <div>
     {
-      PROJECT_LINKS.map((project) => (
+      RANDOM_LINKS.map((project) => (
         <a
           title={project.title}
           href={project.link}
