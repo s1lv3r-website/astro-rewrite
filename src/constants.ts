@@ -84,6 +84,12 @@ export const PROJECT_LINKS: {
     description: '"A Cypherpunk\'s Manifesto" by Eric Hughes',
   },
   {
+      icon: Link,
+      title: "Hacker Manifesto",
+      description: '"The Conscience of a Hacker" by Loyd Blankenship',
+      link: "/the-conscience-of-a-hacker.txt"
+  },
+  {
     icon: Github,
     title: "dotfiles",
     link: "https://github.com/theS1LV3R/dotfiles",
