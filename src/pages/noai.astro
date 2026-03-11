@@ -12,13 +12,26 @@ const description =
     border-top: 1px solid color-mix(in srgb, currentColor 20%, transparent);
     padding-top: 1rem;
   }
+
+  .unfinished {
+    font-style: italic;
+    opacity: 50%;
+  }
 </style>
 
 <Layout title={title} description={description}>
   <h1>{title}</h1>
   <p>
     I am strongly opposed to any form of AI being used, especially generative
-    AI, be it text, image, video, or anything else.
+    AI, be it text, image, video, or anything else. This page will serve as a
+    living document and writeup of the reasons I am opposed to the use of
+    generative AI.
+  </p>
+
+  <p>
+    <b>Note:</b>
+    This document is not finished. Any sections I have yet to start will be in italic
+    and with darker text.
   </p>
 
   <section>
@@ -57,26 +70,19 @@ const description =
         block AI bots, making their content inaccessible to everyone using AI as
         their search engines.
       </p>
-      {
-        /*
 
-        <p>
+      <p class="unfinished">
         It seriously hampers your creative abilities. It seriously hinders and
         affects your critical thinking skills. It creates a false narrative that
         creating something is easy, automated and doesn't require human input
         other than a prompt.
       </p>
-      <p>
+      <p class="unfinished">
         Organic website traffic, "dead internet theory", sites blocking
         chatbots, hallucinations. Reading algoslop instead of things someone
-        spent hours on.
+        spent hours on. Lack of human creativity and yank, aka loss of authetic
+        human slop for example youtube poops
       </p>
-
-      Lack of human creativity and yank, aka loss of authetic human slop for example youtube poops
-
-
-      */
-      }
     </section>
 
     <section>
@@ -94,48 +100,52 @@ const description =
         trying to detect AI content, even if said content was written completely
         organically by a human being.
       </p>
-      {
-        /*<p>
+
+      <p class="unfinished">
         It's also doing long-term damage to education because it's forcing
         schools to use their time and energy on "beating AI" instead of actually
         teaching.
       </p>
-      <p>one user vs whole society - "throwing trash in the nature" argument</p>
-      <p>Trained on stolen content</p>
-      Emdash becoming a "forbidden character"
-      the further destruction of the web as a human centred social community
-      -The erosion of trust in the visual medium
-
-      */
-      }
+      <p class="unfinished">
+        one user vs whole society - "throwing trash in the nature" argument
+      </p>
+      <p class="unfinished">Trained on stolen content</p>
+      <p class="unfinished">Emdash becoming a "forbidden character"</p>
+      <p class="unfinished">
+        the further destruction of the web as a human centred social community
+      </p>
+      <p class="unfinished">The erosion of trust in the visual medium</p>
     </section>
 
     <section>
       <h3>Environmental</h3>
-      {
-        /*<p>
-        Water use, power use, temp changes? Increasing power prices in
-        nordnorge, nrk article
-      </p>*/
-      }
+      <p class="unfinished">
+        Water use, power use, temp changes? Increasing power prices in northern
+        norway, nrk article
+        https://www.nrk.no/nordland/open-ai-og-aker-bygger-datasenter-i-narvik.-det-kan-gjore-stromprisene-fem-ganger-sa-hoye-1.17516127
+      </p>
     </section>
 
     <section>
       <h3>Financial</h3>
-      {
-        /*<p>
+      <p class="unfinished">
         Something something about the bubble, circular funding, hardware
         pricing, etc
-      </p>*/
-      }
+      </p>
     </section>
 
     <section>
       <h3>Other reasons</h3>
-      <p>Code maintenance</p>
-      The erosion of documentation for coding is another factor that ive heard a bit
-      about
-      Hallucination of sources in research, high AI use - https://doi.org/10.48550/arXiv.2502.00632 https://arxiv.org/abs/2403.13812 https://arxiv.org/html/2601.18724v1
+      <p class="unfinished">Code maintenance, spam AI PRs</p>
+      <p class="unfinished">
+        The erosion of documentation for coding is another factor that ive heard
+        a bit
+      </p>
+      <p class="unfinished">
+        about Hallucination of sources in research, high AI use -
+        https://doi.org/10.48550/arXiv.2502.00632
+        https://arxiv.org/abs/2403.13812 https://arxiv.org/html/2601.18724v1
+      </p>
     </section>
   </section>
 
