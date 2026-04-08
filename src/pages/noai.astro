@@ -22,7 +22,7 @@ const description =
 <Layout title={title} description={description}>
   <h1>{title}</h1>
   <p>
-    I am strongly opposed to any form of AI being used, especially generative
+    I am strongly opposed to any[1] form of AI being used, especially generative
     AI, be it text, image, video, or anything else. This page will serve as a
     living document and writeup of the reasons I am opposed to the use of
     generative AI.
@@ -30,8 +30,7 @@ const description =
 
   <p>
     <b>Note:</b>
-    This document is not finished. Any sections I have yet to start will be in italic
-    and with darker text.
+    This document is not finished. Any grayed-out sections are yet to be started/finished.
   </p>
 
   <section>
@@ -154,12 +153,12 @@ const description =
     <h2>Other commonly used reasons <i>for</i> AI</h2>
     <details>
       <summary>"I only use it as a search engine"</summary>
-      <p>Improve your searching instead</p>
+      <p>Improve your searching instead. Google-fu is a lost art, but a very important one.</p>
     </details>
   </section>
 
   <section>
-    <h2>"But x, y, or z!"</h2>
+    <h2 id="counterpoints">"But x, y, or z!"</h2>
     <p>
       This page isn't meant to list <i>every</i> type of AI or reasons against AI
       use. There are plenty of researchers trying to achieve good things through AI
@@ -214,6 +213,10 @@ const description =
       massive privacy implications in regards to HIPAA, GDPR, and other privacy
       frameworks.
     </p>
+  </section>
+  <hr />
+  <section title="Footnotes">
+    <ol><li>"Any" here mostly means generative &mdash; see <a href="#counterpoints"><i>"But x, y, or z!"</i></a></li></ol>
   </section>
 </Layout>
 
