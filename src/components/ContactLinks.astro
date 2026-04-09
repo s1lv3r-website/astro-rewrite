@@ -43,21 +43,25 @@ import { CONTACT_LINKS } from "@/constants";
   }
 </style>
 
-<div class="wrapper">
-  {
-    CONTACT_LINKS.map((link) => (
-      <a
-        href={link.link}
-        title={link.title}
-        target="_blank"
-        rel="noopener noreferrer"
-        class="button"
-      >
-        <span class="icon">
-          <link.icon aria-hidden />
-        </span>
-        {link.title}
-      </a>
-    ))
-  }
-</div>
+<section title="Contact links">
+  <h2>Where can you find me?</h2>
+
+  <div class="wrapper">
+    {
+      CONTACT_LINKS.map((link) => (
+        <a
+          href={link.link}
+          title={link.title}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="button"
+        >
+          <span class="icon">
+            <link.icon aria-hidden />
+          </span>
+          {link.title}
+        </a>
+      ))
+    }
+  </div>
+</section>
