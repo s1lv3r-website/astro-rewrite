@@ -1,60 +1,39 @@
 ---
-import type { InferEntrySchema } from "astro:content";
 import { SITE_NAME, THEME_COLOR, TAGLINE } from "@/constants";
 import StyleReset from "@components/StyleReset.astro";
 
 const getPageClass = (name: string): string =>
   [`/${name}`, `/${name}/`].includes(Astro.url.pathname) ? "current-page" : "";
 
-interface Props {
+type Props = {
   title?: string;
   description?: string;
-  blogpost?: "true" | "false";
-  blogData?: InferEntrySchema<"blog">;
+  ogtype?: "article" | "website"
 }
 
-const { title, description, blogpost, blogData } = Astro.props;
-
-const isBlogpost = blogpost === "true";
+const { title, description, ogtype = "website" } = Astro.props;
+/** "SITE_NAME" or "title | SITE_NAME" */
 const resolvedTitle = title ? `${title} | ${SITE_NAME}` : SITE_NAME;
 ---
 
 <!doctype html>
-<html lang="en" prefix="og: https://ogp.me/ns#">
-  <head>
+<html lang="en">
+  <head prefix="og: https://ogp.me/ns# article: https://ogp.me/ns/article#">
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/logo.svg" />
     <link rel="sitemap" href="/sitemap-index.xml" />
     <link rel="canonical" href={Astro.url} />
+
     <title>{resolvedTitle}</title>
     <meta name="title" content={title ?? SITE_NAME} />
+    <meta property="og:site_name" content={SITE_NAME} />
     <meta name="theme-color" content={THEME_COLOR} />
     <meta name="description" content={description ?? TAGLINE} />
-    <meta property="og:type" content={isBlogpost ? "article" : "website"} />
-    {
-      isBlogpost && (
-        <>
-          <meta
-            property="og:site_name"
-            content={`${SITE_NAME} : ${blogData?.pubDate.toISOString().split("T")[0]}`}
-          />
-          <meta property="article:author" content={SITE_NAME} />
-          <meta
-            property="article:published_time"
-            content={blogData?.pubDate.toISOString()}
-          />
-        </>
-      )
-    }
-    {
-      blogData?.updatedDate && (
-        <meta
-          property="article:updated_time"
-          content={blogData?.updatedDate.toISOString()}
-        />
-      )
-    }
+    <meta property="og:type" content={ogtype} />
+
+    <slot name="head" />
+
     <StyleReset />
   </head>
   <body>
@@ -74,12 +53,14 @@ const resolvedTitle = title ? `${title} | ${SITE_NAME}` : SITE_NAME;
           <a href="/noai" class={getPageClass("noai")}>NoAI</a>
         </nav>
       </header>
+
       <main role="main">
         <slot />
       </main>
+
       <footer>
         <p>
-          Proudly written by me and only me, no AI or slop generators here.
+          Proudly written by me, myself, and I. No AI or slop generators here.
           Opinions are my own and do not represent the views or opinions of past
           or current employers. All rights reserved. Use of content on this site
           for AI training or generation is strictly forbidden.

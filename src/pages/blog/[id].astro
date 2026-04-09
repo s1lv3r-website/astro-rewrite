@@ -1,8 +1,7 @@
 ---
 import { getCollection, render } from "astro:content";
-import { getDescription } from "@/utils";
-import Layout from "@layouts/Layout.astro";
 import ToC from "@components/ToC.astro";
+import Blogpost from "@layouts/Blogpost.astro";
 
 export async function getStaticPaths() {
   const posts = await getCollection("blog");
@@ -12,6 +11,7 @@ export async function getStaticPaths() {
     props: { post },
   }));
 }
+
 
 const { post } = Astro.props;
 const { Content, headings } = await render(post);
@@ -321,12 +321,7 @@ const dateFormat = (_date: Date): string => {
   }
 </style>
 
-<Layout
-  blogpost="true"
-  title={post.data.title}
-  description={await getDescription(post)}
-  blogData={post.data}
->
+<Blogpost post={post}>
   <div class="metadata">
     <h1>{post.data.title}</h1>
     <span title="Posted and updated date">
@@ -372,4 +367,4 @@ const dateFormat = (_date: Date): string => {
   <div id="content">
     <Content />
   </div>
-</Layout>
+</>

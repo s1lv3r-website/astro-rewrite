@@ -1,0 +1,35 @@
+---
+import { getDescription } from "@/utils";
+import Layout from "@layouts/Layout.astro";
+import type { CollectionEntry } from "astro:content";
+
+type Props = {
+  post: CollectionEntry<"blog">;
+};
+
+const { post } = Astro.props;
+const postData = post.data
+
+const datePosted = postData.pubDate.toISOString().split("T")[0]
+const title = `${datePosted} : ${postData.title}`
+---
+
+<Layout title={title} description={await getDescription(post)} ogtype="article">
+  <Fragment slot="head">
+    <meta
+      property="article:published_time"
+      content={postData.pubDate.toISOString()}
+    />
+
+    {
+      postData.updatedDate && (
+        <meta
+          property="article:updated_time"
+          content={postData.updatedDate.toISOString()}
+        />
+      )
+    }
+  </Fragment>
+
+  <slot />
+</Layout>
