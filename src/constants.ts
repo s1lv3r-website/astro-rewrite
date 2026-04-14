@@ -40,6 +40,11 @@ export const CONTACT_LINKS: {
   icon: AstroComponent;
 }[] = [
   {
+    title: "Signal (Preferred)",
+    link: "https://signal.me/#eu/uQnZe59M88FcFd2TTXyvtA03IppAUx3e-WyhlSN3Gxlnf2AFxKpLQ7AM1n-nP7-x",
+    icon: Signal,
+  },
+  {
     title: "Email",
     link: "mailto:me@s1lv3r.codes",
     icon: AtSign,
@@ -50,19 +55,9 @@ export const CONTACT_LINKS: {
     icon: Github,
   },
   {
-    title: "Signal",
-    link: "https://signal.me/#eu/uQnZe59M88FcFd2TTXyvtA03IppAUx3e-WyhlSN3Gxlnf2AFxKpLQ7AM1n-nP7-x",
-    icon: Signal,
-  },
-  {
     title: "Matrix",
     link: "https://matrix.to/#/@s1lv3r:wolfgirl.pet",
     icon: Matrix,
-  },
-  {
-    title: "Discord",
-    link: "https://discord.com/users/279692618391093248",
-    icon: Discord,
   },
   {
     title: "Fedi",
