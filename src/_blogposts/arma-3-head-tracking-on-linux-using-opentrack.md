@@ -2,9 +2,9 @@
 title: Arma 3 head tracking on linux using OpenTrack
 pubDate: 2026-01-27T21:05:00.000+01:00
 ---
-I love playing Arma 3, and wanted to get myself a head tracking setup like a [TrackIR](https://www.trackir.com/) for more enjoyable gameplay, however due to it being decently expensive at €219 I bought a [PlayStation Eye](https://en.wikipedia.org/wiki/PlayStation_Eye) camera instead. This, paired with a piece of software called [OpenTrack](https://github.com/opentrack/opentrack) allows me to get *basically* the same experience as if I'd gotten a TrackIR.
+I love playing Arma 3, and wanted to get myself a head tracking setup like a [TrackIR](https://www.trackir.com/) for more enjoyable gameplay. However due to it being decently expensive for my student self at €219, I bought a used [PlayStation Eye](https://en.wikipedia.org/wiki/PlayStation_Eye) camera for ~€20 instead. This camera, paired with a piece of software called [OpenTrack](https://github.com/opentrack/opentrack) allows me to get *basically* the same experience as if I'd gotten a TrackIR instead :)
 
-However, I found the setup for OpenTrack a bit tedious and kinda unintuitive, so I wrote it down to make the process easier for others :)
+I found the setup for OpenTrack a bit tedious and kinda unintuitive, so I wrote it down to make the process easier for others :3
 
 > The majority of this post was originally posted on steam: [Linux head tracking using Opentrack and its Neuralnet camera tracker](https://steamcommunity.com/sharedfiles/filedetails/?id=3599782753)
 
@@ -18,9 +18,9 @@ Any camera supporting at least 60fps should be good, however the [AiTrack wiki](
 
 First, ensure Opentrack is installed with the correct dependencies for the Neuralnet tracker. On Arch Linux, this involves installing it with any of the packages providing the `onnxruntime` optional dependency:
 
-- `onnxruntime-cpu`
-- `onnxruntime-cuda` (NVIDIA)
-- `onnxruntime-rocm` (AMD)
+* `onnxruntime-cpu`
+* `onnxruntime-cuda` (NVIDIA)
+* `onnxruntime-rocm` (AMD)
 
 ```bash
 paru -S onnxruntime-<variant> opentrack
@@ -43,7 +43,7 @@ In here, we use the regular Wine variant, not the Proton output ([why?](#why-not
 1. Find what version of Proton Arma is configured to use in the steam settings. In this example, that is Proton 9.0-4
 2. Fill in the path to the wine binary in the proton installation, here that would be `/srv/steam_games/steamapps/common/Proton 9.0 (Beta)/files/bin/wine`, where `/srv/steam_games` is the steam library. Your location may wary.
 3. Fill in the path to the Arma 3 proton directory. In this example: `/srv/steam_games/steamapps/compatdata/107410/pfx`.
-4. Under **Advanced**, ensure **Protocol** is set to _Both_ and **Steam application id** is set to _107410_, it being the AppID for Arma 3
+4. Under **Advanced**, ensure **Protocol** is set to *Both* and **Steam application id** is set to *107410*, it being the AppID for Arma 3
 
 ### Why not the Proton output?
 
@@ -55,8 +55,8 @@ As far as I can tell, the two are identical and use the same code except for the
 
 Ensure OpenTtrack is running before launching Arma. Then, open Arma's input settings, and find the Controllers tab. From there two devices should be listed:
 
-- Track IR
-- FreeTrack
+* Track IR
+* FreeTrack
 
 Ensure **Track IR** is **enabled**, and **FreeTrack** is **disabled**. Input bindings for analog head movement should be set up by default.
 
