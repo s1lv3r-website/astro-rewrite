@@ -12,7 +12,7 @@ export const SITE_NAME: string = "S1LV3R";
 export const TAGLINE: string = "Autistic trans woman (she/her), working with DevOps, networks, and systems design, engineering, and administration.";
 export const THEME_COLOR: string = "#744eb4";
 
-export const HIRE_ME_ENABLED: boolean = true;
+export const HIRE_ME_ENABLED: boolean = false;
 export const DESCRIPTION_TRIM_LENGTH: number = 180;
 export const TOC_MAX_NESTED = 3;
 
