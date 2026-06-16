@@ -9,7 +9,8 @@ import FediverseNocolor from "@components/icons/FediverseNocolor.astro";
 export type AstroComponent = (_props: Record<string, any>) => any;
 
 export const SITE_NAME: string = "S1LV3R";
-export const TAGLINE: string = "Autistic trans woman (she/her), working with DevOps, networks, and systems design, engineering, and administration.";
+export const PRONOUNS: string = "it/she";
+export const TAGLINE: string = `Autistic trans woman, working with DevOps, networks, and systems design, engineering, and administration.`;
 export const THEME_COLOR: string = "#744eb4";
 
 export const HIRE_ME_ENABLED: boolean = false;

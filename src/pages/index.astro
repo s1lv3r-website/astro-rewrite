@@ -1,5 +1,5 @@
 ---
-import { HIRE_ME_ENABLED } from "@/constants";
+import { HIRE_ME_ENABLED, TAGLINE } from "@/constants";
 import Layout from "@layouts/Layout.astro";
 import HireMe from "@components/HireMe.astro";
 import ContactLinks from "@components/ContactLinks.astro";
@@ -21,12 +21,7 @@ import ContactLinks from "@components/ContactLinks.astro";
 <Layout>
   <div class="about">
     <p class="tagline">
-      Autistic trans woman (<a
-        target="_blank"
-        rel="noopener noreferrer"
-        href="https://en.pronouns.page/@theS1LV3R">she/her</a
-      >), working with DevOps, networks, and systems design, engineering, and
-      administration.
+      {TAGLINE}
     </p>
     <p>
       I am highly interested in everything computers, servers, networking, and
@@ -38,5 +33,4 @@ import ContactLinks from "@components/ContactLinks.astro";
   {HIRE_ME_ENABLED && <HireMe />}
 
   <ContactLinks />
-
 </Layout>

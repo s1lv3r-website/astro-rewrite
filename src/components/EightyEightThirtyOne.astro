@@ -1,0 +1,64 @@
+---
+type Button = {
+  /** Link to image or file name */
+  image: string;
+  alt: string;
+  target?: string;
+};
+
+const buttons: Button[] = [
+  {
+    image: "https://yesterweb.org/no-to-web3/img/roly-saynotoweb3.gif",
+    alt: "88x31 button switching between saying 'Keep the Web Free' and 'Say No To Web3'",
+    target: "https://yesterweb.org/no-to-web3/",
+  },
+  {
+    image: "rss.png",
+    alt: "RSS logo along with the text 'RSS Feed'",
+    target: "/blog/feed.rss",
+  },
+  {
+    image: "not_a_person.png",
+    alt: "88x31 button with a barcode and the text 'Not a Person' below",
+    target: "https://voidgoddess.org/emptyspaces/notaperson/",
+  },
+  {
+    image: "best_viewed_with_pepsi.gif",
+    alt: "88x31 button with the pepsi logo on the left hand side, and the right side switching between 'This Site Best Viewed With' and 'Pepsi'",
+  },
+].map((btn) => {
+  if (!btn.image.includes("/")) {
+    btn.image = `/88x31/${btn.image}`;
+  }
+  return btn;
+});
+---
+
+<style lang="scss">
+  a {
+    margin: 2px;
+  }
+
+  img {
+    width: 88px;
+    height: 31px;
+  }
+
+  #wrapper {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+  }
+</style>
+
+<div id="wrapper">
+  {
+    buttons.map(({ image, target, alt }) => (
+      <a href={target} target="_blank" rel="noopener noreferrer">
+        <img src={image} alt={alt} />
+      </a>
+    ))
+  }
+</div>
