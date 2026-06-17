@@ -52,6 +52,7 @@ const dateToIso = (date: Date) => date.toISOString().split("T")[0];
     h2 {
       margin: 0;
       line-height: 1.3;
+      text-wrap: stable;
     }
 
     span {
@@ -91,7 +92,7 @@ const dateToIso = (date: Date) => date.toISOString().split("T")[0];
                   post.data.updatedDate > post.data.pubDate &&
                   ` | Last updated: ${dateToIso(post.data.updatedDate)}`}
               </span>
-              {(post.data.description || post.body) && (
+              {(post.data.description || post.body) && false && (
                 <p>{getDescription(post)}</p>
               )}
             </a>

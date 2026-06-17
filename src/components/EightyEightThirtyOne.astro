@@ -9,22 +9,31 @@ type Button = {
 const buttons: Button[] = [
   {
     image: "https://yesterweb.org/no-to-web3/img/roly-saynotoweb3.gif",
-    alt: "88x31 button switching between saying 'Keep the Web Free' and 'Say No To Web3'",
+    alt: "Keep the Web Free, Say No To Web3",
     target: "https://yesterweb.org/no-to-web3/",
   },
   {
     image: "rss.png",
-    alt: "RSS logo along with the text 'RSS Feed'",
+    alt: "RSS Feed",
     target: "/blog/feed.rss",
   },
   {
     image: "not_a_person.png",
-    alt: "88x31 button with a barcode and the text 'Not a Person' below",
+    alt: "Not a Person",
     target: "https://voidgoddess.org/emptyspaces/notaperson/",
   },
   {
+    image: "pride-transgender.png", // https://qalle.neocities.org/88x31/
+    alt: "Transgender flag",
+    target: "https://en.pronouns.page/@thes1lv3r",
+  },
+  {
     image: "best_viewed_with_pepsi.gif",
-    alt: "88x31 button with the pepsi logo on the left hand side, and the right side switching between 'This Site Best Viewed With' and 'Pepsi'",
+    alt: "This Site Best Viewed With Pepsi",
+  },
+  {
+    image: "this_machine_kills_fascists.png",
+    alt: "This Machine Kills Fascists",
   },
 ].map((btn) => {
   if (!btn.image.includes("/")) {

@@ -1,10 +1,8 @@
 ---
-import { SITE_NAME, THEME_COLOR, TAGLINE, PRONOUNS } from "@/constants";
-import Footer from "@components/Footer.astro";
+import { SITE_NAME, THEME_COLOR, TAGLINE } from "@/constants";
 import StyleReset from "@components/StyleReset.astro";
-
-const getPageClass = (name: string): string =>
-  [`/${name}`, `/${name}/`].includes(Astro.url.pathname) ? "current-page" : "";
+import Header from "@components/Header.astro";
+import Footer from "@components/Footer.astro";
 
 type Props = {
   title?: string;
@@ -38,27 +36,12 @@ const resolvedTitle = title ? `${title} | ${SITE_NAME}` : SITE_NAME;
     <StyleReset />
   </head>
   <body>
+    <a href="#main" id="skip-to-content">Skip to content</a>
     <div class="wrapper">
-      <header>
-        <a href="/">
-          <img src="/logo.svg" aria-hidden="true" />
-          <span>
-            <h1>{SITE_NAME}</h1>
-            <p id="pronouns">{PRONOUNS}</p>
-          </span>
-        </a>
-        <nav>
-          <a href="/" class={getPageClass("")}>home</a>
-          |
-          <a href="/blog" class={getPageClass("blog")}>blog</a>
-          |
-          <a href="/links" class={getPageClass("links")}>links</a>
-          |
-          <a href="/noai" class={getPageClass("noai")}>NoAI</a>
-        </nav>
-      </header>
 
-      <main role="main">
+      <Header />
+
+      <main id="main" role="main">
         <slot />
       </main>
 
@@ -68,6 +51,20 @@ const resolvedTitle = title ? `${title} | ${SITE_NAME}` : SITE_NAME;
 </html>
 
 <style lang="scss">
+  #skip-to-content {
+    left: 50%;
+    position: absolute;
+    transform: translateY(-110%);
+    background: #e77e23;
+    height: 30px;
+    padding: 8px;
+    transition: transform 0.3s;
+
+    &:focus {
+      transform: translateY(0%);
+    }
+  }
+
   .wrapper {
     padding: 1rem;
     margin-right: auto;

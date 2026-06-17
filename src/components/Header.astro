@@ -1,0 +1,89 @@
+---
+import { SITE_NAME, PRONOUNS } from "@/constants";
+
+const getPageClass = (name: string): string =>
+  [`/${name}`, `/${name}/`].includes(Astro.url.pathname) ? "current-page" : "";
+---
+
+<header>
+  <a href="/">
+    <img src="/logo.svg" aria-hidden="true" />
+    <span>
+      <h1>{SITE_NAME}</h1>
+      <p id="pronouns">{PRONOUNS}</p>
+    </span>
+  </a>
+  <nav>
+    <a href="/" class={getPageClass("")}> home</a><span aria-hidden> | </span>
+    <a href="/blog" class={getPageClass("blog")}>blog</a><span aria-hidden> | </span>
+    <a href="/links" class={getPageClass("links")}>links</a><span aria-hidden> | </span>
+    <a href="/noai" class={getPageClass("noai")}>NoAI</a>
+  </nav>
+</header>
+
+<style lang="scss">
+  $wrapWidth: 52rem;
+
+  header {
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+    margin-bottom: 1rem;
+
+    @media (width < $wrapWidth) {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    @media (width >= $wrapWidth) {
+      flex-direction: row;
+    }
+
+    & > a {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      align-items: baseline;
+      margin-right: auto;
+
+      @media (width < $wrapWidth) {
+        margin-left: auto;
+      }
+    }
+
+    img {
+      padding-bottom: 0.45rem;
+      width: 4rem;
+      height: 4rem;
+      margin-right: 0.25rem;
+      margin-top: auto;
+      margin-bottom: auto;
+    }
+
+    h1 {
+      max-height: 5rem;
+      margin-top: auto;
+      margin-bottom: auto;
+    }
+
+    nav {
+      text-align: right;
+      margin-top: auto;
+      margin-bottom: auto;
+    }
+
+    #pronouns {
+      padding-left: 0.1rem;
+      margin: 0;
+    }
+
+    .current-page {
+      font-style: italic;
+      font-weight: 600;
+    }
+
+    a {
+      text-decoration: none;
+    }
+  }
+</style>
