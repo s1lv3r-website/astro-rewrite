@@ -22,7 +22,7 @@ A lot of what I here write about would probably fall under the genres of [Transh
 
 I will admit that I am still young. A lot of this could, and probably will change. This is simply a view of my identity as it stands today, and I felt the need to get it out there.
 
-\ - S1LV3R
+\- S1LV3R
 
 
 ---
