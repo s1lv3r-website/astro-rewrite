@@ -7,8 +7,8 @@ const site = Astro.site!.host;
 <footer>
   <EightyEightThirtyOne />
 
-  <div class="webrings">
-    <p title="Roboring webring">
+  <div class="webrings" aria-label="Webrings">
+    <p aria-label="Roboring">
       <a title="Previous page" href="https://stellophiliac.github.io/roboring/s1lv3r/previous">←</a>
       <a title="Ring info" href="https://stellophiliac.github.io/roboring">roboring</a>
       <a title="Next page" href="https://stellophiliac.github.io/roboring/s1lv3r/next">→</a>
@@ -39,6 +39,7 @@ const site = Astro.site!.host;
 <style lang="scss">
   footer {
     margin-top: auto;
+    padding-top: 1rem;
     text-align: center;
   }
 

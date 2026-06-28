@@ -55,10 +55,19 @@ const dateFormat = (_date: Date): string => {
         }
       }
     }
+
+    #desc {
+      padding-top: 1rem;
+    }
   }
 
   .separator {
     margin-top: 1rem;
+
+    &:last-of-type {
+      margin-top: 0;
+      margin-bottom: 1rem;
+    }
   }
 </style>
 
@@ -358,14 +367,15 @@ const dateFormat = (_date: Date): string => {
     }
     {
       post.data.description && (
-        <p title="Post description">{post.data.description}</p>
+        <p id="desc" title="Post description">{post.data.description}</p>
       )
     }
     <ToC headings={headings} />
   </div>
+
   <hr class="separator" />
   <div id="content">
     <Content />
   </div>
-  <hr class="separator" />
-</>
+  <hr class="separator end" />
+</Blogpost>

@@ -15,41 +15,6 @@ const { title, description, ogtype = "website" } = Astro.props;
 const resolvedTitle = title ? `${title} | ${SITE_NAME}` : SITE_NAME;
 ---
 
-<!doctype html>
-<html lang="en">
-  <head prefix="og: https://ogp.me/ns# article: https://ogp.me/ns/article#">
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href="/logo.svg" />
-    <link rel="sitemap" href="/sitemap-index.xml" />
-    <link rel="canonical" href={Astro.url} />
-
-    <title>{resolvedTitle}</title>
-    <meta name="title" content={title ?? SITE_NAME} />
-    <meta property="og:site_name" content={SITE_NAME} />
-    <meta name="theme-color" content={THEME_COLOR} />
-    <meta name="description" content={description ?? TAGLINE} />
-    <meta property="og:type" content={ogtype} />
-
-    <slot name="head" />
-
-    <StyleReset />
-  </head>
-  <body>
-    <a href="#main" id="skip-to-content">Skip to content</a>
-    <div class="wrapper">
-
-      <Header />
-
-      <main id="main" role="main">
-        <slot />
-      </main>
-
-      <Footer />
-    </div>
-  </body>
-</html>
-
 <style lang="scss">
   #skip-to-content {
     left: 50%;
@@ -78,6 +43,10 @@ const resolvedTitle = title ? `${title} | ${SITE_NAME}` : SITE_NAME;
     @media (width >= 52rem) {
       max-width: 52rem;
     }
+  }
+
+  #main {
+    margin-top: -1rem;
   }
 
   header {
@@ -143,6 +112,43 @@ const resolvedTitle = title ? `${title} | ${SITE_NAME}` : SITE_NAME;
     }
   }
 </style>
+
+<!doctype html>
+<html lang="en">
+  <head prefix="og: https://ogp.me/ns# article: https://ogp.me/ns/article#">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/logo.svg" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <link rel="canonical" href={Astro.url} />
+
+    <title>{resolvedTitle}</title>
+    <meta name="title" content={title ?? SITE_NAME} />
+    <meta property="og:site_name" content={SITE_NAME} />
+    <meta name="theme-color" content={THEME_COLOR} />
+    <meta name="description" content={description ?? TAGLINE} />
+    <meta property="og:type" content={ogtype} />
+
+    <slot name="head" />
+
+    <StyleReset />
+  </head>
+  <body>
+    <a href="#main" id="skip-to-content">Skip to content</a>
+    <div class="wrapper">
+
+      <Header />
+
+      <main id="main" role="main">
+        <slot />
+      </main>
+
+      <Footer />
+    </div>
+  </body>
+</html>
+
+
 
 <style is:global lang="scss">
   $bgPrimary: #141414;

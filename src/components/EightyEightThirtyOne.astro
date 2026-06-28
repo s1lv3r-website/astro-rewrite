@@ -1,50 +1,9 @@
 ---
-type Button = {
-  /** Link to image or file name */
-  image: string;
-  alt: string;
-  target?: string;
-};
-
-const buttons: Button[] = [
-  {
-    image: "https://yesterweb.org/no-to-web3/img/roly-saynotoweb3.gif",
-    alt: "Keep the Web Free, Say No To Web3",
-    target: "https://yesterweb.org/no-to-web3/",
-  },
-  {
-    image: "rss.png",
-    alt: "RSS Feed",
-    target: "/blog/feed.rss",
-  },
-  {
-    image: "not_a_person.png",
-    alt: "Not a Person",
-    target: "https://voidgoddess.org/emptyspaces/notaperson/",
-  },
-  {
-    image: "pride-transgender.png", // https://qalle.neocities.org/88x31/
-    alt: "Transgender flag",
-    target: "https://en.pronouns.page/@thes1lv3r",
-  },
-  {
-    image: "best_viewed_with_pepsi.gif",
-    alt: "This Site Best Viewed With Pepsi",
-  },
-  {
-    image: "this_machine_kills_fascists.png",
-    alt: "This Machine Kills Fascists",
-  },
-].map((btn) => {
-  if (!btn.image.includes("/")) {
-    btn.image = `/88x31/${btn.image}`;
-  }
-  return btn;
-});
+import { EIGHTY_EIGHT_THIRTY_ONE_BUTTONS } from "@/constants";
 ---
 
 <style lang="scss">
-  a {
+  li {
     margin: 2px;
   }
 
@@ -53,21 +12,30 @@ const buttons: Button[] = [
     height: 31px;
   }
 
-  #wrapper {
+  ul {
     width: 100%;
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
     justify-content: center;
+    padding-left: 0;
+  }
+
+  ul > li {
+    list-style-type: none;
   }
 </style>
 
 <div id="wrapper">
-  {
-    buttons.map(({ image, target, alt }) => (
-      <a href={target} target="_blank" rel="noopener noreferrer">
-        <img src={image} alt={alt} />
-      </a>
-    ))
-  }
+  <ul title="88x31 buttons">
+    {
+      EIGHTY_EIGHT_THIRTY_ONE_BUTTONS.map(({ image, target, alt }) => (
+        <li>
+          <a href={target} target="_blank" rel="noopener noreferrer">
+            <img src={image} alt={alt} />
+          </a>
+        </li>
+      ))
+    }
+  </ul>
 </div>

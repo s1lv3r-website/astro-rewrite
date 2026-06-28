@@ -62,6 +62,10 @@ const dateToIso = (date: Date) => date.toISOString().split("T")[0];
     p {
       margin-bottom: 0;
     }
+
+    &:last-of-type {
+      margin-bottom: 0;
+    }
   }
 </style>
 
@@ -84,14 +88,15 @@ const dateToIso = (date: Date) => date.toISOString().split("T")[0];
         posts.map((post) => (
           <li>
             <a title={post.data.title} href={`/blog/${post.id}`}>
-              <h2>{post.data.title}</h2>
+              <h3>{post.data.title}</h3>
               <span>
-                Posted on: {dateToIso(post.data.pubDate)}
+                Posted: {dateToIso(post.data.pubDate)}
                 {post.data.updatedDate &&
                   typeof post.data.updatedDate !== "string" &&
                   post.data.updatedDate > post.data.pubDate &&
-                  ` | Last updated: ${dateToIso(post.data.updatedDate)}`}
+                  ` | Updated: ${dateToIso(post.data.updatedDate)}`}
               </span>
+
               {(post.data.description || post.body) && false && (
                 <p>{getDescription(post)}</p>
               )}

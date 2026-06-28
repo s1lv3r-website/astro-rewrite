@@ -8,6 +8,7 @@ import { CONTACT_LINKS } from "@/constants";
     flex-wrap: wrap;
     gap: 0.75rem;
     align-items: stretch;
+    padding: 0;
   }
 
   .button {
@@ -41,27 +42,33 @@ import { CONTACT_LINKS } from "@/constants";
     padding: 2px;
     vertical-align: middle;
   }
+
+  li {
+    list-style-type: none;
+  }
 </style>
 
-<section title="Contact links">
-  <h2>Where can you find me?</h2>
+<section>
+  <h2>Contact links</h2>
 
-  <div class="wrapper">
+  <ul class="wrapper">
     {
       CONTACT_LINKS.map((link) => (
-        <a
-          href={link.link}
-          title={link.title}
-          target="_blank"
-          rel="noopener noreferrer"
-          class="button"
-        >
-          <span aria-hidden="true" class="icon">
-            <link.icon  />
-          </span>
-          {link.title}
-        </a>
+        <li>
+          <a
+            href={link.link}
+            title={link.title}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="button"
+          >
+            <span aria-hidden="true" class="icon">
+              <link.icon />
+            </span>
+            {link.title}
+          </a>
+        </li>
       ))
     }
-  </div>
+  </ul>
 </section>
