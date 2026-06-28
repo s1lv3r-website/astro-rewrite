@@ -105,6 +105,11 @@ export const EIGHTY_EIGHT_THIRTY_ONE_BUTTONS: EightyEightThirtyOneButton[] = [
     target: "https://www.31a05b.net",
   },
   {
+    image: "https://beeps.website/assets/images/88x31-n.gif",
+    alt: "beeps.website - a site by a plural, furry, otherkin weirdo about web dev, identity and stuff",
+    target: "https://beeps.website/",
+  },
+  {
     image: "/88x31/best_viewed_with_pepsi.gif",
     alt: "This Site Best Viewed With Pepsi",
   },
