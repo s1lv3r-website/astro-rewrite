@@ -1,6 +1,9 @@
 ---
 title: Not human
 pubDate: 2026-06-28T21:36:00.000+02:00
+socials:
+- site: bsky
+  url: https://bsky.app/profile/did:plc:t4orz775m4rskkwakd3nogxm/post/3mpf4z56yjk2c
 ---
 If you've been on my website before, you might've seen the "Not a Person" 88x31 image in the footer. I added this because I do not identify with being human.
 
@@ -27,7 +30,4 @@ I will admit that I am still young. A lot of this could, and probably will chang
 
 ---
 
-Small afterthought: A lot of my thoughts here have been better explained by other, better writers. Some of those include [beeps](https://beeps.website/) whose page "[I'm not human](https://beeps.website/about/nonhuman/)" largely inspired this one, [31a](https://www.31a05b.net/) who is a delight to talk to on Matrix about all sorts of topics, and [doll-parts](https://neogenitals-evangelion.neocities.org/) [NSFW] (and the sites on the bottom) which have helped me a lot with coming to terms with my own sexuality.
-
-
-
+Small afterthought: A lot of my thoughts here have been better explained by other, better writers. Some of those include [beeps](https://beeps.website/) whose page "[I'm not human](https://beeps.website/about/nonhuman/)" largely inspired this one, [31a](https://www.31a05b.net/) which is a delight to interact with on Matrix about all sorts of topics, and [doll-parts](https://neogenitals-evangelion.neocities.org/) [NSFW] (and the sites on the bottom) which have helped me a lot with coming to terms with my own sexuality.
