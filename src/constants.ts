@@ -76,6 +76,10 @@ export const RANDOM_LINKS: Link[] = [
 
 export const EIGHTY_EIGHT_THIRTY_ONE_BUTTONS: EightyEightThirtyOneButton[] = [
   {
+    image: "/88x31/best_viewed_with_pepsi.gif",
+    alt: "This Site Best Viewed With Pepsi",
+  },
+  {
     image: "https://yesterweb.org/no-to-web3/img/roly-saynotoweb3.gif",
     alt: "Keep the Web Free, Say No To Web3",
     target: "https://yesterweb.org/no-to-web3/",
@@ -100,6 +104,10 @@ export const EIGHTY_EIGHT_THIRTY_ONE_BUTTONS: EightyEightThirtyOneButton[] = [
     target: "https://en.pronouns.page/@thes1lv3r",
   },
   {
+    image: "/88x31/s1lv3r.png",
+    alt: "S1LV3R (my own 88x31)",
+  },
+  {
     image: "https://www.31a05b.net/a/8831/31a05b.png",
     alt: "rings of particles around disc; cat emoticons",
     target: "https://www.31a05b.net",
@@ -108,9 +116,5 @@ export const EIGHTY_EIGHT_THIRTY_ONE_BUTTONS: EightyEightThirtyOneButton[] = [
     image: "https://beeps.website/assets/images/88x31-n.gif",
     alt: "beeps.website - a site by a plural, furry, otherkin weirdo about web dev, identity and stuff",
     target: "https://beeps.website/",
-  },
-  {
-    image: "/88x31/best_viewed_with_pepsi.gif",
-    alt: "This Site Best Viewed With Pepsi",
   },
 ];
