@@ -1,4 +1,5 @@
 ---
+import { SITE_NAME } from "@/constants";
 import { getDescription } from "@/utils";
 import Layout from "@layouts/Layout.astro";
 import type { CollectionEntry } from "astro:content";
@@ -8,14 +9,17 @@ type Props = {
 };
 
 const { post } = Astro.props;
-const postData = post.data
-
-const datePosted = postData.pubDate.toISOString().split("T")[0]
-const title = `${datePosted} : ${postData.title}`
+const postData = post.data;
 ---
 
-<Layout title={title} description={await getDescription(post)} ogtype="article">
+<Layout
+  title={postData.title}
+  description={await getDescription(post)}
+  ogtype="article"
+>
   <Fragment slot="head">
+    <meta property="og:site_name" content={SITE_NAME} />
+    {/* only for when linking directly to a blog site */}
     <meta
       property="article:published_time"
       content={postData.pubDate.toISOString()}

@@ -42,13 +42,14 @@ const dateFormat = (_date: Date): string => {
       display: inline-flex;
       list-style: none;
       padding-left: 0;
+      margin-left: 0;
 
       li {
         padding-left: 1rem;
         display: flex;
 
         &:first-child {
-          padding-left: 0.3rem;
+          padding-left: 0;
         }
 
         svg {
@@ -336,9 +337,7 @@ const dateFormat = (_date: Date): string => {
     <span title="Posted and updated date">
       Posted on: {dateFormat(post.data.pubDate)}
       {
-        post.data.updatedDate &&
-          typeof post.data.updatedDate !== "string" &&
-          post.data.updatedDate > post.data.pubDate && (
+        post.data.updatedDate && post.data.updatedDate > post.data.pubDate && (
             <>
               <br />
               Last updated: {dateFormat(post.data.updatedDate)}
