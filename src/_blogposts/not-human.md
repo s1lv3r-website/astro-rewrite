@@ -1,6 +1,7 @@
 ---
 title: Not human
 pubDate: 2026-06-28T21:36:00.000+02:00
+updatedDate: 2026-06-30T02:04:08+02:00
 socials:
 - site: bsky
   url: https://bsky.app/profile/did:plc:t4orz775m4rskkwakd3nogxm/post/3mpf4z56yjk2c
@@ -19,7 +20,7 @@ Back in the early years I quickly started identifying with the prevalent puppygi
 
 A lot of my realizations have been around my dislike of the human body in general. Be it annoyances at how weak it is and my own disabilities, or the desire for something less hostile to myself in the way of autism, or something that better matches my inner image of myself as a trans person.
 
-There have been various forms of media made covering how I feel at times or wish I was like. Examples include [SOMA](https://store.steampowered.com/app/282140/), [Cyberpunk 2077](https://www.cyberpunk.net/), *Ghost in the Shell*, or other media of a similar genre. I have felt more like *me* in all of these examples than I do in the physical world.
+There have been various forms of media made covering how I feel at times or wish I was like. Examples include [SOMA](https://store.steampowered.com/app/282140/) (BeamBuddy on YouTube made an amazing [story analysis](https://www.youtube.com/watch?v=Q7w2hZ6jxjo) if you struggle with playing horror games), [Cyberpunk 2077](https://www.cyberpunk.net/), *Ghost in the Shell*, or other media of a similar genre. I have felt more like *me* in all of these examples than I do in the physical world.
 
 A lot of what I here write about would probably fall under the genres of [Transhumanism](https://en.wikipedia.org/wiki/Transhumanism) or [Posthumanism](https://en.wikipedia.org/wiki/Posthumanism), and these are two labels I largely enjoy and identify with. I enjoy tinkering with and modifying the human condition in ways commonly seen as "taboo" or "disgusting". Biomodding is a big interest of mine, and one I intend to continue.
 
