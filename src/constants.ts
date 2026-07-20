@@ -4,7 +4,7 @@ import AtSign from "./components/icons/AtSign.astro";
 import Matrix from "./components/icons/Matrix.astro";
 import Signal from "./components/icons/Signal.astro";
 import FediverseNocolor from "@components/icons/FediverseNocolor.astro";
-import type { EightyEightThirtyOneButton, Link } from "@/types";
+import type { Badge, Link } from "@/types";
 
 export type AstroComponent = (_props: Record<string, any>) => any;
 
@@ -74,7 +74,7 @@ export const RANDOM_LINKS: Link[] = [
   },
 ];
 
-export const EIGHTY_EIGHT_THIRTY_ONE_BUTTONS: EightyEightThirtyOneButton[] = [
+export const BADGES: Badge[] = [
   {
     image: "/88x31/best_viewed_with_pepsi.gif",
     alt: "This Site Best Viewed With Pepsi",

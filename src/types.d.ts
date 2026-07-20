@@ -1,4 +1,4 @@
-export type EightyEightThirtyOneButton = {
+export type Badge = {
   /** Link to image or file name */
   image: string;
   alt: string;

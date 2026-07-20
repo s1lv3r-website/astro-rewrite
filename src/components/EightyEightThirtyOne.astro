@@ -1,5 +1,5 @@
 ---
-import { EIGHTY_EIGHT_THIRTY_ONE_BUTTONS } from "@/constants";
+import { BADGES } from "@/constants";
 ---
 
 <style lang="scss">
@@ -27,9 +27,9 @@ import { EIGHTY_EIGHT_THIRTY_ONE_BUTTONS } from "@/constants";
 </style>
 
 <div id="wrapper">
-  <ul title="88x31 buttons">
+  <ul title="88x31 badges">
     {
-      EIGHTY_EIGHT_THIRTY_ONE_BUTTONS.map(({ image, target, alt }) => (
+      BADGES.map(({ image, target, alt }) => (
         <li>
           <a href={target} target="_blank" rel="noopener noreferrer">
             <img src={image} alt={alt} />
