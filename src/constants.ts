@@ -117,4 +117,9 @@ export const BADGES: Badge[] = [
     alt: "beeps.website - a site by a plural, furry, otherkin weirdo about web dev, identity and stuff",
     target: "https://beeps.website/",
   },
+  {
+    image: "https://timedout.uk/88x31s/nexy7574-new.gif",
+    alt: "<Nexy/> <3",
+    target: "https://timedout.uk/"
+  }
 ];
