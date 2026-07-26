@@ -121,5 +121,10 @@ export const BADGES: Badge[] = [
     image: "https://timedout.uk/88x31s/nexy7574-new.gif",
     alt: "<Nexy/> <3",
     target: "https://timedout.uk/"
-  }
+  },
+  {
+    image: "https://gingershaped.computer/8831/button.png",
+    alt: "ginger's 88x31 button",
+    target: "https://gingershaped.computer/"
+  },
 ];
