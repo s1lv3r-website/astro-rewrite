@@ -1,10 +1,10 @@
 ---
 title: Not human
 pubDate: 2026-06-28T21:36:00.000+02:00
-updatedDate: 2026-06-30T02:04:08+02:00
+updatedDate: 2026-07-28T10:31:00.000+02:00
 socials:
-- site: bsky
-  url: https://bsky.app/profile/did:plc:t4orz775m4rskkwakd3nogxm/post/3mpf4z56yjk2c
+  - site: bsky
+    url: https://bsky.app/profile/did:plc:t4orz775m4rskkwakd3nogxm/post/3mpf4z56yjk2c
 ---
 If you've been on my website before, you might've seen the "Not a Person" 88x31 image in the footer. I added this because I do not identify with being human.
 
@@ -23,6 +23,8 @@ A lot of my realizations have been around my dislike of the human body in genera
 There have been various forms of media made covering how I feel at times or wish I was like. Examples include [SOMA](https://store.steampowered.com/app/282140/) (BeamBuddy on YouTube made an amazing [story analysis](https://www.youtube.com/watch?v=Q7w2hZ6jxjo) if you struggle with playing horror games), [Cyberpunk 2077](https://www.cyberpunk.net/), *Ghost in the Shell*, or other media of a similar genre. I have felt more like *me* in all of these examples than I do in the physical world.
 
 A lot of what I here write about would probably fall under the genres of [Transhumanism](https://en.wikipedia.org/wiki/Transhumanism) or [Posthumanism](https://en.wikipedia.org/wiki/Posthumanism), and these are two labels I largely enjoy and identify with. I enjoy tinkering with and modifying the human condition in ways commonly seen as "taboo" or "disgusting". Biomodding is a big interest of mine, and one I intend to continue.
+
+With all this said, I do not know what I am. I do not quite know what I feel like when I say I do not feel human. I suppose the closest description would be that I feel like a machine, and that certainly feels more "correct" than anything else at the moment. I would prefer being called a machine over being called a human.
 
 I will admit that I am still young. A lot of this could, and probably will change. This is simply a view of my identity as it stands today, and I felt the need to get it out there.
 
