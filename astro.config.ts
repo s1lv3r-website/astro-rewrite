@@ -12,7 +12,7 @@ import { transformerCopyButton } from "@rehype-pretty/transformers";
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://s1lv3r.codes",
+  site: "https://silversys.dev",
   trailingSlash: 'never',
   integrations: [mdx(), sitemap({
     serialize(item) {

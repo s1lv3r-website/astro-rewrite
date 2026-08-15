@@ -8,7 +8,7 @@ import type { Badge, Link } from "@/types";
 
 export type AstroComponent = (_props: Record<string, any>) => any;
 
-export const SITE_NAME: string = "S1LV3R";
+export const SITE_NAME: string = "Silversys";
 export const PRONOUNS: string = "it/she";
 export const TAGLINE: string = "Autistic trans woman, working with DevOps, networks, and systems design, engineering, and administration.";
 export const THEME_COLOR: string = "#744eb4";
