@@ -7,7 +7,7 @@ const site = Astro.site!.host;
 <footer aria-label="Footer">
   <EightyEightThirtyOne />
 
-  <div class="webrings" aria-label="Webrings">
+  <div id="webrings" aria-label="Webrings">
     <p aria-label="Roboring">
       <a title="Previous page" href="https://stellophiliac.github.io/roboring/s1lv3r/previous">←</a>
       <a title="Ring info" href="https://stellophiliac.github.io/roboring">roboring</a>
@@ -27,7 +27,7 @@ const site = Astro.site!.host;
     </p> -->
   </div>
 
-  <p class="darkened">
+  <p id="disclosure">
     Proudly written by me, myself, and I. No AI or slop generators here.
     Opinions are my own and do not represent the views or opinions of past or
     current employers. All rights reserved. Use of content on this site for AI
@@ -49,21 +49,27 @@ const site = Astro.site!.host;
     text-align: center;
   }
 
-  .webrings {
+  #webrings {
     font-size: 75%;
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
+    margin: 1rem auto;
+
+    & > p {
+      padding: 0;
+      margin: 0;
+    }
   }
 
-  .darkened {
+  #disclosure {
     --opacity: 60%;
 
     color: color-mix(in srgb, currentColor var(--opacity), transparent);
-    font-size: 60%;
+    font-size: 70%;
     transition: color ease 0.3s;
 
-    &:has(*:hover) {
+    &:hover {
       --opacity: 100%;
     }
 
