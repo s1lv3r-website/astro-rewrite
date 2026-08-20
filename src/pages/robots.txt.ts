@@ -26,10 +26,6 @@ const getRobotsTxt = (sitemapURL: URL) => `\
 # DIRECTIVE 2019/790 ON COPYRIGHT AND RELATED RIGHTS IN THE
 # DIGITAL SINGLE MARKET.
 
-User-agent: *
-Content-Signal: ai-train=no,ai-input=no,search=yes
-Allow: /
-
 User-agent: Amazonbot
 Disallow: /
 
@@ -58,6 +54,7 @@ User-agent: meta-externalagent
 Disallow: /
 
 User-agent: *
+Content-Signal: ai-train=no,ai-input=no,search=yes
 Allow: /
 
 Sitemap: ${sitemapURL.href}
